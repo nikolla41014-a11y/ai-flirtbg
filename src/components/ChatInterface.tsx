@@ -85,7 +85,13 @@ export const ChatInterface = ({ partnerName, partnerType, partnerImage: customIm
 
   return (
     <div className="min-h-screen gradient-soft flex flex-col">
-      {/* Header */}
+      {/* Top Header */}
+      <div className="w-full bg-gradient-to-r from-primary/10 via-secondary/10 to-accent/10 backdrop-blur-sm border-b border-primary/20 py-3">
+        <h1 className="text-xl md:text-2xl font-bold gradient-romantic bg-clip-text text-transparent text-center">
+          AI.FLIRT
+        </h1>
+      </div>
+      {/* Chat Header */}
       <div className="bg-card/80 backdrop-blur-md border-b shadow-soft sticky top-0 z-10">
         <div className="max-w-4xl mx-auto px-4 py-4 flex items-center gap-4">
           <Button

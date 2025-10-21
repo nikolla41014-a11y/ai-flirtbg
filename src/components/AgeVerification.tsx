@@ -10,8 +10,14 @@ interface AgeVerificationProps {
 export const AgeVerification = ({ onConfirm }: AgeVerificationProps) => {
   const { t } = useLanguage();
   return (
-    <div className="min-h-screen gradient-soft flex items-center justify-center p-4">
-      <Card className="max-w-md w-full p-8 shadow-glow border-2 border-primary/20">
+    <div className="min-h-screen gradient-soft flex flex-col">
+      <div className="w-full flex items-center justify-center px-4 py-4 bg-gradient-to-r from-primary/10 via-secondary/10 to-accent/10 backdrop-blur-sm border-b border-primary/20">
+        <h1 className="text-2xl md:text-3xl font-bold gradient-romantic bg-clip-text text-transparent">
+          AI.FLIRT
+        </h1>
+      </div>
+      <div className="flex-1 flex items-center justify-center p-4">
+        <Card className="max-w-md w-full p-8 shadow-glow border-2 border-primary/20">
         <div className="text-center space-y-6">
           <div className="flex justify-center">
             <div className="w-20 h-20 rounded-full bg-primary/20 flex items-center justify-center">
@@ -42,6 +48,7 @@ export const AgeVerification = ({ onConfirm }: AgeVerificationProps) => {
           </div>
         </div>
       </Card>
+      </div>
     </div>
   );
 };
