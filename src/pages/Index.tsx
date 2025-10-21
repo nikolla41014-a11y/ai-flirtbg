@@ -79,12 +79,12 @@ const Index = () => {
         <div className="flex items-center gap-4">
           <LanguageSelector />
           {user ? (
-            <Button variant="outline" size="sm" onClick={signOut}>
+            <Button variant="outline" size="sm" onClick={signOut} className="text-gray-900 border-gray-900 hover:bg-gray-100">
               <LogOut className="w-4 h-4 mr-2" />
               Изход
             </Button>
           ) : (
-            <Button variant="outline" size="sm" onClick={() => navigate("/auth")}>
+            <Button variant="outline" size="sm" onClick={() => navigate("/auth")} className="text-gray-900 border-gray-900 hover:bg-gray-100">
               Вход
             </Button>
           )}
