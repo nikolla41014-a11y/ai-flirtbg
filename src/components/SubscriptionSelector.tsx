@@ -1,9 +1,10 @@
 import { useState } from "react";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { useAuth } from "@/contexts/AuthContext";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { Check, Plus, Sparkles } from "lucide-react";
+import { Check, Plus, Sparkles, X } from "lucide-react";
 import { CustomPartnerDialog } from "@/components/CustomPartnerDialog";
 import andrea from "@/assets/andrea.jpg";
 import desita from "@/assets/desita.jpg";
@@ -98,6 +99,7 @@ export const SubscriptionSelector = () => {
   const [hoveredCard, setHoveredCard] = useState<string | null>(null);
   const [showCustomDialog, setShowCustomDialog] = useState(false);
   const [customPartnerType, setCustomPartnerType] = useState<"girlfriend" | "boyfriend">("girlfriend");
+  const [selectedImage, setSelectedImage] = useState<string | null>(null);
 
   const hasActiveSubscription = subscriptionStatus?.subscribed;
   const activeProductId = subscriptionStatus?.product_id;
@@ -132,6 +134,11 @@ export const SubscriptionSelector = () => {
     console.log("Custom partner created:", name, imageUrl);
     setShowCustomDialog(false);
     // TODO: Store custom partner details and allow chat
+  };
+
+  const handleImageClick = (e: React.MouseEvent, imageUrl: string) => {
+    e.stopPropagation();
+    setSelectedImage(imageUrl);
   };
 
   return (
@@ -200,11 +207,12 @@ export const SubscriptionSelector = () => {
                     </div>
                   )}
                   
-              <div className="relative h-[700px] overflow-hidden">
+                  <div className="relative h-[700px] overflow-hidden">
                     <img
                       src={plan.image}
                       alt={plan.name}
-                      className={`w-full h-full object-cover transition-transform duration-700 ${
+                      onClick={(e) => handleImageClick(e, plan.image)}
+                      className={`w-full h-full object-cover transition-transform duration-700 cursor-pointer ${
                         hoveredCard === plan.name ? "scale-110" : "scale-100"
                       }`}
                     />
@@ -320,11 +328,12 @@ export const SubscriptionSelector = () => {
                     </div>
                   )}
                   
-              <div className="relative h-[700px] overflow-hidden">
+                  <div className="relative h-[700px] overflow-hidden">
                     <img
                       src={plan.image}
                       alt={plan.name}
-                      className={`w-full h-full object-cover transition-transform duration-700 ${
+                      onClick={(e) => handleImageClick(e, plan.image)}
+                      className={`w-full h-full object-cover transition-transform duration-700 cursor-pointer ${
                         hoveredCard === plan.name ? "scale-110" : "scale-100"
                       }`}
                     />
@@ -423,6 +432,24 @@ export const SubscriptionSelector = () => {
         partnerType={customPartnerType}
         onConfirm={handleCustomPartnerCreate}
       />
+
+      <Dialog open={!!selectedImage} onOpenChange={() => setSelectedImage(null)}>
+        <DialogContent className="max-w-4xl w-full p-0 bg-transparent border-0">
+          <button
+            onClick={() => setSelectedImage(null)}
+            className="absolute top-4 right-4 z-50 p-2 rounded-full bg-black/50 hover:bg-black/70 transition-colors"
+          >
+            <X className="w-6 h-6 text-white" />
+          </button>
+          {selectedImage && (
+            <img
+              src={selectedImage}
+              alt="Enlarged view"
+              className="w-full h-auto rounded-lg"
+            />
+          )}
+        </DialogContent>
+      </Dialog>
     </div>
   );
 };
