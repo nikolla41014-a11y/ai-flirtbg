@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { Globe, ChevronDown } from "lucide-react";
 import {
   DropdownMenu,
@@ -6,6 +5,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const languages = [
   { code: "bg", name: "Български", flag: "🇧🇬" },
@@ -15,7 +15,12 @@ const languages = [
 ];
 
 export const LanguageSelector = () => {
-  const [selectedLanguage, setSelectedLanguage] = useState(languages[0]);
+  const { language, setLanguage } = useLanguage();
+  const selectedLanguage = languages.find(lang => lang.code === language) || languages[0];
+
+  const handleLanguageChange = (langCode: string) => {
+    setLanguage(langCode as "bg" | "en" | "es" | "tr");
+  };
 
   return (
     <DropdownMenu>
@@ -25,18 +30,18 @@ export const LanguageSelector = () => {
         <ChevronDown className="w-4 h-4 text-muted-foreground" />
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className="w-48 bg-card/95 backdrop-blur-sm border-border z-50">
-        {languages.map((language) => (
+        {languages.map((lang) => (
           <DropdownMenuItem
-            key={language.code}
-            onClick={() => setSelectedLanguage(language)}
+            key={lang.code}
+            onClick={() => handleLanguageChange(lang.code)}
             className={`flex items-center gap-3 px-4 py-3 cursor-pointer ${
-              selectedLanguage.code === language.code
+              selectedLanguage.code === lang.code
                 ? "bg-primary/20 text-primary"
                 : "hover:bg-muted"
             }`}
           >
-            <span className="text-xl">{language.flag}</span>
-            <span className="font-medium">{language.name}</span>
+            <span className="text-xl">{lang.flag}</span>
+            <span className="font-medium">{lang.name}</span>
           </DropdownMenuItem>
         ))}
       </DropdownMenuContent>

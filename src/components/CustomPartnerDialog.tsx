@@ -5,6 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Upload, Sparkles } from "lucide-react";
 import { toast } from "sonner";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 interface CustomPartnerDialogProps {
   isOpen: boolean;
@@ -14,6 +15,7 @@ interface CustomPartnerDialogProps {
 }
 
 export const CustomPartnerDialog = ({ isOpen, onClose, partnerType, onConfirm }: CustomPartnerDialogProps) => {
+  const { t } = useLanguage();
   const [name, setName] = useState("");
   const [imageUrl, setImageUrl] = useState("");
   const [previewUrl, setPreviewUrl] = useState("");
@@ -59,16 +61,16 @@ export const CustomPartnerDialog = ({ isOpen, onClose, partnerType, onConfirm }:
         <DialogHeader>
           <DialogTitle className="text-2xl gradient-romantic bg-clip-text text-transparent flex items-center gap-2">
             <Sparkles className="w-6 h-6 text-primary" />
-            Създай свой {typeLabel}
+            {partnerType === "girlfriend" ? t("custom.title.girlfriend") : t("custom.title.boyfriend")}
           </DialogTitle>
         </DialogHeader>
         
         <div className="space-y-6 py-4">
           <div className="space-y-2">
-            <Label htmlFor="name">Име</Label>
+            <Label htmlFor="name">{t("custom.name")}</Label>
             <Input
               id="name"
-              placeholder="Въведи име..."
+              placeholder={t("custom.name")}
               value={name}
               onChange={(e) => setName(e.target.value)}
               maxLength={30}
@@ -76,7 +78,7 @@ export const CustomPartnerDialog = ({ isOpen, onClose, partnerType, onConfirm }:
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="image">Снимка</Label>
+            <Label htmlFor="image">{t("custom.upload")}</Label>
             <div className="flex flex-col items-center gap-4">
               {previewUrl && (
                 <div className="w-40 h-40 rounded-lg overflow-hidden border-2 border-primary/20">
@@ -116,13 +118,13 @@ export const CustomPartnerDialog = ({ isOpen, onClose, partnerType, onConfirm }:
               onClick={onClose}
               className="flex-1"
             >
-              Отказ
+              {t("custom.cancel")}
             </Button>
             <Button
               onClick={handleConfirm}
               className="flex-1 gradient-romantic"
             >
-              Създай
+              {t("custom.create")}
             </Button>
           </div>
         </div>

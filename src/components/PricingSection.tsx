@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Card } from "@/components/ui/card";
 import { Sparkles, Plus } from "lucide-react";
+import { useLanguage } from "@/contexts/LanguageContext";
 import andrea from "@/assets/andrea.jpg";
 import desita from "@/assets/desita.jpg";
 import simeon from "@/assets/simeon.jpg";
@@ -72,10 +73,21 @@ const pricingCards: PricingCard[] = [
 ];
 
 export const PricingSection = ({ onSelect }: PricingSectionProps) => {
+  const { t } = useLanguage();
   const [hoveredCard, setHoveredCard] = useState<string | null>(null);
+  
+  const pricingCardsWithTranslations: PricingCard[] = pricingCards.map(card => ({
+    ...card,
+    name: card.isCustom ? t("pricing.createOwn") : card.name,
+    description: card.isCustom 
+      ? (card.type === "girlfriend" ? t("partner.custom.girlfriend") : t("partner.custom.boyfriend"))
+      : (card.name === "Андреа" ? t("partner.andrea.desc") :
+         card.name === "Десита" ? t("partner.desita.desc") :
+         card.name === "Симеон" ? t("partner.simeon.desc") : t("partner.nikola.desc"))
+  }));
 
-  const girlfriends = pricingCards.filter(card => card.type === "girlfriend");
-  const boyfriends = pricingCards.filter(card => card.type === "boyfriend");
+  const girlfriends = pricingCardsWithTranslations.filter(card => card.type === "girlfriend");
+  const boyfriends = pricingCardsWithTranslations.filter(card => card.type === "boyfriend");
 
   return (
     <div className="py-16 px-4">
@@ -83,17 +95,17 @@ export const PricingSection = ({ onSelect }: PricingSectionProps) => {
         {/* Header */}
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold gradient-romantic bg-clip-text text-transparent mb-4">
-            Избери своя AI партньор
+            {t("pricing.title")}
           </h2>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            Започни романтично приключение с AI партньор по твой избор
+            {t("pricing.subtitle")}
           </p>
         </div>
 
         {/* AI Girlfriends */}
         <div className="mb-16">
           <h3 className="text-3xl font-bold text-primary text-center mb-8">
-            AI Girlfriends 💖
+            {t("pricing.girlfriends")}
           </h3>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {girlfriends.map((card) => (
@@ -155,7 +167,7 @@ export const PricingSection = ({ onSelect }: PricingSectionProps) => {
                           : "bg-primary/90 text-white"
                       }`}
                     >
-                      Избери
+                      {t("pricing.select")}
                     </button>
                   </div>
                 </div>
@@ -167,7 +179,7 @@ export const PricingSection = ({ onSelect }: PricingSectionProps) => {
         {/* AI Boyfriends */}
         <div>
           <h3 className="text-3xl font-bold text-secondary text-center mb-8">
-            AI Boyfriends 💙
+            {t("pricing.boyfriends")}
           </h3>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {boyfriends.map((card) => (
@@ -229,7 +241,7 @@ export const PricingSection = ({ onSelect }: PricingSectionProps) => {
                           : "bg-secondary/90 text-white"
                       }`}
                     >
-                      Избери
+                      {t("pricing.select")}
                     </button>
                   </div>
                 </div>
