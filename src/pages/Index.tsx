@@ -70,7 +70,7 @@ const Index = () => {
 
   return (
     <div className="relative min-h-screen">
-      <div className="absolute top-0 left-0 right-0 z-50 flex items-center justify-between px-4 py-4 bg-gradient-to-r from-primary/10 via-secondary/10 to-accent/10 backdrop-blur-sm border-b border-primary/20">
+      <div className="absolute top-0 left-0 right-0 z-50 flex items-center justify-between px-4 py-4 bg-card/95 backdrop-blur-sm border-b border-border">
         <img 
           src={aiFlirtLogo} 
           alt="AI FLIRT Logo" 
