@@ -223,7 +223,7 @@ export const SubscriptionSelector = () => {
                     </div>
                   )}
                   
-                  <div className="relative h-[700px] overflow-hidden">
+                  <div className="relative h-[900px] overflow-hidden">
                     <div
                       onClick={(e) => handleImageClick(e, plan.image)}
                       className="w-full h-full cursor-pointer"
@@ -287,7 +287,7 @@ export const SubscriptionSelector = () => {
                 </div>
               )}
               
-              <div className="relative h-[700px] overflow-hidden">
+              <div className="relative h-[900px] overflow-hidden">
                 <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-primary/20 to-accent/20">
                   <Plus className="w-24 h-24 text-primary/50" />
                 </div>
@@ -348,7 +348,7 @@ export const SubscriptionSelector = () => {
                     </div>
                   )}
                   
-                  <div className="relative h-[700px] overflow-hidden">
+                  <div className="relative h-[900px] overflow-hidden">
                     <div
                       onClick={(e) => handleImageClick(e, plan.image)}
                       className="w-full h-full cursor-pointer"
@@ -412,7 +412,7 @@ export const SubscriptionSelector = () => {
                 </div>
               )}
               
-              <div className="relative h-[700px] overflow-hidden">
+              <div className="relative h-[900px] overflow-hidden">
                 <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-secondary/20 to-accent/20">
                   <Plus className="w-24 h-24 text-secondary/50" />
                 </div>
