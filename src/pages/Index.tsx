@@ -70,26 +70,6 @@ const Index = () => {
 
   return (
     <div className="relative min-h-screen">
-      <div className="absolute top-0 left-0 right-0 z-50 flex items-center justify-between px-4 py-4 bg-card/95 backdrop-blur-sm border-b border-border">
-        <img 
-          src={aiFlirtLogo} 
-          alt="AI FLIRT Logo" 
-          className="h-10 md:h-12 w-auto object-contain"
-        />
-        <div className="flex items-center gap-4">
-          <LanguageSelector />
-          {user ? (
-            <Button variant="outline" size="sm" onClick={signOut} className="text-gray-900 border-gray-900 hover:bg-gray-100">
-              <LogOut className="w-4 h-4 mr-2" />
-              Изход
-            </Button>
-          ) : (
-            <Button variant="outline" size="sm" onClick={() => navigate("/auth")} className="text-gray-900 border-gray-900 hover:bg-gray-100">
-              Вход
-            </Button>
-          )}
-        </div>
-      </div>
       {subscriptionStatus?.subscribed ? (
         <PartnerSelector onSelect={handleSelectPartner} />
       ) : (
