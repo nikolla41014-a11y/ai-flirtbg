@@ -74,6 +74,23 @@ const subscriptionPlans: SubscriptionPlan[] = [
   }
 ];
 
+const customPlans = {
+  girlfriend: {
+    monthlyPrice: "15.99",
+    monthlyPriceId: "price_1SKn4TB31kXFBtKd3j9CZhPR",
+    yearlyPrice: "143.91",
+    yearlyPriceId: "price_1SKn54B31kXFBtKdBvo7QU9o",
+    productId: "prod_THLmOQVIi0rUXx"
+  },
+  boyfriend: {
+    monthlyPrice: "15.99",
+    monthlyPriceId: "price_1SKn6nB31kXFBtKd45jkszdq",
+    yearlyPrice: "143.91",
+    yearlyPriceId: "price_1SKn9WB31kXFBtKdvYY4kjzN",
+    productId: "prod_THLoDbmo7r6pKJ"
+  }
+};
+
 export const SubscriptionSelector = () => {
   const { t } = useLanguage();
   const { subscriptionStatus, createCheckoutSession, openCustomerPortal } = useAuth();
@@ -98,14 +115,23 @@ export const SubscriptionSelector = () => {
   };
 
   const handleOpenCustomDialog = (type: "girlfriend" | "boyfriend") => {
-    setCustomPartnerType(type);
-    setShowCustomDialog(true);
+    // Check if user has active custom subscription for this type
+    const customPlan = customPlans[type];
+    if (isActivePlan(customPlan.productId)) {
+      // User has active subscription, can create custom partner
+      setCustomPartnerType(type);
+      setShowCustomDialog(true);
+    } else {
+      // User needs to subscribe first
+      const priceId = selectedPlan === "monthly" ? customPlan.monthlyPriceId : customPlan.yearlyPriceId;
+      createCheckoutSession(priceId);
+    }
   };
 
   const handleCustomPartnerCreate = (name: string, imageUrl: string) => {
     console.log("Custom partner created:", name, imageUrl);
     setShowCustomDialog(false);
-    // TODO: Handle custom partner creation with subscription requirement
+    // TODO: Store custom partner details and allow chat
   };
 
   return (
@@ -224,8 +250,15 @@ export const SubscriptionSelector = () => {
               onMouseLeave={() => setHoveredCard(null)}
               className={`relative overflow-hidden cursor-pointer transition-all duration-500 ${
                 hoveredCard === "custom-girlfriend" ? "scale-105 shadow-glow" : "shadow-romantic"
-              } border-2 border-border`}
+              } border-2 ${isActivePlan(customPlans.girlfriend.productId) ? "border-primary" : "border-border"}`}
             >
+              {isActivePlan(customPlans.girlfriend.productId) && (
+                <div className="absolute top-4 right-4 z-10 bg-primary text-white px-3 py-1 rounded-full text-sm font-semibold flex items-center gap-1">
+                  <Check className="w-4 h-4" />
+                  Активен
+                </div>
+              )}
+              
               <div className="relative h-[500px] overflow-hidden">
                 <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-primary/20 to-accent/20">
                   <Plus className="w-24 h-24 text-primary/50" />
@@ -241,12 +274,21 @@ export const SubscriptionSelector = () => {
                     </h4>
                   </div>
                   
+                  <div className="flex items-baseline gap-3 mb-3">
+                    <span className="text-3xl font-bold text-primary">
+                      {selectedPlan === "monthly" ? customPlans.girlfriend.monthlyPrice : customPlans.girlfriend.yearlyPrice} лв
+                    </span>
+                    <span className="text-sm text-gray-300">
+                      {selectedPlan === "monthly" ? "/ месец" : "/ година"}
+                    </span>
+                  </div>
+                  
                   <p className="text-sm text-gray-300 mb-4 leading-relaxed">
                     {t("partner.custom.girlfriend")}
                   </p>
                   
                   <Button className="w-full bg-primary hover:bg-primary/90">
-                    Създай
+                    {isActivePlan(customPlans.girlfriend.productId) ? "Създай" : "Абонирай се"}
                   </Button>
                 </div>
               </div>
@@ -328,8 +370,15 @@ export const SubscriptionSelector = () => {
               onMouseLeave={() => setHoveredCard(null)}
               className={`relative overflow-hidden cursor-pointer transition-all duration-500 ${
                 hoveredCard === "custom-boyfriend" ? "scale-105 shadow-glow" : "shadow-romantic"
-              } border-2 border-border`}
+              } border-2 ${isActivePlan(customPlans.boyfriend.productId) ? "border-secondary" : "border-border"}`}
             >
+              {isActivePlan(customPlans.boyfriend.productId) && (
+                <div className="absolute top-4 right-4 z-10 bg-secondary text-white px-3 py-1 rounded-full text-sm font-semibold flex items-center gap-1">
+                  <Check className="w-4 h-4" />
+                  Активен
+                </div>
+              )}
+              
               <div className="relative h-[500px] overflow-hidden">
                 <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-secondary/20 to-accent/20">
                   <Plus className="w-24 h-24 text-secondary/50" />
@@ -345,12 +394,21 @@ export const SubscriptionSelector = () => {
                     </h4>
                   </div>
                   
+                  <div className="flex items-baseline gap-3 mb-3">
+                    <span className="text-3xl font-bold text-secondary">
+                      {selectedPlan === "monthly" ? customPlans.boyfriend.monthlyPrice : customPlans.boyfriend.yearlyPrice} лв
+                    </span>
+                    <span className="text-sm text-gray-300">
+                      {selectedPlan === "monthly" ? "/ месец" : "/ година"}
+                    </span>
+                  </div>
+                  
                   <p className="text-sm text-gray-300 mb-4 leading-relaxed">
                     {t("partner.custom.boyfriend")}
                   </p>
                   
                   <Button className="w-full bg-secondary hover:bg-secondary/90">
-                    Създай
+                    {isActivePlan(customPlans.boyfriend.productId) ? "Създай" : "Абонирай се"}
                   </Button>
                 </div>
               </div>
