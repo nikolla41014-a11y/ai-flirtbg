@@ -1,12 +1,9 @@
 import { useState } from "react";
-import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
 import andrea from "@/assets/andrea.jpg";
 import desita from "@/assets/desita.jpg";
 import simeon from "@/assets/simeon.jpg";
 import nikola from "@/assets/nikola.jpg";
-import aiBoyfriend from "@/assets/ai-boyfriend.jpg";
-import { Heart, MessageCircleHeart, Sparkles, Plus } from "lucide-react";
+import { Heart, MessageCircleHeart, Sparkles } from "lucide-react";
 import { CustomPartnerDialog } from "@/components/CustomPartnerDialog";
 import { PricingSection } from "@/components/PricingSection";
 
@@ -52,7 +49,6 @@ const boyfriends: Partner[] = [
 ];
 
 export const PartnerSelector = ({ onSelect }: PartnerSelectorProps) => {
-  const [hoveredCard, setHoveredCard] = useState<string | null>(null);
   const [customDialogOpen, setCustomDialogOpen] = useState(false);
   const [customPartnerType, setCustomPartnerType] = useState<"girlfriend" | "boyfriend">("girlfriend");
 
@@ -109,149 +105,14 @@ export const PartnerSelector = ({ onSelect }: PartnerSelectorProps) => {
           </p>
         </div>
 
-        {/* AI Girlfriends Section */}
-        <div className="mb-12">
-          <h2 className="text-3xl font-bold text-primary text-center mb-8">
-            AI Girlfriends 💖
-          </h2>
-          <div className="grid md:grid-cols-3 gap-6">
-            <CustomPartnerDialog
-              isOpen={customDialogOpen}
-              onClose={() => setCustomDialogOpen(false)}
-              partnerType={customPartnerType}
-              onConfirm={handleCustomConfirm}
-            />
-            {girlfriends.map((partner) => (
-              <Card 
-                key={partner.name}
-                onClick={() => onSelect(partner)}
-                className={`overflow-hidden cursor-pointer transition-all duration-500 shadow-romantic hover:shadow-glow border-2 ${
-                  hoveredCard === partner.name ? "border-primary scale-105" : "border-border"
-                }`}
-                onMouseEnter={() => setHoveredCard(partner.name)}
-                onMouseLeave={() => setHoveredCard(null)}
-              >
-                <div className="relative h-80 overflow-hidden">
-                  <div className="absolute inset-0 bg-gradient-to-t from-background via-background/50 to-transparent z-10" />
-                  <img 
-                    src={partner.image} 
-                    alt={partner.name}
-                    className={`w-full h-full object-contain transition-transform duration-700 ${
-                      hoveredCard === partner.name ? "scale-110" : "scale-100"
-                    }`}
-                  />
-                </div>
-                <div className="p-8">
-                  <h3 className="text-2xl font-bold mb-3 text-primary flex items-center gap-2">
-                    <Heart className="w-6 h-6" />
-                    {partner.name}
-                  </h3>
-                  <p className="text-muted-foreground mb-5 leading-relaxed text-base">
-                    {partner.description}
-                  </p>
-                  <div className="w-full gradient-romantic rounded-lg py-5 shadow-romantic text-center font-semibold">
-                    Избери {partner.name} 💖
-                  </div>
-                </div>
-              </Card>
-            ))}
-            
-            {/* Create Your Own Girlfriend */}
-            <Card 
-              onClick={() => handleCustomCreate("girlfriend")}
-              className={`overflow-hidden cursor-pointer transition-all duration-500 shadow-romantic hover:shadow-glow border-2 border-dashed ${
-                hoveredCard === "custom-gf" ? "border-primary scale-105" : "border-border"
-              }`}
-              onMouseEnter={() => setHoveredCard("custom-gf")}
-              onMouseLeave={() => setHoveredCard(null)}
-            >
-              <div className="relative h-80 flex items-center justify-center bg-gradient-to-br from-primary/10 to-accent/10">
-                <Plus className="w-24 h-24 text-primary/40" />
-              </div>
-              <div className="p-8">
-                <h3 className="text-2xl font-bold mb-3 text-primary flex items-center gap-2">
-                  <Sparkles className="w-6 h-6" />
-                  Създай своя
-                </h3>
-                <p className="text-muted-foreground mb-5 leading-relaxed text-base">
-                  Качи снимка и избери име за своята перфектна AI Girlfriend! 🎨
-                </p>
-                <div className="w-full gradient-romantic rounded-lg py-5 shadow-romantic text-center font-semibold">
-                  Създай своя AI 💖
-                </div>
-              </div>
-            </Card>
-          </div>
-        </div>
-
-        {/* AI Boyfriends Section */}
-        <div className="mb-12">
-          <h2 className="text-3xl font-bold text-secondary text-center mb-8">
-            AI Boyfriends 💙
-          </h2>
-          <div className="grid md:grid-cols-3 gap-6">
-            {boyfriends.map((partner) => (
-              <Card 
-                key={partner.name}
-                onClick={() => onSelect(partner)}
-                className={`overflow-hidden cursor-pointer transition-all duration-500 shadow-romantic hover:shadow-glow border-2 ${
-                  hoveredCard === partner.name ? "border-secondary scale-105" : "border-border"
-                }`}
-                onMouseEnter={() => setHoveredCard(partner.name)}
-                onMouseLeave={() => setHoveredCard(null)}
-              >
-                <div className="relative h-80 overflow-hidden">
-                  <div className="absolute inset-0 bg-gradient-to-t from-background via-background/50 to-transparent z-10" />
-                  <img 
-                    src={aiBoyfriend} 
-                    alt={partner.name}
-                    className={`w-full h-full object-contain transition-transform duration-700 ${
-                      hoveredCard === partner.name ? "scale-110" : "scale-100"
-                    }`}
-                  />
-                </div>
-                <div className="p-8">
-                  <h3 className="text-2xl font-bold mb-3 text-secondary flex items-center gap-2">
-                    <Heart className="w-6 h-6" />
-                    {partner.name}
-                  </h3>
-                  <p className="text-muted-foreground mb-5 leading-relaxed text-base">
-                    {partner.description}
-                  </p>
-                  <div className="w-full bg-secondary rounded-lg py-5 shadow-romantic text-center font-semibold">
-                    Избери {partner.name} 💙
-                  </div>
-                </div>
-              </Card>
-            ))}
-            
-            {/* Create Your Own Boyfriend */}
-            <Card 
-              onClick={() => handleCustomCreate("boyfriend")}
-              className={`overflow-hidden cursor-pointer transition-all duration-500 shadow-romantic hover:shadow-glow border-2 border-dashed ${
-                hoveredCard === "custom-bf" ? "border-secondary scale-105" : "border-border"
-              }`}
-              onMouseEnter={() => setHoveredCard("custom-bf")}
-              onMouseLeave={() => setHoveredCard(null)}
-            >
-              <div className="relative h-80 flex items-center justify-center bg-gradient-to-br from-secondary/10 to-accent/10">
-                <Plus className="w-24 h-24 text-secondary/40" />
-              </div>
-              <div className="p-8">
-                <h3 className="text-2xl font-bold mb-3 text-secondary flex items-center gap-2">
-                  <Sparkles className="w-6 h-6" />
-                  Създай своя
-                </h3>
-                <p className="text-muted-foreground mb-5 leading-relaxed text-base">
-                  Качи снимка и избери име за своя перфектен AI Boyfriend! 🎨
-                </p>
-                <div className="w-full bg-secondary rounded-lg py-5 shadow-romantic text-center font-semibold">
-                  Създай своя AI 💙
-                </div>
-              </div>
-            </Card>
-          </div>
-        </div>
+        {/* Pricing Section */}
+        <CustomPartnerDialog
+          isOpen={customDialogOpen}
+          onClose={() => setCustomDialogOpen(false)}
+          partnerType={customPartnerType}
+          onConfirm={handleCustomConfirm}
+        />
+        <PricingSection onSelect={handlePricingSelect} />
 
         {/* Features */}
         <div className="mt-16 grid md:grid-cols-3 gap-6 text-center">
@@ -292,9 +153,6 @@ export const PartnerSelector = ({ onSelect }: PartnerSelectorProps) => {
             </p>
           </div>
         </div>
-
-        {/* Pricing Section */}
-        <PricingSection onSelect={handlePricingSelect} />
       </div>
     </div>
   );
