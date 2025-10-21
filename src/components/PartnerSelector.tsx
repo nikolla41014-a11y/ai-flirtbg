@@ -3,9 +3,12 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import andrea from "@/assets/andrea.jpg";
 import desita from "@/assets/desita.jpg";
+import simeon from "@/assets/simeon.jpg";
+import nikola from "@/assets/nikola.jpg";
 import aiBoyfriend from "@/assets/ai-boyfriend.jpg";
 import { Heart, MessageCircleHeart, Sparkles, Plus } from "lucide-react";
 import { CustomPartnerDialog } from "@/components/CustomPartnerDialog";
+import { PricingSection } from "@/components/PricingSection";
 
 interface Partner {
   name: string;
@@ -37,12 +40,14 @@ const boyfriends: Partner[] = [
   {
     name: "Симеон",
     type: "boyfriend",
-    description: "Интелигентен и чаровен, обича дълбоките разговори и романтичните жестове. Перфектният джентълмен! 😎"
+    description: "Интелигентен и чаровен, обича дълбоките разговори и романтичните жестове. Перфектният джентълмен! 😎",
+    image: simeon
   },
   {
     name: "Никола",
     type: "boyfriend",
-    description: "Искам да ти го вкарам, пиши ми 😛"
+    description: "Искам да ти го вкарам, пиши ми 😛",
+    image: nikola
   }
 ];
 
@@ -64,6 +69,17 @@ export const PartnerSelector = ({ onSelect }: PartnerSelectorProps) => {
       image: imageUrl
     });
     setCustomDialogOpen(false);
+  };
+
+  const handlePricingSelect = (name: string, type: "girlfriend" | "boyfriend") => {
+    if (name === "Създай своя") {
+      handleCustomCreate(type);
+    } else {
+      const partner = [...girlfriends, ...boyfriends].find(p => p.name === name);
+      if (partner) {
+        onSelect(partner);
+      }
+    }
   };
 
   return (
@@ -276,6 +292,9 @@ export const PartnerSelector = ({ onSelect }: PartnerSelectorProps) => {
             </p>
           </div>
         </div>
+
+        {/* Pricing Section */}
+        <PricingSection onSelect={handlePricingSelect} />
       </div>
     </div>
   );
