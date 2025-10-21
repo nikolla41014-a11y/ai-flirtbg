@@ -1,8 +1,13 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { PartnerSelector } from "@/components/PartnerSelector";
 import { ChatInterface } from "@/components/ChatInterface";
 import { AgeVerification } from "@/components/AgeVerification";
 import { LanguageSelector } from "@/components/LanguageSelector";
+import { SubscriptionSelector } from "@/components/SubscriptionSelector";
+import { Button } from "@/components/ui/button";
+import { useAuth } from "@/contexts/AuthContext";
+import { LogOut } from "lucide-react";
 
 interface Partner {
   name: string;
@@ -14,18 +19,42 @@ interface Partner {
 const Index = () => {
   const [isAgeVerified, setIsAgeVerified] = useState(false);
   const [selectedPartner, setSelectedPartner] = useState<Partner | null>(null);
+  const { user, loading, signOut, subscriptionStatus } = useAuth();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!loading && !user) {
+      navigate("/auth");
+    }
+  }, [user, loading, navigate]);
 
   const handleAgeVerification = () => {
     setIsAgeVerified(true);
   };
 
   const handleSelectPartner = (partner: Partner) => {
+    // Check if user has active subscription before allowing chat
+    if (!subscriptionStatus?.subscribed) {
+      return; // Stay on subscription selector
+    }
     setSelectedPartner(partner);
   };
 
   const handleBack = () => {
     setSelectedPartner(null);
   };
+
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="text-xl">Зареждане...</div>
+      </div>
+    );
+  }
+
+  if (!user) {
+    return null;
+  }
 
   if (!isAgeVerified) {
     return <AgeVerification onConfirm={handleAgeVerification} />;
@@ -48,9 +77,19 @@ const Index = () => {
         <h1 className="text-2xl md:text-3xl font-bold gradient-romantic bg-clip-text text-transparent">
           AI.FLIRT
         </h1>
-        <LanguageSelector />
+        <div className="flex items-center gap-4">
+          <LanguageSelector />
+          <Button variant="outline" size="sm" onClick={signOut}>
+            <LogOut className="w-4 h-4 mr-2" />
+            Изход
+          </Button>
+        </div>
       </div>
-      <PartnerSelector onSelect={handleSelectPartner} />
+      {subscriptionStatus?.subscribed ? (
+        <PartnerSelector onSelect={handleSelectPartner} />
+      ) : (
+        <SubscriptionSelector />
+      )}
     </div>
   );
 };
