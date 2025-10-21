@@ -154,6 +154,39 @@ export const PartnerSelector = ({ onSelect }: PartnerSelectorProps) => {
             </p>
           </div>
         </div>
+
+        {/* Bottom Description */}
+        <div className="mt-16 p-8 rounded-3xl bg-gradient-to-br from-primary/10 to-secondary/10 backdrop-blur-sm border border-primary/20">
+          <div className="max-w-3xl mx-auto space-y-4">
+            <div className="flex items-start gap-3">
+              <span className="text-2xl">💌</span>
+              <p className="text-foreground leading-relaxed">
+                Разговори за всичко – от сладки комплименти до леко закачливи и пикантни моменти.
+              </p>
+            </div>
+            <div className="flex items-start gap-3">
+              <span className="text-2xl">💖</span>
+              <p className="text-foreground leading-relaxed">
+                Подобри уменията си във флирта – научи как да водиш интересни разговори и да впечатляваш.
+              </p>
+            </div>
+            <div className="flex items-start gap-3">
+              <span className="text-2xl">📸</span>
+              <p className="text-foreground leading-relaxed">
+                Персонализирани AI профили – избери своя виртуален партньор с красиви генерирани снимки.
+              </p>
+            </div>
+            <div className="flex items-start gap-3">
+              <span className="text-2xl">🎯</span>
+              <p className="text-foreground leading-relaxed">
+                Тренирай уверено – когато дойде момента в реалния живот, ще си подготвен.
+              </p>
+            </div>
+            <p className="text-center mt-8 text-xl font-bold gradient-romantic bg-clip-text text-transparent">
+              AI Flirt – практикувай, флиртувай и се забавлявай с виртуалния си партньор!
+            </p>
+          </div>
+        </div>
       </div>
     </div>
   );
