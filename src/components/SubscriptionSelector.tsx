@@ -138,6 +138,8 @@ export const SubscriptionSelector = () => {
 
   const handleImageClick = (e: React.MouseEvent, imageUrl: string) => {
     e.stopPropagation();
+    e.preventDefault();
+    console.log("Image clicked:", imageUrl);
     setSelectedImage(imageUrl);
   };
 
@@ -208,14 +210,18 @@ export const SubscriptionSelector = () => {
                   )}
                   
                   <div className="relative h-[700px] overflow-hidden">
-                    <img
-                      src={plan.image}
-                      alt={plan.name}
+                    <div
                       onClick={(e) => handleImageClick(e, plan.image)}
-                      className={`w-full h-full object-cover transition-transform duration-700 cursor-pointer ${
-                        hoveredCard === plan.name ? "scale-110" : "scale-100"
-                      }`}
-                    />
+                      className="w-full h-full cursor-pointer"
+                    >
+                      <img
+                        src={plan.image}
+                        alt={plan.name}
+                        className={`w-full h-full object-cover transition-transform duration-700 ${
+                          hoveredCard === plan.name ? "scale-110" : "scale-100"
+                        }`}
+                      />
+                    </div>
                     
                     <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent opacity-80" />
                     
@@ -329,14 +335,18 @@ export const SubscriptionSelector = () => {
                   )}
                   
                   <div className="relative h-[700px] overflow-hidden">
-                    <img
-                      src={plan.image}
-                      alt={plan.name}
+                    <div
                       onClick={(e) => handleImageClick(e, plan.image)}
-                      className={`w-full h-full object-cover transition-transform duration-700 cursor-pointer ${
-                        hoveredCard === plan.name ? "scale-110" : "scale-100"
-                      }`}
-                    />
+                      className="w-full h-full cursor-pointer"
+                    >
+                      <img
+                        src={plan.image}
+                        alt={plan.name}
+                        className={`w-full h-full object-cover transition-transform duration-700 ${
+                          hoveredCard === plan.name ? "scale-110" : "scale-100"
+                        }`}
+                      />
+                    </div>
                     
                     <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent opacity-80" />
                     
@@ -434,10 +444,10 @@ export const SubscriptionSelector = () => {
       />
 
       <Dialog open={!!selectedImage} onOpenChange={() => setSelectedImage(null)}>
-        <DialogContent className="max-w-4xl w-full p-0 bg-transparent border-0">
+        <DialogContent className="max-w-6xl w-full p-2">
           <button
             onClick={() => setSelectedImage(null)}
-            className="absolute top-4 right-4 z-50 p-2 rounded-full bg-black/50 hover:bg-black/70 transition-colors"
+            className="absolute top-2 right-2 z-50 p-2 rounded-full bg-black/80 hover:bg-black transition-colors"
           >
             <X className="w-6 h-6 text-white" />
           </button>
@@ -445,7 +455,7 @@ export const SubscriptionSelector = () => {
             <img
               src={selectedImage}
               alt="Enlarged view"
-              className="w-full h-auto rounded-lg"
+              className="w-full h-auto max-h-[90vh] object-contain"
             />
           )}
         </DialogContent>
