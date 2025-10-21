@@ -110,7 +110,7 @@ export const SubscriptionSelector = () => {
 
   const formatPrice = (bgnPrice: string): string => {
     if (language === "bg") {
-      return `${bgnPrice} лв`;
+      return `${bgnPrice} лв / €${convertToEUR(bgnPrice)}`;
     }
     return `€${convertToEUR(bgnPrice)}`;
   };
