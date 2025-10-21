@@ -12,6 +12,7 @@ interface PricingCard {
   image?: string;
   price: string;
   oldPrice: string;
+  description: string;
   isCustom?: boolean;
 }
 
@@ -25,20 +26,23 @@ const pricingCards: PricingCard[] = [
     type: "girlfriend",
     image: andrea,
     price: "9.99",
-    oldPrice: "19.99"
+    oldPrice: "19.99",
+    description: "Енергична и забавна, обожава приключенията и дълбоките разговори. Винаги е готова да те разсмее! 😊"
   },
   {
     name: "Десита",
     type: "girlfriend",
     image: desita,
     price: "19.99",
-    oldPrice: "39.99"
+    oldPrice: "39.99",
+    description: "Мокра съм, искам го. Пиши ми 💦"
   },
   {
     name: "Създай своя",
     type: "girlfriend",
     price: "15.99",
     oldPrice: "32.99",
+    description: "Качи снимка и избери име за своята перфектна AI Girlfriend! 🎨",
     isCustom: true
   },
   {
@@ -46,20 +50,23 @@ const pricingCards: PricingCard[] = [
     type: "boyfriend",
     image: simeon,
     price: "9.99",
-    oldPrice: "19.99"
+    oldPrice: "19.99",
+    description: "Интелигентен и чаровен, обича дълбоките разговори и романтичните жестове. Перфектният джентълмен! 😎"
   },
   {
     name: "Никола",
     type: "boyfriend",
     image: nikola,
     price: "19.99",
-    oldPrice: "39.99"
+    oldPrice: "39.99",
+    description: "Искам да ти го вкарам, пиши ми 😛"
   },
   {
     name: "Създай своя",
     type: "boyfriend",
     price: "15.99",
     oldPrice: "32.99",
+    description: "Качи снимка и избери име за своя перфектен AI Boyfriend! 🎨",
     isCustom: true
   }
 ];
@@ -128,7 +135,7 @@ export const PricingSection = ({ onSelect }: PricingSectionProps) => {
                       </h4>
                     </div>
                     
-                    <div className="flex items-baseline gap-3 mb-4">
+                    <div className="flex items-baseline gap-3 mb-3">
                       <span className="text-3xl font-bold text-primary">
                         {card.price} лв
                       </span>
@@ -136,6 +143,10 @@ export const PricingSection = ({ onSelect }: PricingSectionProps) => {
                         {card.oldPrice} лв
                       </span>
                     </div>
+                    
+                    <p className="text-sm text-gray-300 mb-4 leading-relaxed">
+                      {card.description}
+                    </p>
                     
                     <button
                       className={`w-full py-3 px-6 rounded-lg font-semibold transition-all duration-300 ${
@@ -198,7 +209,7 @@ export const PricingSection = ({ onSelect }: PricingSectionProps) => {
                       </h4>
                     </div>
                     
-                    <div className="flex items-baseline gap-3 mb-4">
+                    <div className="flex items-baseline gap-3 mb-3">
                       <span className="text-3xl font-bold text-secondary">
                         {card.price} лв
                       </span>
@@ -206,6 +217,10 @@ export const PricingSection = ({ onSelect }: PricingSectionProps) => {
                         {card.oldPrice} лв
                       </span>
                     </div>
+                    
+                    <p className="text-sm text-gray-300 mb-4 leading-relaxed">
+                      {card.description}
+                    </p>
                     
                     <button
                       className={`w-full py-3 px-6 rounded-lg font-semibold transition-all duration-300 ${
