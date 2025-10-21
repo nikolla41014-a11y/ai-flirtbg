@@ -1,7 +1,9 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import aiGirlfriend from "@/assets/ai-girlfriend.jpg";
+import andrea from "@/assets/andrea.jpg";
+import desita from "@/assets/desita.jpg";
+import ivana from "@/assets/ivana.jpg";
 import aiBoyfriend from "@/assets/ai-boyfriend.jpg";
 import { Heart, MessageCircleHeart, Sparkles } from "lucide-react";
 
@@ -9,6 +11,7 @@ interface Partner {
   name: string;
   type: "girlfriend" | "boyfriend";
   description: string;
+  image?: string;
 }
 
 interface PartnerSelectorProps {
@@ -19,17 +22,20 @@ const girlfriends: Partner[] = [
   {
     name: "Андреа",
     type: "girlfriend",
-    description: "Енергична и забавна, обожава приключенията и дълбоките разговори. Винаги е готова да те разсмее! 😊"
+    description: "Енергична и забавна, обожава приключенията и дълбоките разговори. Винаги е готова да те разсмее! 😊",
+    image: andrea
   },
   {
     name: "Десита",
     type: "girlfriend",
-    description: "Елегантна и романтична, обича изкуството и поезията. Нейните комплименти са като музика! 💕"
+    description: "Елегантна и романтична, обича изкуството и поезията. Нейните комплименти са като музика! 💕",
+    image: desita
   },
   {
     name: "Ивана",
     type: "girlfriend",
-    description: "Спортна и активна, обича предизвикателствата. Флиртува смело и директно! 🔥"
+    description: "Спортна и активна, обича предизвикателствата. Флиртува смело и директно! 🔥",
+    image: ivana
   }
 ];
 
@@ -99,7 +105,7 @@ export const PartnerSelector = ({ onSelect }: PartnerSelectorProps) => {
                 <div className="relative h-64 overflow-hidden">
                   <div className="absolute inset-0 bg-gradient-to-t from-background via-background/50 to-transparent z-10" />
                   <img 
-                    src={aiGirlfriend} 
+                    src={partner.image} 
                     alt={partner.name}
                     className={`w-full h-full object-cover transition-transform duration-700 ${
                       hoveredCard === partner.name ? "scale-110" : "scale-100"
