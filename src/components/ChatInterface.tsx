@@ -17,17 +17,19 @@ interface Message {
 interface ChatInterfaceProps {
   partnerName: string;
   partnerType: "girlfriend" | "boyfriend";
+  partnerImage?: string;
   onBack: () => void;
 }
 
-export const ChatInterface = ({ partnerName, partnerType, onBack }: ChatInterfaceProps) => {
+export const ChatInterface = ({ partnerName, partnerType, partnerImage: customImage, onBack }: ChatInterfaceProps) => {
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
-  const partnerImage = partnerType === "girlfriend" ? aiGirlfriend : aiBoyfriend;
+  const defaultImage = partnerType === "girlfriend" ? aiGirlfriend : aiBoyfriend;
+  const partnerImage = customImage || defaultImage;
   const partnerColor = partnerType === "girlfriend" ? "text-primary" : "text-secondary";
 
   useEffect(() => {

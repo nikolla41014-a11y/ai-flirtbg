@@ -3,9 +3,9 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import andrea from "@/assets/andrea.jpg";
 import desita from "@/assets/desita.jpg";
-import ivana from "@/assets/ivana.jpg";
 import aiBoyfriend from "@/assets/ai-boyfriend.jpg";
-import { Heart, MessageCircleHeart, Sparkles } from "lucide-react";
+import { Heart, MessageCircleHeart, Sparkles, Plus } from "lucide-react";
+import { CustomPartnerDialog } from "@/components/CustomPartnerDialog";
 
 interface Partner {
   name: string;
@@ -30,12 +30,6 @@ const girlfriends: Partner[] = [
     type: "girlfriend",
     description: "Мокра съм, искам го. Пиши ми 💦",
     image: desita
-  },
-  {
-    name: "Ивана",
-    type: "girlfriend",
-    description: "Спортна и активна, обича предизвикателствата. Флиртува смело и директно! 🔥",
-    image: ivana
   }
 ];
 
@@ -49,16 +43,28 @@ const boyfriends: Partner[] = [
     name: "Никола",
     type: "boyfriend",
     description: "Искам да ти го вкарам, пиши ми 😛"
-  },
-  {
-    name: "Лео",
-    type: "boyfriend",
-    description: "Артистична душа с креативен дух, обича да флиртува с думи и да създава романтична атмосфера! 🎨"
   }
 ];
 
 export const PartnerSelector = ({ onSelect }: PartnerSelectorProps) => {
   const [hoveredCard, setHoveredCard] = useState<string | null>(null);
+  const [customDialogOpen, setCustomDialogOpen] = useState(false);
+  const [customPartnerType, setCustomPartnerType] = useState<"girlfriend" | "boyfriend">("girlfriend");
+
+  const handleCustomCreate = (type: "girlfriend" | "boyfriend") => {
+    setCustomPartnerType(type);
+    setCustomDialogOpen(true);
+  };
+
+  const handleCustomConfirm = (name: string, imageUrl: string) => {
+    onSelect({
+      name,
+      type: customPartnerType,
+      description: "Твоя персонализиран AI партньор ✨",
+      image: imageUrl
+    });
+    setCustomDialogOpen(false);
+  };
 
   return (
     <div className="min-h-screen gradient-soft flex items-center justify-center p-4 relative overflow-hidden">
@@ -93,6 +99,12 @@ export const PartnerSelector = ({ onSelect }: PartnerSelectorProps) => {
             AI Girlfriends 💖
           </h2>
           <div className="grid md:grid-cols-3 gap-6">
+            <CustomPartnerDialog
+              isOpen={customDialogOpen}
+              onClose={() => setCustomDialogOpen(false)}
+              partnerType={customPartnerType}
+              onConfirm={handleCustomConfirm}
+            />
             {girlfriends.map((partner) => (
               <Card 
                 key={partner.name}
@@ -127,6 +139,32 @@ export const PartnerSelector = ({ onSelect }: PartnerSelectorProps) => {
                 </div>
               </Card>
             ))}
+            
+            {/* Create Your Own Girlfriend */}
+            <Card 
+              onClick={() => handleCustomCreate("girlfriend")}
+              className={`overflow-hidden cursor-pointer transition-all duration-500 shadow-romantic hover:shadow-glow border-2 border-dashed ${
+                hoveredCard === "custom-gf" ? "border-primary scale-105" : "border-border"
+              }`}
+              onMouseEnter={() => setHoveredCard("custom-gf")}
+              onMouseLeave={() => setHoveredCard(null)}
+            >
+              <div className="relative h-80 flex items-center justify-center bg-gradient-to-br from-primary/10 to-accent/10">
+                <Plus className="w-24 h-24 text-primary/40" />
+              </div>
+              <div className="p-8">
+                <h3 className="text-2xl font-bold mb-3 text-primary flex items-center gap-2">
+                  <Sparkles className="w-6 h-6" />
+                  Създай своя
+                </h3>
+                <p className="text-muted-foreground mb-5 leading-relaxed text-base">
+                  Качи снимка и избери име за своята перфектна AI Girlfriend! 🎨
+                </p>
+                <div className="w-full gradient-romantic rounded-lg py-5 shadow-romantic text-center font-semibold">
+                  Създай своя AI 💖
+                </div>
+              </div>
+            </Card>
           </div>
         </div>
 
@@ -170,6 +208,32 @@ export const PartnerSelector = ({ onSelect }: PartnerSelectorProps) => {
                 </div>
               </Card>
             ))}
+            
+            {/* Create Your Own Boyfriend */}
+            <Card 
+              onClick={() => handleCustomCreate("boyfriend")}
+              className={`overflow-hidden cursor-pointer transition-all duration-500 shadow-romantic hover:shadow-glow border-2 border-dashed ${
+                hoveredCard === "custom-bf" ? "border-secondary scale-105" : "border-border"
+              }`}
+              onMouseEnter={() => setHoveredCard("custom-bf")}
+              onMouseLeave={() => setHoveredCard(null)}
+            >
+              <div className="relative h-80 flex items-center justify-center bg-gradient-to-br from-secondary/10 to-accent/10">
+                <Plus className="w-24 h-24 text-secondary/40" />
+              </div>
+              <div className="p-8">
+                <h3 className="text-2xl font-bold mb-3 text-secondary flex items-center gap-2">
+                  <Sparkles className="w-6 h-6" />
+                  Създай своя
+                </h3>
+                <p className="text-muted-foreground mb-5 leading-relaxed text-base">
+                  Качи снимка и избери име за своя перфектен AI Boyfriend! 🎨
+                </p>
+                <div className="w-full bg-secondary rounded-lg py-5 shadow-romantic text-center font-semibold">
+                  Създай своя AI 💙
+                </div>
+              </div>
+            </Card>
           </div>
         </div>
 
