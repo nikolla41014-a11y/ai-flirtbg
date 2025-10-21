@@ -2,6 +2,7 @@ import { useState } from "react";
 import { PartnerSelector } from "@/components/PartnerSelector";
 import { ChatInterface } from "@/components/ChatInterface";
 import { AgeVerification } from "@/components/AgeVerification";
+import { LanguageSelector } from "@/components/LanguageSelector";
 
 interface Partner {
   name: string;
@@ -41,7 +42,14 @@ const Index = () => {
     );
   }
 
-  return <PartnerSelector onSelect={handleSelectPartner} />;
+  return (
+    <div className="relative min-h-screen">
+      <div className="absolute top-4 right-4 z-50">
+        <LanguageSelector />
+      </div>
+      <PartnerSelector onSelect={handleSelectPartner} />
+    </div>
+  );
 };
 
 export default Index;
