@@ -97,7 +97,7 @@ export const PartnerSelector = ({ onSelect }: PartnerSelectorProps) => {
         <div className="text-center mb-12 animate-fade-in">
           <div className="flex items-center justify-center gap-3 mb-4">
             <MessageCircleHeart className="w-12 h-12 text-primary animate-pulse-slow" />
-            <h1 className="text-5xl md:text-6xl font-bold gradient-romantic bg-clip-text text-transparent">
+            <h1 className="text-5xl md:text-6xl font-bold text-foreground drop-shadow-lg">
               {t("header.title")}
             </h1>
           </div>
