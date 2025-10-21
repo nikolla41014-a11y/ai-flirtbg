@@ -15,18 +15,18 @@ interface Message {
 }
 
 interface ChatInterfaceProps {
+  partnerName: string;
   partnerType: "girlfriend" | "boyfriend";
   onBack: () => void;
 }
 
-export const ChatInterface = ({ partnerType, onBack }: ChatInterfaceProps) => {
+export const ChatInterface = ({ partnerName, partnerType, onBack }: ChatInterfaceProps) => {
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
-  const partnerName = partnerType === "girlfriend" ? "Мария" : "Александър";
   const partnerImage = partnerType === "girlfriend" ? aiGirlfriend : aiBoyfriend;
   const partnerColor = partnerType === "girlfriend" ? "text-primary" : "text-secondary";
 
@@ -56,6 +56,7 @@ export const ChatInterface = ({ partnerType, onBack }: ChatInterfaceProps) => {
         body: {
           messages: [...messages, userMessage],
           partnerType,
+          partnerName,
         },
       });
 

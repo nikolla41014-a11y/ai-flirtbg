@@ -2,11 +2,17 @@ import { useState } from "react";
 import { PartnerSelector } from "@/components/PartnerSelector";
 import { ChatInterface } from "@/components/ChatInterface";
 
-const Index = () => {
-  const [selectedPartner, setSelectedPartner] = useState<"girlfriend" | "boyfriend" | null>(null);
+interface Partner {
+  name: string;
+  type: "girlfriend" | "boyfriend";
+  description: string;
+}
 
-  const handleSelectPartner = (type: "girlfriend" | "boyfriend") => {
-    setSelectedPartner(type);
+const Index = () => {
+  const [selectedPartner, setSelectedPartner] = useState<Partner | null>(null);
+
+  const handleSelectPartner = (partner: Partner) => {
+    setSelectedPartner(partner);
   };
 
   const handleBack = () => {
@@ -14,7 +20,13 @@ const Index = () => {
   };
 
   if (selectedPartner) {
-    return <ChatInterface partnerType={selectedPartner} onBack={handleBack} />;
+    return (
+      <ChatInterface 
+        partnerName={selectedPartner.name}
+        partnerType={selectedPartner.type}
+        onBack={handleBack} 
+      />
+    );
   }
 
   return <PartnerSelector onSelect={handleSelectPartner} />;

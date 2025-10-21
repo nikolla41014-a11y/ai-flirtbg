@@ -5,9 +5,51 @@ import aiGirlfriend from "@/assets/ai-girlfriend.jpg";
 import aiBoyfriend from "@/assets/ai-boyfriend.jpg";
 import { Heart, MessageCircleHeart, Sparkles } from "lucide-react";
 
-interface PartnerSelectorProps {
-  onSelect: (type: "girlfriend" | "boyfriend") => void;
+interface Partner {
+  name: string;
+  type: "girlfriend" | "boyfriend";
+  description: string;
 }
+
+interface PartnerSelectorProps {
+  onSelect: (partner: Partner) => void;
+}
+
+const girlfriends: Partner[] = [
+  {
+    name: "Андреа",
+    type: "girlfriend",
+    description: "Енергична и забавна, обожава приключенията и дълбоките разговори. Винаги е готова да те разсмее! 😊"
+  },
+  {
+    name: "Десита",
+    type: "girlfriend",
+    description: "Елегантна и романтична, обича изкуството и поезията. Нейните комплименти са като музика! 💕"
+  },
+  {
+    name: "Ивана",
+    type: "girlfriend",
+    description: "Спортна и активна, обича предизвикателствата. Флиртува смело и директно! 🔥"
+  }
+];
+
+const boyfriends: Partner[] = [
+  {
+    name: "Симеон",
+    type: "boyfriend",
+    description: "Интелигентен и чаровен, обича дълбоките разговори и романтичните жестове. Перфектният джентълмен! 😎"
+  },
+  {
+    name: "Никола",
+    type: "boyfriend",
+    description: "Спортист с чувство за хумор, винаги знае как да те разведри и впечатли! 💪"
+  },
+  {
+    name: "Лео",
+    type: "boyfriend",
+    description: "Артистична душа с креативен дух, обича да флиртува с думи и да създава романтична атмосфера! 🎨"
+  }
+];
 
 export const PartnerSelector = ({ onSelect }: PartnerSelectorProps) => {
   const [hoveredCard, setHoveredCard] = useState<string | null>(null);
@@ -39,79 +81,94 @@ export const PartnerSelector = ({ onSelect }: PartnerSelectorProps) => {
           </p>
         </div>
 
-        {/* Partner cards */}
-        <div className="grid md:grid-cols-2 gap-8">
-          {/* AI Girlfriend */}
-          <Card 
-            className={`overflow-hidden cursor-pointer transition-all duration-500 shadow-romantic hover:shadow-glow border-2 ${
-              hoveredCard === "girlfriend" ? "border-primary scale-105" : "border-border"
-            }`}
-            onMouseEnter={() => setHoveredCard("girlfriend")}
-            onMouseLeave={() => setHoveredCard(null)}
-          >
-            <div className="relative h-80 overflow-hidden">
-              <div className="absolute inset-0 bg-gradient-to-t from-background via-background/50 to-transparent z-10" />
-              <img 
-                src={aiGirlfriend} 
-                alt="AI Girlfriend" 
-                className={`w-full h-full object-cover transition-transform duration-700 ${
-                  hoveredCard === "girlfriend" ? "scale-110" : "scale-100"
+        {/* AI Girlfriends Section */}
+        <div className="mb-12">
+          <h2 className="text-3xl font-bold text-primary text-center mb-8">
+            AI Girlfriends 💖
+          </h2>
+          <div className="grid md:grid-cols-3 gap-6">
+            {girlfriends.map((partner) => (
+              <Card 
+                key={partner.name}
+                className={`overflow-hidden cursor-pointer transition-all duration-500 shadow-romantic hover:shadow-glow border-2 ${
+                  hoveredCard === partner.name ? "border-primary scale-105" : "border-border"
                 }`}
-              />
-            </div>
-            <div className="p-8">
-              <h3 className="text-3xl font-bold mb-3 text-primary flex items-center gap-2">
-                <Heart className="w-7 h-7" />
-                AI-Girlfriend
-              </h3>
-              <p className="text-muted-foreground mb-6 leading-relaxed">
-                Мила, флиртуваща и романтична. Казва се Мария и обожава да води забавни разговори. 
-                Готова е да те впечатли с комплиментите си! 😊
-              </p>
-              <Button 
-                onClick={() => onSelect("girlfriend")}
-                className="w-full gradient-romantic hover:opacity-90 transition-all text-lg py-6 shadow-romantic hover:shadow-glow font-semibold"
+                onMouseEnter={() => setHoveredCard(partner.name)}
+                onMouseLeave={() => setHoveredCard(null)}
               >
-                Избери Мария 💖
-              </Button>
-            </div>
-          </Card>
+                <div className="relative h-64 overflow-hidden">
+                  <div className="absolute inset-0 bg-gradient-to-t from-background via-background/50 to-transparent z-10" />
+                  <img 
+                    src={aiGirlfriend} 
+                    alt={partner.name}
+                    className={`w-full h-full object-cover transition-transform duration-700 ${
+                      hoveredCard === partner.name ? "scale-110" : "scale-100"
+                    }`}
+                  />
+                </div>
+                <div className="p-6">
+                  <h3 className="text-2xl font-bold mb-2 text-primary flex items-center gap-2">
+                    <Heart className="w-6 h-6" />
+                    {partner.name}
+                  </h3>
+                  <p className="text-muted-foreground mb-4 leading-relaxed text-sm">
+                    {partner.description}
+                  </p>
+                  <Button 
+                    onClick={() => onSelect(partner)}
+                    className="w-full gradient-romantic hover:opacity-90 transition-all py-5 shadow-romantic hover:shadow-glow font-semibold"
+                  >
+                    Избери {partner.name} 💖
+                  </Button>
+                </div>
+              </Card>
+            ))}
+          </div>
+        </div>
 
-          {/* AI Boyfriend */}
-          <Card 
-            className={`overflow-hidden cursor-pointer transition-all duration-500 shadow-romantic hover:shadow-glow border-2 ${
-              hoveredCard === "boyfriend" ? "border-secondary scale-105" : "border-border"
-            }`}
-            onMouseEnter={() => setHoveredCard("boyfriend")}
-            onMouseLeave={() => setHoveredCard(null)}
-          >
-            <div className="relative h-80 overflow-hidden">
-              <div className="absolute inset-0 bg-gradient-to-t from-background via-background/50 to-transparent z-10" />
-              <img 
-                src={aiBoyfriend} 
-                alt="AI Boyfriend" 
-                className={`w-full h-full object-cover transition-transform duration-700 ${
-                  hoveredCard === "boyfriend" ? "scale-110" : "scale-100"
+        {/* AI Boyfriends Section */}
+        <div className="mb-12">
+          <h2 className="text-3xl font-bold text-secondary text-center mb-8">
+            AI Boyfriends 💙
+          </h2>
+          <div className="grid md:grid-cols-3 gap-6">
+            {boyfriends.map((partner) => (
+              <Card 
+                key={partner.name}
+                className={`overflow-hidden cursor-pointer transition-all duration-500 shadow-romantic hover:shadow-glow border-2 ${
+                  hoveredCard === partner.name ? "border-secondary scale-105" : "border-border"
                 }`}
-              />
-            </div>
-            <div className="p-8">
-              <h3 className="text-3xl font-bold mb-3 text-secondary flex items-center gap-2">
-                <Heart className="w-7 h-7" />
-                AI-Boyfriend
-              </h3>
-              <p className="text-muted-foreground mb-6 leading-relaxed">
-                Чаровен, флиртуващ и романтичен. Казва се Александър и обича да прави комплименти. 
-                Перфектният виртуален партньор! 😎
-              </p>
-              <Button 
-                onClick={() => onSelect("boyfriend")}
-                className="w-full bg-secondary hover:bg-secondary/90 transition-all text-lg py-6 shadow-romantic hover:shadow-glow font-semibold"
+                onMouseEnter={() => setHoveredCard(partner.name)}
+                onMouseLeave={() => setHoveredCard(null)}
               >
-                Избери Александър 💙
-              </Button>
-            </div>
-          </Card>
+                <div className="relative h-64 overflow-hidden">
+                  <div className="absolute inset-0 bg-gradient-to-t from-background via-background/50 to-transparent z-10" />
+                  <img 
+                    src={aiBoyfriend} 
+                    alt={partner.name}
+                    className={`w-full h-full object-cover transition-transform duration-700 ${
+                      hoveredCard === partner.name ? "scale-110" : "scale-100"
+                    }`}
+                  />
+                </div>
+                <div className="p-6">
+                  <h3 className="text-2xl font-bold mb-2 text-secondary flex items-center gap-2">
+                    <Heart className="w-6 h-6" />
+                    {partner.name}
+                  </h3>
+                  <p className="text-muted-foreground mb-4 leading-relaxed text-sm">
+                    {partner.description}
+                  </p>
+                  <Button 
+                    onClick={() => onSelect(partner)}
+                    className="w-full bg-secondary hover:bg-secondary/90 transition-all py-5 shadow-romantic hover:shadow-glow font-semibold"
+                  >
+                    Избери {partner.name} 💙
+                  </Button>
+                </div>
+              </Card>
+            ))}
+          </div>
         </div>
 
         {/* Features */}
