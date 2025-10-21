@@ -10,6 +10,9 @@ interface LanguageContextType {
 
 const translations: Record<Language, Record<string, string>> = {
   bg: {
+    // Currency
+    "currency": "лв",
+    
     // Age Verification
     "age.title": "18+ Потвърждение",
     "age.description": "Този сайт съдържа съдържание само за възрастни. Моля, потвърдете, че сте навършили 18 години.",
@@ -67,6 +70,9 @@ const translations: Record<Language, Record<string, string>> = {
     "custom.cancel": "Отказ",
   },
   en: {
+    // Currency
+    "currency": "€",
+    
     // Age Verification
     "age.title": "18+ Verification",
     "age.description": "This site contains adult content. Please confirm that you are 18 years or older.",
@@ -124,6 +130,9 @@ const translations: Record<Language, Record<string, string>> = {
     "custom.cancel": "Cancel",
   },
   es: {
+    // Currency
+    "currency": "€",
+    
     // Age Verification
     "age.title": "Verificación 18+",
     "age.description": "Este sitio contiene contenido para adultos. Por favor, confirme que tiene 18 años o más.",
@@ -181,6 +190,9 @@ const translations: Record<Language, Record<string, string>> = {
     "custom.cancel": "Cancelar",
   },
   tr: {
+    // Currency
+    "currency": "€",
+    
     // Age Verification
     "age.title": "18+ Doğrulama",
     "age.description": "Bu site yetişkin içeriği içermektedir. Lütfen 18 yaşında veya daha büyük olduğunuzu onaylayın.",

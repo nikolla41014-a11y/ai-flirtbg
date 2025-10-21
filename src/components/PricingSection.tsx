@@ -149,10 +149,10 @@ export const PricingSection = ({ onSelect }: PricingSectionProps) => {
                     
                     <div className="flex items-baseline gap-3 mb-3">
                       <span className="text-3xl font-bold text-primary">
-                        {card.price} лв
+                        {card.price} {t("currency")}
                       </span>
                       <span className="text-lg text-gray-400 line-through">
-                        {card.oldPrice} лв
+                        {card.oldPrice} {t("currency")}
                       </span>
                     </div>
                     
@@ -223,10 +223,10 @@ export const PricingSection = ({ onSelect }: PricingSectionProps) => {
                     
                     <div className="flex items-baseline gap-3 mb-3">
                       <span className="text-3xl font-bold text-secondary">
-                        {card.price} лв
+                        {card.price} {t("currency")}
                       </span>
                       <span className="text-lg text-gray-400 line-through">
-                        {card.oldPrice} лв
+                        {card.oldPrice} {t("currency")}
                       </span>
                     </div>
                     
