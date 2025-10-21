@@ -151,11 +151,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
   const createCheckoutSession = async (priceId: string) => {
     if (!session) {
-      toast({
-        title: "Грешка",
-        description: "Моля, влезте в профила си.",
-        variant: "destructive",
-      });
+      window.location.href = '/auth';
       return;
     }
 

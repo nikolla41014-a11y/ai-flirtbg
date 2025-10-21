@@ -23,17 +23,17 @@ const Index = () => {
   const { user, loading, signOut, subscriptionStatus } = useAuth();
   const navigate = useNavigate();
 
-  useEffect(() => {
-    if (!loading && !user) {
-      navigate("/auth");
-    }
-  }, [user, loading, navigate]);
 
   const handleAgeVerification = () => {
     setIsAgeVerified(true);
   };
 
   const handleSelectPartner = (partner: Partner) => {
+    // Check if user is logged in
+    if (!user) {
+      navigate("/auth");
+      return;
+    }
     // Check if user has active subscription before allowing chat
     if (!subscriptionStatus?.subscribed) {
       return; // Stay on subscription selector
@@ -51,10 +51,6 @@ const Index = () => {
         <div className="text-xl">Зареждане...</div>
       </div>
     );
-  }
-
-  if (!user) {
-    return null;
   }
 
   if (!isAgeVerified) {
@@ -82,10 +78,16 @@ const Index = () => {
         />
         <div className="flex items-center gap-4">
           <LanguageSelector />
-          <Button variant="outline" size="sm" onClick={signOut}>
-            <LogOut className="w-4 h-4 mr-2" />
-            Изход
-          </Button>
+          {user ? (
+            <Button variant="outline" size="sm" onClick={signOut}>
+              <LogOut className="w-4 h-4 mr-2" />
+              Изход
+            </Button>
+          ) : (
+            <Button variant="outline" size="sm" onClick={() => navigate("/auth")}>
+              Вход
+            </Button>
+          )}
         </div>
       </div>
       {subscriptionStatus?.subscribed ? (
