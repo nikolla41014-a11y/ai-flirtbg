@@ -93,13 +93,27 @@ const customPlans = {
 };
 
 export const SubscriptionSelector = () => {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const { subscriptionStatus, createCheckoutSession, openCustomerPortal } = useAuth();
   const [selectedPlan, setSelectedPlan] = useState<string>("monthly");
   const [hoveredCard, setHoveredCard] = useState<string | null>(null);
   const [showCustomDialog, setShowCustomDialog] = useState(false);
   const [customPartnerType, setCustomPartnerType] = useState<"girlfriend" | "boyfriend">("girlfriend");
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
+
+  // Конверсия от BGN в EUR (1 EUR = 1.95583 BGN)
+  const convertToEUR = (bgnPrice: string): string => {
+    const bgn = parseFloat(bgnPrice);
+    const eur = bgn / 1.95583;
+    return eur.toFixed(2);
+  };
+
+  const formatPrice = (bgnPrice: string): string => {
+    if (language === "bg") {
+      return `${bgnPrice} лв`;
+    }
+    return `€${convertToEUR(bgnPrice)}`;
+  };
 
   const hasActiveSubscription = subscriptionStatus?.subscribed;
   const activeProductId = subscriptionStatus?.product_id;
@@ -232,10 +246,10 @@ export const SubscriptionSelector = () => {
                       
                       <div className="flex items-baseline gap-3 mb-3">
                         <span className="text-3xl font-bold text-primary">
-                          {selectedPlan === "monthly" ? plan.monthlyPrice : plan.yearlyPrice} лв
+                          {formatPrice(selectedPlan === "monthly" ? plan.monthlyPrice : plan.yearlyPrice)}
                         </span>
                         <span className="text-sm text-gray-300">
-                          {selectedPlan === "monthly" ? "/ месец" : "/ година"}
+                          {selectedPlan === "monthly" ? (language === "bg" ? "/ месец" : "/ month") : (language === "bg" ? "/ година" : "/ year")}
                         </span>
                       </div>
                       
@@ -290,10 +304,10 @@ export const SubscriptionSelector = () => {
                   
                   <div className="flex items-baseline gap-3 mb-3">
                     <span className="text-3xl font-bold text-primary">
-                      {selectedPlan === "monthly" ? customPlans.girlfriend.monthlyPrice : customPlans.girlfriend.yearlyPrice} лв
+                      {formatPrice(selectedPlan === "monthly" ? customPlans.girlfriend.monthlyPrice : customPlans.girlfriend.yearlyPrice)}
                     </span>
                     <span className="text-sm text-gray-300">
-                      {selectedPlan === "monthly" ? "/ месец" : "/ година"}
+                      {selectedPlan === "monthly" ? (language === "bg" ? "/ месец" : "/ month") : (language === "bg" ? "/ година" : "/ year")}
                     </span>
                   </div>
                   
@@ -357,10 +371,10 @@ export const SubscriptionSelector = () => {
                       
                       <div className="flex items-baseline gap-3 mb-3">
                         <span className="text-3xl font-bold text-secondary">
-                          {selectedPlan === "monthly" ? plan.monthlyPrice : plan.yearlyPrice} лв
+                          {formatPrice(selectedPlan === "monthly" ? plan.monthlyPrice : plan.yearlyPrice)}
                         </span>
                         <span className="text-sm text-gray-300">
-                          {selectedPlan === "monthly" ? "/ месец" : "/ година"}
+                          {selectedPlan === "monthly" ? (language === "bg" ? "/ месец" : "/ month") : (language === "bg" ? "/ година" : "/ year")}
                         </span>
                       </div>
                       
@@ -415,10 +429,10 @@ export const SubscriptionSelector = () => {
                   
                   <div className="flex items-baseline gap-3 mb-3">
                     <span className="text-3xl font-bold text-secondary">
-                      {selectedPlan === "monthly" ? customPlans.boyfriend.monthlyPrice : customPlans.boyfriend.yearlyPrice} лв
+                      {formatPrice(selectedPlan === "monthly" ? customPlans.boyfriend.monthlyPrice : customPlans.boyfriend.yearlyPrice)}
                     </span>
                     <span className="text-sm text-gray-300">
-                      {selectedPlan === "monthly" ? "/ месец" : "/ година"}
+                      {selectedPlan === "monthly" ? (language === "bg" ? "/ месец" : "/ month") : (language === "bg" ? "/ година" : "/ year")}
                     </span>
                   </div>
                   
