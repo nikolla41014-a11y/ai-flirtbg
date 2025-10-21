@@ -23,51 +23,51 @@ interface PricingSectionProps {
 
 const pricingCards: PricingCard[] = [
   {
-    name: "Андреа",
+    name: "andrea",
     type: "girlfriend",
     image: andrea,
     price: "9.99",
     oldPrice: "19.99",
-    description: "Енергична и забавна, обожава приключенията и дълбоките разговори. Винаги е готова да те разсмее! 😊"
+    description: ""
   },
   {
-    name: "Десита",
+    name: "desita",
     type: "girlfriend",
     image: desita,
     price: "19.99",
     oldPrice: "39.99",
-    description: "Мокра съм, искам го. Пиши ми 💦"
+    description: ""
   },
   {
-    name: "Създай своя",
+    name: "custom",
     type: "girlfriend",
     price: "15.99",
     oldPrice: "32.99",
-    description: "Качи снимка и избери име за своята перфектна AI Girlfriend! 🎨",
+    description: "",
     isCustom: true
   },
   {
-    name: "Симеон",
+    name: "simeon",
     type: "boyfriend",
     image: simeon,
     price: "9.99",
     oldPrice: "19.99",
-    description: "Интелигентен и чаровен, обича дълбоките разговори и романтичните жестове. Перфектният джентълмен! 😎"
+    description: ""
   },
   {
-    name: "Никола",
+    name: "nikola",
     type: "boyfriend",
     image: nikola,
     price: "19.99",
     oldPrice: "39.99",
-    description: "Искам да ти го вкарам, пиши ми 😛"
+    description: ""
   },
   {
-    name: "Създай своя",
+    name: "custom",
     type: "boyfriend",
     price: "15.99",
     oldPrice: "32.99",
-    description: "Качи снимка и избери име за своя перфектен AI Boyfriend! 🎨",
+    description: "",
     isCustom: true
   }
 ];
@@ -78,12 +78,12 @@ export const PricingSection = ({ onSelect }: PricingSectionProps) => {
   
   const pricingCardsWithTranslations: PricingCard[] = pricingCards.map(card => ({
     ...card,
-    name: card.isCustom ? t("pricing.createOwn") : card.name,
+    name: card.isCustom 
+      ? t("pricing.createOwn") 
+      : t(`partner.${card.name}.name`),
     description: card.isCustom 
       ? (card.type === "girlfriend" ? t("partner.custom.girlfriend") : t("partner.custom.boyfriend"))
-      : (card.name === "Андреа" ? t("partner.andrea.desc") :
-         card.name === "Десита" ? t("partner.desita.desc") :
-         card.name === "Симеон" ? t("partner.simeon.desc") : t("partner.nikola.desc"))
+      : t(`partner.${card.name}.desc`)
   }));
 
   const girlfriends = pricingCardsWithTranslations.filter(card => card.type === "girlfriend");

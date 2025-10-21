@@ -28,6 +28,12 @@ const translations: Record<Language, Record<string, string>> = {
     "pricing.select": "Избери",
     "pricing.createOwn": "Създай своя",
     
+    // Partner Names
+    "partner.andrea.name": "Андреа",
+    "partner.desita.name": "Десита",
+    "partner.simeon.name": "Симеон",
+    "partner.nikola.name": "Никола",
+    
     // Partner Descriptions
     "partner.andrea.desc": "Енергична и забавна, обожава приключенията и дълбоките разговори. Винаги е готова да те разсмее! 😊",
     "partner.desita.desc": "Мокра съм, искам го. Пиши ми 💦",
@@ -78,6 +84,12 @@ const translations: Record<Language, Record<string, string>> = {
     "pricing.boyfriends": "AI Boyfriends 💙",
     "pricing.select": "Select",
     "pricing.createOwn": "Create Your Own",
+    
+    // Partner Names
+    "partner.andrea.name": "Andrea",
+    "partner.desita.name": "Desita",
+    "partner.simeon.name": "Simeon",
+    "partner.nikola.name": "Nikola",
     
     // Partner Descriptions
     "partner.andrea.desc": "Energetic and fun, loves adventures and deep conversations. Always ready to make you laugh! 😊",
@@ -130,6 +142,12 @@ const translations: Record<Language, Record<string, string>> = {
     "pricing.select": "Seleccionar",
     "pricing.createOwn": "Crea Tu Propia",
     
+    // Partner Names
+    "partner.andrea.name": "Andrea",
+    "partner.desita.name": "Desita",
+    "partner.simeon.name": "Simeon",
+    "partner.nikola.name": "Nikola",
+    
     // Partner Descriptions
     "partner.andrea.desc": "Enérgica y divertida, ama las aventuras y las conversaciones profundas. ¡Siempre lista para hacerte reír! 😊",
     "partner.desita.desc": "Estoy mojada, lo quiero. Escríbeme 💦",
@@ -180,6 +198,12 @@ const translations: Record<Language, Record<string, string>> = {
     "pricing.boyfriends": "AI Erkek Arkadaşlar 💙",
     "pricing.select": "Seç",
     "pricing.createOwn": "Kendiniz Oluşturun",
+    
+    // Partner Names
+    "partner.andrea.name": "Andrea",
+    "partner.desita.name": "Desita",
+    "partner.simeon.name": "Simeon",
+    "partner.nikola.name": "Nikola",
     
     // Partner Descriptions
     "partner.andrea.desc": "Enerjik ve eğlenceli, maceraları ve derin sohbetleri seviyor. Sizi her zaman güldürmeye hazır! 😊",

@@ -26,13 +26,13 @@ export const PartnerSelector = ({ onSelect }: PartnerSelectorProps) => {
 
   const girlfriends: Partner[] = [
     {
-      name: "Андреа",
+      name: t("partner.andrea.name"),
       type: "girlfriend",
       description: t("partner.andrea.desc"),
       image: andrea
     },
     {
-      name: "Десита",
+      name: t("partner.desita.name"),
       type: "girlfriend",
       description: t("partner.desita.desc"),
       image: desita
@@ -41,13 +41,13 @@ export const PartnerSelector = ({ onSelect }: PartnerSelectorProps) => {
 
   const boyfriends: Partner[] = [
     {
-      name: "Симеон",
+      name: t("partner.simeon.name"),
       type: "boyfriend",
       description: t("partner.simeon.desc"),
       image: simeon
     },
     {
-      name: "Никола",
+      name: t("partner.nikola.name"),
       type: "boyfriend",
       description: t("partner.nikola.desc"),
       image: nikola
