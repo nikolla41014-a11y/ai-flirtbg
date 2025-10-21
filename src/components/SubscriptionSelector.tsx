@@ -3,7 +3,8 @@ import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { useAuth } from "@/contexts/AuthContext";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { Check } from "lucide-react";
+import { Check, Plus, Sparkles } from "lucide-react";
+import { CustomPartnerDialog } from "@/components/CustomPartnerDialog";
 import andrea from "@/assets/andrea.jpg";
 import desita from "@/assets/desita.jpg";
 import simeon from "@/assets/simeon.jpg";
@@ -78,6 +79,8 @@ export const SubscriptionSelector = () => {
   const { subscriptionStatus, createCheckoutSession, openCustomerPortal } = useAuth();
   const [selectedPlan, setSelectedPlan] = useState<string>("monthly");
   const [hoveredCard, setHoveredCard] = useState<string | null>(null);
+  const [showCustomDialog, setShowCustomDialog] = useState(false);
+  const [customPartnerType, setCustomPartnerType] = useState<"girlfriend" | "boyfriend">("girlfriend");
 
   const hasActiveSubscription = subscriptionStatus?.subscribed;
   const activeProductId = subscriptionStatus?.product_id;
@@ -92,6 +95,17 @@ export const SubscriptionSelector = () => {
 
   const isActivePlan = (productId: string) => {
     return hasActiveSubscription && activeProductId === productId;
+  };
+
+  const handleOpenCustomDialog = (type: "girlfriend" | "boyfriend") => {
+    setCustomPartnerType(type);
+    setShowCustomDialog(true);
+  };
+
+  const handleCustomPartnerCreate = (name: string, imageUrl: string) => {
+    console.log("Custom partner created:", name, imageUrl);
+    setShowCustomDialog(false);
+    // TODO: Handle custom partner creation with subscription requirement
   };
 
   return (
@@ -141,7 +155,7 @@ export const SubscriptionSelector = () => {
           <h3 className="text-3xl font-bold text-primary text-center mb-8">
             AI Girlfriends
           </h3>
-          <div className="grid md:grid-cols-2 gap-6">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {girlfriends.map((plan) => {
               const isActive = isActivePlan(plan.productId);
               return (
@@ -202,6 +216,41 @@ export const SubscriptionSelector = () => {
                 </Card>
               );
             })}
+            
+            {/* Custom Girlfriend Card */}
+            <Card
+              onClick={() => handleOpenCustomDialog("girlfriend")}
+              onMouseEnter={() => setHoveredCard("custom-girlfriend")}
+              onMouseLeave={() => setHoveredCard(null)}
+              className={`relative overflow-hidden cursor-pointer transition-all duration-500 ${
+                hoveredCard === "custom-girlfriend" ? "scale-105 shadow-glow" : "shadow-romantic"
+              } border-2 border-border`}
+            >
+              <div className="relative h-[500px] overflow-hidden">
+                <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-primary/20 to-accent/20">
+                  <Plus className="w-24 h-24 text-primary/50" />
+                </div>
+                
+                <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent opacity-80" />
+                
+                <div className="absolute bottom-0 left-0 right-0 p-6">
+                  <div className="flex items-center gap-2 mb-3">
+                    <Sparkles className="w-5 h-5 text-primary" />
+                    <h4 className="text-2xl font-bold text-white">
+                      {t("pricing.createOwn")}
+                    </h4>
+                  </div>
+                  
+                  <p className="text-sm text-gray-300 mb-4 leading-relaxed">
+                    {t("partner.custom.girlfriend")}
+                  </p>
+                  
+                  <Button className="w-full bg-primary hover:bg-primary/90">
+                    Създай
+                  </Button>
+                </div>
+              </div>
+            </Card>
           </div>
         </div>
 
@@ -210,7 +259,7 @@ export const SubscriptionSelector = () => {
           <h3 className="text-3xl font-bold text-secondary text-center mb-8">
             AI Boyfriends
           </h3>
-          <div className="grid md:grid-cols-2 gap-6">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {boyfriends.map((plan) => {
               const isActive = isActivePlan(plan.productId);
               return (
@@ -271,9 +320,51 @@ export const SubscriptionSelector = () => {
                 </Card>
               );
             })}
+            
+            {/* Custom Boyfriend Card */}
+            <Card
+              onClick={() => handleOpenCustomDialog("boyfriend")}
+              onMouseEnter={() => setHoveredCard("custom-boyfriend")}
+              onMouseLeave={() => setHoveredCard(null)}
+              className={`relative overflow-hidden cursor-pointer transition-all duration-500 ${
+                hoveredCard === "custom-boyfriend" ? "scale-105 shadow-glow" : "shadow-romantic"
+              } border-2 border-border`}
+            >
+              <div className="relative h-[500px] overflow-hidden">
+                <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-secondary/20 to-accent/20">
+                  <Plus className="w-24 h-24 text-secondary/50" />
+                </div>
+                
+                <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent opacity-80" />
+                
+                <div className="absolute bottom-0 left-0 right-0 p-6">
+                  <div className="flex items-center gap-2 mb-3">
+                    <Sparkles className="w-5 h-5 text-secondary" />
+                    <h4 className="text-2xl font-bold text-white">
+                      {t("pricing.createOwn")}
+                    </h4>
+                  </div>
+                  
+                  <p className="text-sm text-gray-300 mb-4 leading-relaxed">
+                    {t("partner.custom.boyfriend")}
+                  </p>
+                  
+                  <Button className="w-full bg-secondary hover:bg-secondary/90">
+                    Създай
+                  </Button>
+                </div>
+              </div>
+            </Card>
           </div>
         </div>
       </div>
+
+      <CustomPartnerDialog
+        isOpen={showCustomDialog}
+        onClose={() => setShowCustomDialog(false)}
+        partnerType={customPartnerType}
+        onConfirm={handleCustomPartnerCreate}
+      />
     </div>
   );
 };
