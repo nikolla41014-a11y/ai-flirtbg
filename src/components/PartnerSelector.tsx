@@ -96,36 +96,34 @@ export const PartnerSelector = ({ onSelect }: PartnerSelectorProps) => {
             {girlfriends.map((partner) => (
               <Card 
                 key={partner.name}
+                onClick={() => onSelect(partner)}
                 className={`overflow-hidden cursor-pointer transition-all duration-500 shadow-romantic hover:shadow-glow border-2 ${
                   hoveredCard === partner.name ? "border-primary scale-105" : "border-border"
                 }`}
                 onMouseEnter={() => setHoveredCard(partner.name)}
                 onMouseLeave={() => setHoveredCard(null)}
               >
-                <div className="relative h-64 overflow-hidden">
+                <div className="relative h-80 overflow-hidden">
                   <div className="absolute inset-0 bg-gradient-to-t from-background via-background/50 to-transparent z-10" />
                   <img 
                     src={partner.image} 
                     alt={partner.name}
-                    className={`w-full h-full object-cover transition-transform duration-700 ${
+                    className={`w-full h-full object-contain transition-transform duration-700 ${
                       hoveredCard === partner.name ? "scale-110" : "scale-100"
                     }`}
                   />
                 </div>
-                <div className="p-6">
-                  <h3 className="text-2xl font-bold mb-2 text-primary flex items-center gap-2">
+                <div className="p-8">
+                  <h3 className="text-2xl font-bold mb-3 text-primary flex items-center gap-2">
                     <Heart className="w-6 h-6" />
                     {partner.name}
                   </h3>
-                  <p className="text-muted-foreground mb-4 leading-relaxed text-sm">
+                  <p className="text-muted-foreground mb-5 leading-relaxed text-base">
                     {partner.description}
                   </p>
-                  <Button 
-                    onClick={() => onSelect(partner)}
-                    className="w-full gradient-romantic hover:opacity-90 transition-all py-5 shadow-romantic hover:shadow-glow font-semibold"
-                  >
+                  <div className="w-full gradient-romantic rounded-lg py-5 shadow-romantic text-center font-semibold">
                     Избери {partner.name} 💖
-                  </Button>
+                  </div>
                 </div>
               </Card>
             ))}
@@ -141,36 +139,34 @@ export const PartnerSelector = ({ onSelect }: PartnerSelectorProps) => {
             {boyfriends.map((partner) => (
               <Card 
                 key={partner.name}
+                onClick={() => onSelect(partner)}
                 className={`overflow-hidden cursor-pointer transition-all duration-500 shadow-romantic hover:shadow-glow border-2 ${
                   hoveredCard === partner.name ? "border-secondary scale-105" : "border-border"
                 }`}
                 onMouseEnter={() => setHoveredCard(partner.name)}
                 onMouseLeave={() => setHoveredCard(null)}
               >
-                <div className="relative h-64 overflow-hidden">
+                <div className="relative h-80 overflow-hidden">
                   <div className="absolute inset-0 bg-gradient-to-t from-background via-background/50 to-transparent z-10" />
                   <img 
                     src={aiBoyfriend} 
                     alt={partner.name}
-                    className={`w-full h-full object-cover transition-transform duration-700 ${
+                    className={`w-full h-full object-contain transition-transform duration-700 ${
                       hoveredCard === partner.name ? "scale-110" : "scale-100"
                     }`}
                   />
                 </div>
-                <div className="p-6">
-                  <h3 className="text-2xl font-bold mb-2 text-secondary flex items-center gap-2">
+                <div className="p-8">
+                  <h3 className="text-2xl font-bold mb-3 text-secondary flex items-center gap-2">
                     <Heart className="w-6 h-6" />
                     {partner.name}
                   </h3>
-                  <p className="text-muted-foreground mb-4 leading-relaxed text-sm">
+                  <p className="text-muted-foreground mb-5 leading-relaxed text-base">
                     {partner.description}
                   </p>
-                  <Button 
-                    onClick={() => onSelect(partner)}
-                    className="w-full bg-secondary hover:bg-secondary/90 transition-all py-5 shadow-romantic hover:shadow-glow font-semibold"
-                  >
+                  <div className="w-full bg-secondary rounded-lg py-5 shadow-romantic text-center font-semibold">
                     Избери {partner.name} 💙
-                  </Button>
+                  </div>
                 </div>
               </Card>
             ))}
