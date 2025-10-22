@@ -28,12 +28,21 @@
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
-    <script src="https://cdn.babelbeez.com/voice-agent.min.js"
-      data-agent-id="YOUR_AGENT_ID_HERE"
-      data-language="bg"
-      data-theme="light"
-      data-position="bottom-right"
-      defer>
+    <!-- Babelbeez Chatbot Embed Start -->
+    <script>
+      window.babelbeezConfig = {
+        publicChatbotId: "cc94421d-8af3-4f92-aac6-15979b3f5ccc",
+        proxyInitializeUrl: "https://www.babelbeez.com/initialize-chat",
+        loaderUrl: "https://www.babelbeez.com/assets/embedLoader.js"
+      };
+      (function() {
+        var d = document;
+        var s = d.createElement('script');
+        s.src = window.babelbeezConfig.loaderUrl;
+        s.async = true;
+        d.body.appendChild(s);
+      })();
     </script>
+    <!-- Babelbeez Chatbot Embed End -->
   </body>
 </html>
