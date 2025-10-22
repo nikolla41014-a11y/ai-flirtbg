@@ -6,6 +6,7 @@ import { AgeVerification } from "@/components/AgeVerification";
 import { LanguageSelector } from "@/components/LanguageSelector";
 import { SubscriptionSelector } from "@/components/SubscriptionSelector";
 import { HeroSection } from "@/components/HeroSection";
+import { Footer } from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { useAuth } from "@/contexts/AuthContext";
 import { LogOut } from "lucide-react";
@@ -73,7 +74,7 @@ const Index = () => {
   }
 
   return (
-    <div className="relative min-h-screen">
+    <div className="relative min-h-screen flex flex-col">
       <div className="absolute top-0 left-0 right-0 z-50 flex items-center justify-between px-4 py-4 bg-card/95 backdrop-blur-sm border-b border-border">
         <img 
           src={aiFlirtLogo} 
@@ -99,12 +100,15 @@ const Index = () => {
           )}
         </div>
       </div>
-      <HeroSection />
-      {DEV_MODE || subscriptionStatus?.subscribed ? (
-        <PartnerSelector onSelect={handleSelectPartner} />
-      ) : (
-        <SubscriptionSelector />
-      )}
+      <div className="flex-1">
+        <HeroSection />
+        {DEV_MODE || subscriptionStatus?.subscribed ? (
+          <PartnerSelector onSelect={handleSelectPartner} />
+        ) : (
+          <SubscriptionSelector />
+        )}
+      </div>
+      <Footer />
     </div>
   );
 };

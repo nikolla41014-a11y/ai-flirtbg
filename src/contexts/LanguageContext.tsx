@@ -17,7 +17,8 @@ const translations: Record<Language, Record<string, string>> = {
     "age.title": "18+ Потвърждение",
     "age.description": "Този сайт съдържа съдържание само за възрастни. Моля, потвърдете, че сте навършили 18 години.",
     "age.confirm": "Потвърждавам - Навършил/а съм 18 години",
-    "age.notice": "С натискането на бутона потвърждавате, че сте навършили пълнолетие",
+    "age.notice": "С натискането на бутона потвърждавате, че сте навършили пълнолетие.",
+    "age.privacyLink": "Прочетете нашата Политика за поверителност",
     
     // Main Header
     "header.title": "AI Flirt",
@@ -83,7 +84,8 @@ const translations: Record<Language, Record<string, string>> = {
     "age.title": "18+ Verification",
     "age.description": "This site contains adult content. Please confirm that you are 18 years or older.",
     "age.confirm": "I confirm - I am 18 years or older",
-    "age.notice": "By clicking the button you confirm that you have reached the age of majority",
+    "age.notice": "By clicking the button you confirm that you have reached the age of majority.",
+    "age.privacyLink": "Read our Privacy Policy",
     
     // Main Header
     "header.title": "AI Flirt",
@@ -149,7 +151,8 @@ const translations: Record<Language, Record<string, string>> = {
     "age.title": "Verificación 18+",
     "age.description": "Este sitio contiene contenido para adultos. Por favor, confirme que tiene 18 años o más.",
     "age.confirm": "Confirmo - Tengo 18 años o más",
-    "age.notice": "Al hacer clic en el botón, confirmas que has alcanzado la mayoría de edad",
+    "age.notice": "Al hacer clic en el botón, confirmas que has alcanzado la mayoría de edad.",
+    "age.privacyLink": "Lea nuestra Política de Privacidad",
     
     // Main Header
     "header.title": "AI Flirt",
@@ -215,7 +218,8 @@ const translations: Record<Language, Record<string, string>> = {
     "age.title": "18+ Doğrulama",
     "age.description": "Bu site yetişkin içeriği içermektedir. Lütfen 18 yaşında veya daha büyük olduğunuzu onaylayın.",
     "age.confirm": "Onaylıyorum - 18 yaşında veya daha büyüğüm",
-    "age.notice": "Butona tıklayarak reşit olduğunuzu onaylamış olursunuz",
+    "age.notice": "Butona tıklayarak reşit olduğunuzu onaylamış olursunuz.",
+    "age.privacyLink": "Gizlilik Politikamızı Okuyun",
     
     // Main Header
     "header.title": "AI Flirt",

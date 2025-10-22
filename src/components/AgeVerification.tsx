@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { AlertCircle } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { Link } from "react-router-dom";
 
 interface AgeVerificationProps {
   onConfirm: () => void;
@@ -44,6 +45,13 @@ export const AgeVerification = ({ onConfirm }: AgeVerificationProps) => {
             
             <p className="text-xs text-muted-foreground">
               {t("age.notice")}
+            </p>
+            
+            <p className="text-xs text-muted-foreground mt-4">
+              {t("age.notice")}{" "}
+              <Link to="/privacy-policy" className="text-primary hover:underline">
+                {t("age.privacyLink")}
+              </Link>
             </p>
           </div>
         </div>
