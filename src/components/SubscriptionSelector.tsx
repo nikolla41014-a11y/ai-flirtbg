@@ -207,27 +207,6 @@ export const SubscriptionSelector = () => {
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto mb-6">
             Изберете вашия AI партньор и започнете вашето романтично пътешествие
           </p>
-
-          {/* Plan Toggle */}
-          <div className="inline-flex items-center gap-2 p-1 bg-muted rounded-lg">
-            <Button
-              variant={selectedPlan === "monthly" ? "default" : "ghost"}
-              onClick={() => setSelectedPlan("monthly")}
-              className="rounded-md"
-            >
-              Месечен план
-            </Button>
-            <Button
-              variant={selectedPlan === "yearly" ? "default" : "ghost"}
-              onClick={() => setSelectedPlan("yearly")}
-              className="rounded-md"
-            >
-              Годишен план
-              <span className="ml-2 text-xs bg-primary/20 px-2 py-0.5 rounded">
-                Спестете 25%
-              </span>
-            </Button>
-          </div>
         </div>
 
         {hasActiveSubscription && (
