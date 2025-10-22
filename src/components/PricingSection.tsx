@@ -53,8 +53,8 @@ const pricingCards: PricingCard[] = [
     name: "lora",
     type: "girlfriend",
     image: lora,
-    price: "16.99",
-    oldPrice: "33.99",
+    price: "36.99",
+    oldPrice: "73.99",
     description: ""
   },
   {
