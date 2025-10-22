@@ -7,6 +7,7 @@ import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { supabase } from "@/integrations/supabase/client";
 import { Send, ArrowLeft, Heart, Loader2 } from "lucide-react";
 import { toast } from "sonner";
+import { useAuth } from "@/contexts/AuthContext";
 import aiGirlfriend from "@/assets/ai-girlfriend.jpg";
 import aiBoyfriend from "@/assets/ai-boyfriend.jpg";
 
@@ -27,12 +28,20 @@ export const ChatInterface = ({ partnerName, partnerType, partnerImage: customIm
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [isImageOpen, setIsImageOpen] = useState(false);
+  const [freeTrialCount, setFreeTrialCount] = useState(0);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
+  const { subscriptionStatus } = useAuth();
 
   const defaultImage = partnerType === "girlfriend" ? aiGirlfriend : aiBoyfriend;
   const partnerImage = customImage || defaultImage;
   const partnerColor = partnerType === "girlfriend" ? "text-primary" : "text-secondary";
+  
+  // Partners with free trial
+  const FREE_TRIAL_PARTNERS = ["Andrea", "Mia"];
+  const FREE_TRIAL_LIMIT = 3;
+  const hasFreeTrial = FREE_TRIAL_PARTNERS.includes(partnerName);
+  const hasActiveSubscription = subscriptionStatus?.subscribed || false;
 
   useEffect(() => {
     // Initial greeting
@@ -41,7 +50,14 @@ export const ChatInterface = ({ partnerName, partnerType, partnerImage: customIm
       : "Здравей красавице! 😎 Приятно ми е да се запознаем. Какво те прави щастлива?";
     
     setMessages([{ role: "assistant", content: greeting }]);
-  }, [partnerType]);
+    
+    // Load free trial count from localStorage
+    if (hasFreeTrial) {
+      const storageKey = `freeTrial_${partnerName}`;
+      const savedCount = localStorage.getItem(storageKey);
+      setFreeTrialCount(savedCount ? parseInt(savedCount, 10) : 0);
+    }
+  }, [partnerType, partnerName, hasFreeTrial]);
 
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -49,6 +65,23 @@ export const ChatInterface = ({ partnerName, partnerType, partnerImage: customIm
 
   const sendMessage = async () => {
     if (!input.trim() || isLoading) return;
+
+    // Check free trial limit
+    if (hasFreeTrial && !hasActiveSubscription) {
+      if (freeTrialCount >= FREE_TRIAL_LIMIT) {
+        toast.error(
+          `Изчерпахте безплатните ${FREE_TRIAL_LIMIT} съобщения с ${partnerName}. Абонирайте се за неограничен достъп!`,
+          {
+            duration: 5000,
+            action: {
+              label: "Виж планове",
+              onClick: () => onBack(),
+            },
+          }
+        );
+        return;
+      }
+    }
 
     const userMessage: Message = { role: "user", content: input };
     setMessages(prev => [...prev, userMessage]);
@@ -68,6 +101,31 @@ export const ChatInterface = ({ partnerName, partnerType, partnerImage: customIm
 
       if (data?.message) {
         setMessages(prev => [...prev, { role: "assistant", content: data.message }]);
+        
+        // Increment free trial count if applicable
+        if (hasFreeTrial && !hasActiveSubscription) {
+          const newCount = freeTrialCount + 1;
+          setFreeTrialCount(newCount);
+          const storageKey = `freeTrial_${partnerName}`;
+          localStorage.setItem(storageKey, newCount.toString());
+          
+          // Show remaining messages
+          const remaining = FREE_TRIAL_LIMIT - newCount;
+          if (remaining > 0) {
+            toast.info(`Имате още ${remaining} безплатни съобщения с ${partnerName}`);
+          } else {
+            toast.warning(
+              `Изчерпахте безплатните съобщения! Абонирайте се за неограничен достъп.`,
+              {
+                duration: 5000,
+                action: {
+                  label: "Виж планове",
+                  onClick: () => onBack(),
+                },
+              }
+            );
+          }
+        }
       }
     } catch (error: any) {
       console.error("Error:", error);
