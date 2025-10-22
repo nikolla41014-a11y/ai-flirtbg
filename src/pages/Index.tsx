@@ -12,7 +12,7 @@ import { LogOut } from "lucide-react";
 import aiFlirtLogo from "@/assets/ai-flirt-logo.png";
 
 // DEV MODE: Set to true to bypass subscription checks for testing
-const DEV_MODE = true;
+const DEV_MODE = false;
 
 interface Partner {
   name: string;
