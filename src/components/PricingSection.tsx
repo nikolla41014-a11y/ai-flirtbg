@@ -42,6 +42,30 @@ const pricingCards: PricingCard[] = [
     description: ""
   },
   {
+    name: "mia",
+    type: "girlfriend",
+    image: mia,
+    price: "14.99",
+    oldPrice: "29.99",
+    description: ""
+  },
+  {
+    name: "lora",
+    type: "girlfriend",
+    image: lora,
+    price: "16.99",
+    oldPrice: "33.99",
+    description: ""
+  },
+  {
+    name: "ana",
+    type: "girlfriend",
+    image: ana,
+    price: "18.99",
+    oldPrice: "37.99",
+    description: ""
+  },
+  {
     name: "custom",
     type: "girlfriend",
     price: "15.99",
@@ -63,30 +87,6 @@ const pricingCards: PricingCard[] = [
     image: nikola,
     price: "19.99",
     oldPrice: "39.99",
-    description: ""
-  },
-  {
-    name: "mia",
-    type: "boyfriend",
-    image: mia,
-    price: "14.99",
-    oldPrice: "29.99",
-    description: ""
-  },
-  {
-    name: "lora",
-    type: "boyfriend",
-    image: lora,
-    price: "16.99",
-    oldPrice: "33.99",
-    description: ""
-  },
-  {
-    name: "ana",
-    type: "boyfriend",
-    image: ana,
-    price: "18.99",
-    oldPrice: "37.99",
     description: ""
   },
   {
