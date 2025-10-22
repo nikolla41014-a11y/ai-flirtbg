@@ -240,9 +240,31 @@ export const SubscriptionSelector = () => {
 
         {/* AI Girlfriends */}
         <div className="mb-16">
-          <h3 className="text-3xl font-bold text-primary text-center mb-8">
-            AI Girlfriends
-          </h3>
+          <div className="text-center mb-8">
+            <h3 className="text-3xl font-bold text-primary mb-4">
+              AI Girlfriends
+            </h3>
+            {/* Plan Toggle for Girlfriends */}
+            <div className="inline-flex items-center gap-2 p-1 bg-muted rounded-lg">
+              <Button
+                variant={selectedPlan === "monthly" ? "default" : "ghost"}
+                onClick={() => setSelectedPlan("monthly")}
+                className="rounded-md"
+              >
+                Месечен план
+              </Button>
+              <Button
+                variant={selectedPlan === "yearly" ? "default" : "ghost"}
+                onClick={() => setSelectedPlan("yearly")}
+                className="rounded-md"
+              >
+                Годишен план
+                <span className="ml-2 text-xs bg-primary/20 px-2 py-0.5 rounded">
+                  Спестете 25%
+                </span>
+              </Button>
+            </div>
+          </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {girlfriends.map((plan) => {
               const isActive = isActivePlan(plan.productId);
@@ -365,9 +387,31 @@ export const SubscriptionSelector = () => {
 
         {/* AI Boyfriends */}
         <div>
-          <h3 className="text-3xl font-bold text-secondary text-center mb-8">
-            AI Boyfriends
-          </h3>
+          <div className="text-center mb-8">
+            <h3 className="text-3xl font-bold text-secondary mb-4">
+              AI Boyfriends
+            </h3>
+            {/* Plan Toggle for Boyfriends */}
+            <div className="inline-flex items-center gap-2 p-1 bg-muted rounded-lg">
+              <Button
+                variant={selectedPlan === "monthly" ? "default" : "ghost"}
+                onClick={() => setSelectedPlan("monthly")}
+                className="rounded-md"
+              >
+                Месечен план
+              </Button>
+              <Button
+                variant={selectedPlan === "yearly" ? "default" : "ghost"}
+                onClick={() => setSelectedPlan("yearly")}
+                className="rounded-md"
+              >
+                Годишен план
+                <span className="ml-2 text-xs bg-secondary/20 px-2 py-0.5 rounded">
+                  Спестете 25%
+                </span>
+              </Button>
+            </div>
+          </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {boyfriends.map((plan) => {
               const isActive = isActivePlan(plan.productId);
