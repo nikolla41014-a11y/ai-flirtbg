@@ -6,6 +6,9 @@ import andrea from "@/assets/andrea.jpg";
 import desita from "@/assets/desita.jpg";
 import simeon from "@/assets/simeon.jpg";
 import nikola from "@/assets/nikola.jpg";
+import mia from "@/assets/mia.jpg";
+import lora from "@/assets/lora.jpg";
+import ana from "@/assets/ana.jpg";
 
 interface PricingCard {
   name: string;
@@ -60,6 +63,30 @@ const pricingCards: PricingCard[] = [
     image: nikola,
     price: "19.99",
     oldPrice: "39.99",
+    description: ""
+  },
+  {
+    name: "mia",
+    type: "boyfriend",
+    image: mia,
+    price: "14.99",
+    oldPrice: "29.99",
+    description: ""
+  },
+  {
+    name: "lora",
+    type: "boyfriend",
+    image: lora,
+    price: "16.99",
+    oldPrice: "33.99",
+    description: ""
+  },
+  {
+    name: "ana",
+    type: "boyfriend",
+    image: ana,
+    price: "18.99",
+    oldPrice: "37.99",
     description: ""
   },
   {
