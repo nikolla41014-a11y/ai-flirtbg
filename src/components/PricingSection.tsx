@@ -34,19 +34,19 @@ const pricingCards: PricingCard[] = [
     description: ""
   },
   {
-    name: "desita",
-    type: "girlfriend",
-    image: desita,
-    price: "19.99",
-    oldPrice: "39.99",
-    description: ""
-  },
-  {
     name: "mia",
     type: "girlfriend",
     image: mia,
     price: "14.99",
     oldPrice: "29.99",
+    description: ""
+  },
+  {
+    name: "desita",
+    type: "girlfriend",
+    image: desita,
+    price: "19.99",
+    oldPrice: "39.99",
     description: ""
   },
   {
