@@ -3,9 +3,9 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card } from "@/components/ui/card";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
-import { Dialog, DialogContent } from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import { supabase } from "@/integrations/supabase/client";
-import { Send, ArrowLeft, Heart, Loader2 } from "lucide-react";
+import { Send, ArrowLeft, Heart, Loader2, Crown } from "lucide-react";
 import { toast } from "sonner";
 import { useAuth } from "@/contexts/AuthContext";
 import aiGirlfriend from "@/assets/ai-girlfriend.jpg";
@@ -29,6 +29,7 @@ export const ChatInterface = ({ partnerName, partnerType, partnerImage: customIm
   const [isLoading, setIsLoading] = useState(false);
   const [isImageOpen, setIsImageOpen] = useState(false);
   const [freeTrialCount, setFreeTrialCount] = useState(0);
+  const [showSubscribeDialog, setShowSubscribeDialog] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const { subscriptionStatus } = useAuth();
@@ -69,16 +70,7 @@ export const ChatInterface = ({ partnerName, partnerType, partnerImage: customIm
     // Check free trial limit
     if (hasFreeTrial && !hasActiveSubscription) {
       if (freeTrialCount >= FREE_TRIAL_LIMIT) {
-        toast.error(
-          `Изчерпахте безплатните ${FREE_TRIAL_LIMIT} съобщения с ${partnerName}. Абонирайте се за неограничен достъп!`,
-          {
-            duration: 5000,
-            action: {
-              label: "Виж планове",
-              onClick: () => onBack(),
-            },
-          }
-        );
+        setShowSubscribeDialog(true);
         return;
       }
     }
@@ -114,16 +106,7 @@ export const ChatInterface = ({ partnerName, partnerType, partnerImage: customIm
           if (remaining > 0) {
             toast.info(`Имате още ${remaining} безплатни съобщения с ${partnerName}`);
           } else {
-            toast.warning(
-              `Изчерпахте безплатните съобщения! Абонирайте се за неограничен достъп.`,
-              {
-                duration: 5000,
-                action: {
-                  label: "Виж планове",
-                  onClick: () => onBack(),
-                },
-              }
-            );
+            setShowSubscribeDialog(true);
           }
         }
       }
@@ -266,6 +249,39 @@ export const ChatInterface = ({ partnerName, partnerType, partnerImage: customIm
             alt={partnerName}
             className="w-full h-auto object-cover"
           />
+        </DialogContent>
+      </Dialog>
+
+      {/* Subscribe Dialog */}
+      <Dialog open={showSubscribeDialog} onOpenChange={setShowSubscribeDialog}>
+        <DialogContent className="max-w-md">
+          <DialogHeader>
+            <DialogTitle className="flex items-center gap-2 text-2xl">
+              <Crown className="w-6 h-6 text-primary" />
+              Безплатният период приключи
+            </DialogTitle>
+            <DialogDescription className="text-base pt-4">
+              Използвахте всичките си 3 безплатни съобщения с {partnerName}. 
+              Абонирайте се сега за неограничен достъп до всички функции!
+            </DialogDescription>
+          </DialogHeader>
+          <div className="flex flex-col gap-3 pt-4">
+            <Button 
+              onClick={onBack}
+              className="w-full bg-primary hover:bg-primary/90"
+              size="lg"
+            >
+              <Crown className="w-4 h-4 mr-2" />
+              Виж планове за абонамент
+            </Button>
+            <Button 
+              onClick={() => setShowSubscribeDialog(false)}
+              variant="outline"
+              className="w-full"
+            >
+              Затвори
+            </Button>
+          </div>
         </DialogContent>
       </Dialog>
     </div>

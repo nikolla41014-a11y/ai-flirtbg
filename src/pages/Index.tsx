@@ -46,6 +46,21 @@ const Index = () => {
     setSelectedPartner(partner);
   };
 
+  const handleStartFreeTrial = (partnerName: string, partnerType: "girlfriend" | "boyfriend", partnerImage: string) => {
+    // Check if user is logged in
+    if (!user) {
+      navigate("/auth");
+      return;
+    }
+    // Allow free trial access without subscription
+    setSelectedPartner({
+      name: partnerName,
+      type: partnerType,
+      description: "",
+      image: partnerImage
+    });
+  };
+
   const handleBack = () => {
     setSelectedPartner(null);
   };
@@ -105,7 +120,7 @@ const Index = () => {
         {DEV_MODE || subscriptionStatus?.subscribed ? (
           <PartnerSelector onSelect={handleSelectPartner} />
         ) : (
-          <SubscriptionSelector />
+          <SubscriptionSelector onStartFreeTrial={handleStartFreeTrial} />
         )}
       </div>
       <Footer />

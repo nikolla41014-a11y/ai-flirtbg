@@ -131,7 +131,11 @@ const customPlans = {
   }
 };
 
-export const SubscriptionSelector = () => {
+interface SubscriptionSelectorProps {
+  onStartFreeTrial?: (partnerName: string, partnerType: "girlfriend" | "boyfriend", partnerImage: string) => void;
+}
+
+export const SubscriptionSelector = ({ onStartFreeTrial }: SubscriptionSelectorProps) => {
   const { t, language } = useLanguage();
   const { subscriptionStatus, createCheckoutSession, openCustomerPortal } = useAuth();
   const [selectedPlan, setSelectedPlan] = useState<string>("monthly");
@@ -194,6 +198,12 @@ export const SubscriptionSelector = () => {
     e.preventDefault();
     console.log("Image clicked:", imageUrl);
     setSelectedImage(imageUrl);
+  };
+
+  const handleStartFreeTrial = (plan: SubscriptionPlan) => {
+    if (onStartFreeTrial) {
+      onStartFreeTrial(plan.name, plan.type, plan.image);
+    }
   };
 
   return (
@@ -297,16 +307,15 @@ export const SubscriptionSelector = () => {
                         {t(plan.descKey)}
                       </p>
                       
-                      {/* Free Trial Badge for Andrea and Mia */}
+                      {/* Free Trial Button for Andrea and Mia */}
                       {(plan.name === "Andrea" || plan.name === "Mia") && !isActive && (
-                        <div className="mb-3 p-2 bg-accent/20 border border-accent rounded-lg">
-                          <div className="flex items-center justify-center gap-2 text-accent-foreground">
-                            <Sparkles className="w-4 h-4" />
-                            <span className="text-sm font-semibold">
-                              {language === "bg" ? "Изпробвай 3 безплатни съобщения" : "Try 3 Free Messages"}
-                            </span>
-                          </div>
-                        </div>
+                        <Button
+                          onClick={() => handleStartFreeTrial(plan)}
+                          className="w-full mb-3 bg-accent/90 hover:bg-accent text-accent-foreground"
+                        >
+                          <Sparkles className="w-4 h-4 mr-2" />
+                          {language === "bg" ? "Изпробвай 3 безплатни съобщения" : "Try 3 Free Messages"}
+                        </Button>
                       )}
                       
                       {!isActive && (
