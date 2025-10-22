@@ -135,7 +135,7 @@ export const PartnerSelector = ({ onSelect }: PartnerSelectorProps) => {
         </div>
 
         {/* Description */}
-        <div className="mt-16 p-8 rounded-3xl bg-card/50 backdrop-blur-sm border border-border/50">
+        <div className="mt-16">
           <div className="max-w-3xl mx-auto space-y-4 text-left">
             <p className="text-foreground leading-relaxed">
               {t("desc.line1")}
@@ -149,14 +149,14 @@ export const PartnerSelector = ({ onSelect }: PartnerSelectorProps) => {
             <p className="text-foreground leading-relaxed">
               {t("desc.line4")}
             </p>
-            <p className="text-center mt-8 text-lg font-semibold gradient-romantic bg-clip-text text-transparent">
+            <p className="text-center mt-8 text-lg font-semibold text-foreground">
               {t("desc.footer")}
             </p>
           </div>
         </div>
 
         {/* Bottom Description */}
-        <div className="mt-16 p-8 rounded-3xl bg-gradient-to-br from-primary/10 to-secondary/10 backdrop-blur-sm border border-primary/20">
+        <div className="mt-16">
           <div className="max-w-3xl mx-auto space-y-4">
             <div className="flex items-start gap-3">
               <span className="text-2xl">💌</span>
@@ -182,7 +182,7 @@ export const PartnerSelector = ({ onSelect }: PartnerSelectorProps) => {
                 Тренирай уверено – когато дойде момента в реалния живот, ще си подготвен.
               </p>
             </div>
-            <p className="text-center mt-8 text-xl font-bold gradient-romantic bg-clip-text text-transparent">
+            <p className="text-center mt-8 text-xl font-bold text-foreground">
               AI Flirt – практикувай, флиртувай и се забавлявай с виртуалния си партньор!
             </p>
           </div>
