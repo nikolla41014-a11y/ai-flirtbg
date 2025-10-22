@@ -8,6 +8,9 @@ import { Check, Plus, Sparkles, X } from "lucide-react";
 import { CustomPartnerDialog } from "@/components/CustomPartnerDialog";
 import andrea from "@/assets/andrea.jpg";
 import desita from "@/assets/desita.jpg";
+import mia from "@/assets/mia.jpg";
+import lora from "@/assets/lora.jpg";
+import ana from "@/assets/ana.jpg";
 import simeon from "@/assets/simeon.jpg";
 import nikola from "@/assets/nikola.jpg";
 
@@ -38,6 +41,18 @@ const subscriptionPlans: SubscriptionPlan[] = [
     descKey: "partner.andrea.desc"
   },
   {
+    name: "Mia",
+    nameKey: "partner.mia.name",
+    type: "girlfriend",
+    image: mia,
+    monthlyPrice: "14.99",
+    monthlyPriceId: "price_1SKxpFB31kXFBtKdEbAlpxty",
+    yearlyPrice: "134.91",
+    yearlyPriceId: "price_1SKxpXB31kXFBtKdkLo9qK9C",
+    productId: "prod_THWtvvG7WUP77S",
+    descKey: "partner.mia.desc"
+  },
+  {
     name: "Desita",
     nameKey: "partner.desita.name",
     type: "girlfriend",
@@ -48,6 +63,30 @@ const subscriptionPlans: SubscriptionPlan[] = [
     yearlyPriceId: "price_1SKmtYB31kXFBtKd6pvZW6Uw",
     productId: "prod_THLZOu228wrrqZ",
     descKey: "partner.desita.desc"
+  },
+  {
+    name: "Lora",
+    nameKey: "partner.lora.name",
+    type: "girlfriend",
+    image: lora,
+    monthlyPrice: "36.99",
+    monthlyPriceId: "price_1SKxrEB31kXFBtKdlwRc85NU",
+    yearlyPrice: "332.91",
+    yearlyPriceId: "price_1SKxrdB31kXFBtKdBTVQesmD",
+    productId: "prod_THWv9zShT1sPzo",
+    descKey: "partner.lora.desc"
+  },
+  {
+    name: "Ana",
+    nameKey: "partner.ana.name",
+    type: "girlfriend",
+    image: ana,
+    monthlyPrice: "99.99",
+    monthlyPriceId: "price_1SKxrrB31kXFBtKdOxfs1mpI",
+    yearlyPrice: "899.91",
+    yearlyPriceId: "price_1SKxs7B31kXFBtKd5fR0SofQ",
+    productId: "prod_THWvRpp0exhgwy",
+    descKey: "partner.ana.desc"
   },
   {
     name: "Simeon",
