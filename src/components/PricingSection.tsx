@@ -94,7 +94,7 @@ export const PricingSection = ({ onSelect }: PricingSectionProps) => {
       <div className="max-w-6xl mx-auto">
         {/* Header */}
         <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold gradient-romantic bg-clip-text text-transparent mb-4">
+          <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
             {t("pricing.title")}
           </h2>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
