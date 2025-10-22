@@ -1,6 +1,9 @@
 import { useState } from "react";
 import andrea from "@/assets/andrea.jpg";
 import desita from "@/assets/desita.jpg";
+import mia from "@/assets/mia.jpg";
+import lora from "@/assets/lora.jpg";
+import ana from "@/assets/ana.jpg";
 import simeon from "@/assets/simeon.jpg";
 import nikola from "@/assets/nikola.jpg";
 import { Heart, MessageCircleHeart, Sparkles } from "lucide-react";
@@ -32,10 +35,28 @@ export const PartnerSelector = ({ onSelect }: PartnerSelectorProps) => {
       image: andrea
     },
     {
+      name: t("partner.mia.name"),
+      type: "girlfriend",
+      description: t("partner.mia.desc"),
+      image: mia
+    },
+    {
       name: t("partner.desita.name"),
       type: "girlfriend",
       description: t("partner.desita.desc"),
       image: desita
+    },
+    {
+      name: t("partner.lora.name"),
+      type: "girlfriend",
+      description: t("partner.lora.desc"),
+      image: lora
+    },
+    {
+      name: t("partner.ana.name"),
+      type: "girlfriend",
+      description: t("partner.ana.desc"),
+      image: ana
     }
   ];
 
