@@ -10,6 +10,9 @@ import { useAuth } from "@/contexts/AuthContext";
 import { LogOut } from "lucide-react";
 import aiFlirtLogo from "@/assets/ai-flirt-logo.png";
 
+// DEV MODE: Set to true to bypass subscription checks for testing
+const DEV_MODE = true;
+
 interface Partner {
   name: string;
   type: "girlfriend" | "boyfriend";
@@ -34,8 +37,8 @@ const Index = () => {
       navigate("/auth");
       return;
     }
-    // Check if user has active subscription before allowing chat
-    if (!subscriptionStatus?.subscribed) {
+    // Check if user has active subscription before allowing chat (skip in DEV_MODE)
+    if (!DEV_MODE && !subscriptionStatus?.subscribed) {
       return; // Stay on subscription selector
     }
     setSelectedPartner(partner);
@@ -77,6 +80,11 @@ const Index = () => {
           className="h-10 md:h-12 w-auto object-contain"
         />
         <div className="flex items-center gap-4">
+          {DEV_MODE && (
+            <div className="px-3 py-1 bg-yellow-500 text-black text-xs font-bold rounded-full">
+              ТЕСТОВ РЕЖИМ
+            </div>
+          )}
           <LanguageSelector />
           {user ? (
             <Button variant="outline" size="sm" onClick={signOut} className="text-gray-900 border-gray-900 hover:bg-gray-100">
@@ -90,7 +98,7 @@ const Index = () => {
           )}
         </div>
       </div>
-      {subscriptionStatus?.subscribed ? (
+      {DEV_MODE || subscriptionStatus?.subscribed ? (
         <PartnerSelector onSelect={handleSelectPartner} />
       ) : (
         <SubscriptionSelector />
