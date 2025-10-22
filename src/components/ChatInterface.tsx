@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card } from "@/components/ui/card";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
+import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { supabase } from "@/integrations/supabase/client";
 import { Send, ArrowLeft, Heart, Loader2 } from "lucide-react";
 import { toast } from "sonner";
@@ -25,6 +26,7 @@ export const ChatInterface = ({ partnerName, partnerType, partnerImage: customIm
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [isImageOpen, setIsImageOpen] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -133,10 +135,11 @@ export const ChatInterface = ({ partnerName, partnerType, partnerImage: customIm
               )}
               
               <Card
+                onClick={() => message.role === "assistant" && setIsImageOpen(true)}
                 className={`max-w-[75%] p-4 ${
                   message.role === "user"
                     ? "gradient-romantic text-primary-foreground shadow-romantic"
-                    : "bg-card shadow-soft border-border"
+                    : "bg-card shadow-soft border-border cursor-pointer hover:shadow-glow transition-all"
                 }`}
               >
                 <p className="whitespace-pre-wrap leading-relaxed">{message.content}</p>
@@ -196,6 +199,17 @@ export const ChatInterface = ({ partnerName, partnerType, partnerImage: customIm
           </div>
         </div>
       </div>
+
+      {/* Image Dialog */}
+      <Dialog open={isImageOpen} onOpenChange={setIsImageOpen}>
+        <DialogContent className="max-w-3xl p-0 overflow-hidden border-2 border-primary/30">
+          <img 
+            src={partnerImage} 
+            alt={partnerName}
+            className="w-full h-auto object-cover"
+          />
+        </DialogContent>
+      </Dialog>
     </div>
   );
 };
