@@ -297,6 +297,18 @@ export const SubscriptionSelector = () => {
                         {t(plan.descKey)}
                       </p>
                       
+                      {/* Free Trial Badge for Andrea and Mia */}
+                      {(plan.name === "Andrea" || plan.name === "Mia") && !isActive && (
+                        <div className="mb-3 p-2 bg-accent/20 border border-accent rounded-lg">
+                          <div className="flex items-center justify-center gap-2 text-accent-foreground">
+                            <Sparkles className="w-4 h-4" />
+                            <span className="text-sm font-semibold">
+                              {language === "bg" ? "Изпробвай 3 безплатни съобщения" : "Try 3 Free Messages"}
+                            </span>
+                          </div>
+                        </div>
+                      )}
+                      
                       {!isActive && (
                         <Button
                           onClick={() => handleSubscribe(plan)}
