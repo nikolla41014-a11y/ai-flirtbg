@@ -29,7 +29,7 @@ export const FlirtCoachSection = ({ onStartChat }: FlirtCoachSectionProps) => {
               <img
                 src={flirtCoach}
                 alt="Flirt Coach"
-                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-110"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
               
