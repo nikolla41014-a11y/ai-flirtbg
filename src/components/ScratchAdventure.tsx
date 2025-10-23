@@ -77,6 +77,22 @@ export const ScratchAdventure = () => {
   const [resetTrigger, setResetTrigger] = useState(0);
   const [revealedCount, setRevealedCount] = useState(0);
 
+  // Fisher-Yates shuffle algorithm
+  const shuffleArray = <T,>(array: T[]): T[] => {
+    const newArray = [...array];
+    for (let i = newArray.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [newArray[i], newArray[j]] = [newArray[j], newArray[i]];
+    }
+    return newArray;
+  };
+
+  // Initialize shuffled positions
+  const [shuffledPositions, setShuffledPositions] = useState(() => {
+    const positions = Array.from({ length: 69 }, (_, i) => i + 1);
+    return shuffleArray(positions);
+  });
+
   const positionImages: Record<number, string> = {
     1: position1,
     2: position2,
@@ -155,6 +171,8 @@ export const ScratchAdventure = () => {
   };
 
   const handleReset = () => {
+    const positions = Array.from({ length: 69 }, (_, i) => i + 1);
+    setShuffledPositions(shuffleArray(positions));
     setResetTrigger((prev) => prev + 1);
     setRevealedCount(0);
     toast.info("Всички карти са нулирани!");
@@ -187,17 +205,17 @@ export const ScratchAdventure = () => {
         </div>
 
         <div className="grid grid-cols-3 sm:grid-cols-5 md:grid-cols-7 lg:grid-cols-9 gap-4 md:gap-6">
-          {Array.from({ length: 69 }, (_, i) => (
+          {shuffledPositions.map((positionId, i) => (
             <div
-              key={`${i}-${resetTrigger}`}
+              key={`${positionId}-${resetTrigger}`}
               className="animate-fade-in"
               style={{
                 animationDelay: `${i * 0.01}s`,
               }}
             >
               <ScratchCard
-                id={i + 1}
-                image={positionImages[i + 1]}
+                id={positionId}
+                image={positionImages[positionId]}
                 onRevealed={handleRevealed}
                 resetTrigger={resetTrigger}
               />
