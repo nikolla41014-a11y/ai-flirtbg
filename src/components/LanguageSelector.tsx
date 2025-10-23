@@ -12,6 +12,7 @@ const languages = [
   { code: "en", name: "English", flag: "🇬🇧" },
   { code: "es", name: "Español", flag: "🇪🇸" },
   { code: "tr", name: "Türkçe", flag: "🇹🇷" },
+  { code: "it", name: "Italiano", flag: "🇮🇹" },
 ];
 
 export const LanguageSelector = () => {
@@ -19,7 +20,7 @@ export const LanguageSelector = () => {
   const selectedLanguage = languages.find(lang => lang.code === language) || languages[0];
 
   const handleLanguageChange = (langCode: string) => {
-    setLanguage(langCode as "bg" | "en" | "es" | "tr");
+    setLanguage(langCode as "bg" | "en" | "es" | "tr" | "it");
   };
 
   return (

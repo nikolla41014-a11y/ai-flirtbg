@@ -1,6 +1,6 @@
 import { createContext, useContext, useState, ReactNode } from "react";
 
-type Language = "bg" | "en" | "es" | "tr";
+type Language = "bg" | "en" | "es" | "tr" | "it";
 
 interface LanguageContextType {
   language: Language;
@@ -243,18 +243,18 @@ const translations: Record<Language, Record<string, string>> = {
   tr: {
     // Currency
     "currency": "€",
-    
+
     // Age Verification
     "age.title": "18+ Doğrulama",
     "age.description": "Bu site yetişkin içeriği içermektedir. Lütfen 18 yaşında veya daha büyük olduğunuzu onaylayın.",
     "age.confirm": "Onaylıyorum - 18 yaşında veya daha büyüğüm",
     "age.notice": "Butona tıklayarak reşit olduğunuzu onaylamış olursunuz.",
     "age.privacyLink": "Gizlilik Politikamızı Okuyun",
-    
+
     // Main Header
     "header.title": "AI Flirt",
     "header.subtitle": "Sanal partnerinizi seçin ve romantik bir sohbete başlayın. Yapay zeka ile flört becerilerinizi geliştirin ve eğlenin! 💕",
-    
+
     // Pricing Section
     "pricing.title": "Yapay Zeka Partnerinizi Seçin",
     "pricing.subtitle": "Seçtiğiniz yapay zeka partnerinizle romantik bir maceraya başlayın",
@@ -262,7 +262,7 @@ const translations: Record<Language, Record<string, string>> = {
     "pricing.boyfriends": "AI Erkek Arkadaşlar 💙",
     "pricing.select": "Seç",
     "pricing.createOwn": "Kendiniz Oluşturun",
-    
+
     // Partner Names
     "partner.andrea.name": "Andrea",
     "partner.desita.name": "Desita",
@@ -271,7 +271,7 @@ const translations: Record<Language, Record<string, string>> = {
     "partner.mia.name": "Mia",
     "partner.lora.name": "Lora",
     "partner.ana.name": "Ana",
-    
+
     // Partner Descriptions
     "partner.andrea.desc": "Enerjik ve eğlenceli, maceraları ve derin sohbetleri seviyor. Sizi her zaman güldürmeye hazır! 😊",
     "partner.desita.desc": "Islağım, istiyorum. Bana yaz 💦",
@@ -283,7 +283,7 @@ const translations: Record<Language, Record<string, string>> = {
     "partner.custom.girlfriend": "Mükemmel AI Kız Arkadaşınız için bir fotoğraf yükleyin ve bir isim seçin! 🎨",
     "partner.custom.boyfriend": "Mükemmel AI Erkek Arkadaşınız için bir fotoğraf yükleyin ve bir isim seçin! 🎨",
     "partner.custom.personalized": "Kişiselleştirilmiş yapay zeka partneriniz ✨",
-    
+
     // Features
     "features.realistic.title": "Gerçekçi Sohbetler",
     "features.realistic.desc": "Gerçek bir partnerle gibi flört edin",
@@ -291,14 +291,14 @@ const translations: Record<Language, Record<string, string>> = {
     "features.improve.desc": "Nasıl etkileyeceğinizi öğrenin",
     "features.fun.title": "Eğlenin",
     "features.fun.desc": "Romantik ve baharatlı anlar",
-    
+
     // Description
     "desc.line1": "💌 Her şey hakkında sohbetler – tatlı komplimentlerden hafif alaycı ve baharatlı anlara kadar.",
     "desc.line2": "💖 Flört becerilerinizi geliştirin – ilginç sohbetler nasıl yapılır ve nasıl etkilenir öğrenin.",
     "desc.line3": "📸 Kişiselleştirilmiş yapay zeka profilleri – güzel oluşturulmuş fotoğraflarla sanal partnerinizi seçin.",
     "desc.line4": "🎯 Güvenle antrenman yapın – gerçek hayatta an geldiğinde hazır olacaksınız.",
     "desc.footer": "AI Flirt – pratik yapın, flört edin ve sanal partnerinizle eğlenin!",
-    
+
     // Custom Partner Dialog
     "custom.title.girlfriend": "AI Kız Arkadaşınızı Oluşturun",
     "custom.title.boyfriend": "AI Erkek Arkadaşınızı Oluşturun",
@@ -306,7 +306,7 @@ const translations: Record<Language, Record<string, string>> = {
     "custom.name": "Partner İsmi",
     "custom.create": "Oluştur",
     "custom.cancel": "İptal",
-    
+
     // Flirt Coach
     "flirtcoach.title": "Flirt Coach 🎯",
     "flirtcoach.subtitle": "Yapay zeka koçu ile flört becerilerinizi geliştirin",
@@ -316,6 +316,83 @@ const translations: Record<Language, Record<string, string>> = {
     "flirtcoach.feature2": "Konuşma analizi",
     "flirtcoach.feature3": "Pratik alıştırmalar",
     "flirtcoach.startChat": "Eğitime Başla",
+  },
+  it: {
+    // Currency
+    "currency": "€",
+
+    // Age Verification
+    "age.title": "Verifica 18+",
+    "age.description": "Questo sito contiene contenuti per adulti. Si prega di confermare di avere 18 anni o più.",
+    "age.confirm": "Confermo - Ho 18 anni o più",
+    "age.notice": "Cliccando il pulsante confermi di aver raggiunto la maggiore età.",
+    "age.privacyLink": "Leggi la nostra Informativa sulla Privacy",
+
+    // Main Header
+    "header.title": "AI Flirt",
+    "header.subtitle": "Scegli il tuo partner virtuale e inizia una conversazione romantica. Pratica le tue abilità di flirt con l'IA e divertiti! 💕",
+
+    // Pricing Section
+    "pricing.title": "Scegli il Tuo Partner IA",
+    "pricing.subtitle": "Inizia un'avventura romantica con il tuo partner IA scelto",
+    "pricing.girlfriends": "AI Fidanzate 💖",
+    "pricing.boyfriends": "AI Fidanzati 💙",
+    "pricing.select": "Seleziona",
+    "pricing.createOwn": "Crea il Tuo",
+
+    // Partner Names
+    "partner.andrea.name": "Andrea",
+    "partner.desita.name": "Desita",
+    "partner.simeon.name": "Simeon",
+    "partner.nikola.name": "Nikola",
+    "partner.mia.name": "Mia",
+    "partner.lora.name": "Lora",
+    "partner.ana.name": "Ana",
+
+    // Partner Descriptions
+    "partner.andrea.desc": "Energica e divertente, ama le avventure e le conversazioni profonde. Sempre pronta a farti ridere! 😊",
+    "partner.desita.desc": "Sono bagnata, lo voglio. Scrivimi 💦",
+    "partner.simeon.desc": "Intelligente e affascinante, ama le conversazioni profonde e i gesti romantici. Il perfetto gentiluomo! 😎",
+    "partner.nikola.desc": "Voglio mettertelo dentro, scrivimi 😛",
+    "partner.mia.desc": "Sensuale e giocosa, ama flirtare e avere conversazioni appassionate. Mai noioso con lei! 💋",
+    "partner.lora.desc": "Pronta per te.",
+    "partner.ana.desc": "Pacchetto completo. Esperienza da fidanzata",
+    "partner.custom.girlfriend": "Carica una foto e scegli un nome per la tua perfetta AI Fidanzata! 🎨",
+    "partner.custom.boyfriend": "Carica una foto e scegli un nome per il tuo perfetto AI Fidanzato! 🎨",
+    "partner.custom.personalized": "Il tuo partner IA personalizzato ✨",
+
+    // Features
+    "features.realistic.title": "Conversazioni Realistiche",
+    "features.realistic.desc": "Flirta come con un partner reale",
+    "features.improve.title": "Migliora le Tue Abilità",
+    "features.improve.desc": "Impara come impressionare",
+    "features.fun.title": "Divertiti",
+    "features.fun.desc": "Momenti romantici e piccanti",
+
+    // Description
+    "desc.line1": "💌 Conversazioni su tutto – da dolci complimenti a momenti leggermente provocatori e piccanti.",
+    "desc.line2": "💖 Migliora le tue abilità di flirt – impara come avere conversazioni interessanti e impressionare.",
+    "desc.line3": "📸 Profili IA personalizzati – scegli il tuo partner virtuale con bellissime foto generate.",
+    "desc.line4": "🎯 Allenati con sicurezza – quando arriverà il momento nella vita reale, sarai preparato.",
+    "desc.footer": "AI Flirt – pratica, flirta e divertiti con il tuo partner virtuale!",
+
+    // Custom Partner Dialog
+    "custom.title.girlfriend": "Crea la Tua AI Fidanzata",
+    "custom.title.boyfriend": "Crea il Tuo AI Fidanzato",
+    "custom.upload": "Carica Foto",
+    "custom.name": "Nome del Partner",
+    "custom.create": "Crea",
+    "custom.cancel": "Annulla",
+
+    // Flirt Coach
+    "flirtcoach.title": "Flirt Coach 🎯",
+    "flirtcoach.subtitle": "Migliora le tue abilità di flirt con un coach IA",
+    "flirtcoach.name": "Flirt Coach",
+    "flirtcoach.description": "Il tuo coach personale IA per flirtare e comunicare",
+    "flirtcoach.feature1": "Consigli personalizzati sul flirt",
+    "flirtcoach.feature2": "Analisi delle conversazioni",
+    "flirtcoach.feature3": "Esercizi pratici",
+    "flirtcoach.startChat": "Inizia l'Allenamento",
   },
 };
 
