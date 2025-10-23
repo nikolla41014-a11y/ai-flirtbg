@@ -40,6 +40,16 @@ import position34 from "@/assets/positions/position-34.jpg";
 import position35 from "@/assets/positions/position-35.jpg";
 import position36 from "@/assets/positions/position-36.jpg";
 import position37 from "@/assets/positions/position-37.jpg";
+import position38 from "@/assets/positions/position-38.jpg";
+import position39 from "@/assets/positions/position-39.jpg";
+import position40 from "@/assets/positions/position-40.jpg";
+import position41 from "@/assets/positions/position-41.jpg";
+import position42 from "@/assets/positions/position-42.jpg";
+import position43 from "@/assets/positions/position-43.jpg";
+import position44 from "@/assets/positions/position-44.jpg";
+import position45 from "@/assets/positions/position-45.jpg";
+import position46 from "@/assets/positions/position-46.jpg";
+import position47 from "@/assets/positions/position-47.jpg";
 
 export const ScratchAdventure = () => {
   const [resetTrigger, setResetTrigger] = useState(0);
@@ -83,6 +93,16 @@ export const ScratchAdventure = () => {
     35: position35,
     36: position36,
     37: position37,
+    38: position38,
+    39: position39,
+    40: position40,
+    41: position41,
+    42: position42,
+    43: position43,
+    44: position44,
+    45: position45,
+    46: position46,
+    47: position47,
   };
 
   const handleRevealed = (id: number) => {
