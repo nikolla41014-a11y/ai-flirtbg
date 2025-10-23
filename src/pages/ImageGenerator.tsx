@@ -72,10 +72,15 @@ export default function ImageGenerator() {
     setIsGenerating(true);
 
     try {
+      const { data: { session } } = await supabase.auth.getSession();
+      
       const { data: functionData, error: functionError } = await supabase.functions.invoke(
         'generate-romantic-image',
         {
-          body: { prompt: prompt.trim(), style: selectedStyle }
+          body: { prompt: prompt.trim(), style: selectedStyle },
+          headers: {
+            Authorization: `Bearer ${session?.access_token}`
+          }
         }
       );
 
