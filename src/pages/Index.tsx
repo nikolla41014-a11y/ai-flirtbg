@@ -7,7 +7,7 @@ import { LanguageSelector } from "@/components/LanguageSelector";
 import { SubscriptionSelector } from "@/components/SubscriptionSelector";
 import { HeroSection } from "@/components/HeroSection";
 import { Footer } from "@/components/Footer";
-
+import { ScratchHeartButton } from "@/components/ScratchHeartButton";
 import { Button } from "@/components/ui/button";
 import { useAuth } from "@/contexts/AuthContext";
 import { LogOut } from "lucide-react";
@@ -123,6 +123,7 @@ const Index = () => {
         ) : (
           <SubscriptionSelector onStartFreeTrial={handleStartFreeTrial} />
         )}
+        <ScratchHeartButton />
       </div>
       <Footer />
     </div>
