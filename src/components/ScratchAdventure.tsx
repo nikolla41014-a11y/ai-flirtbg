@@ -183,7 +183,7 @@ export const ScratchAdventure = () => {
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-12">
           <h2 className="text-4xl md:text-5xl font-bold mb-4">
-            Scratch Adventure
+            Scratch 69 Positions
           </h2>
           <p className="text-lg text-muted-foreground mb-6">
             Надраскай 69 карти и открий скритите награди!
