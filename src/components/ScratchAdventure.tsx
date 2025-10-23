@@ -186,7 +186,7 @@ export const ScratchAdventure = () => {
             Scratch 69 Positions
           </h2>
           <p className="text-lg text-muted-foreground mb-6">
-            Надраскай 69 карти и открий скритите награди!
+            Надраскай 69 карти и открий скритите пози!
           </p>
           <div className="flex items-center justify-center gap-4 mb-6">
             <div className="text-sm text-muted-foreground">
