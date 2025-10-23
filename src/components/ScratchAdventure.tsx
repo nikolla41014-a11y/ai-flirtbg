@@ -3,10 +3,27 @@ import { ScratchCard } from "./ScratchCard";
 import { Button } from "./ui/button";
 import { RotateCcw } from "lucide-react";
 import { toast } from "sonner";
+import position1 from "@/assets/positions/position-1.jpg";
+import position2 from "@/assets/positions/position-2.jpg";
+import position3 from "@/assets/positions/position-3.jpg";
+import position4 from "@/assets/positions/position-4.jpg";
+import position5 from "@/assets/positions/position-5.jpg";
+import position6 from "@/assets/positions/position-6.jpg";
+import position7 from "@/assets/positions/position-7.jpg";
 
 export const ScratchAdventure = () => {
   const [resetTrigger, setResetTrigger] = useState(0);
   const [revealedCount, setRevealedCount] = useState(0);
+
+  const positionImages: Record<number, string> = {
+    1: position1,
+    2: position2,
+    3: position3,
+    4: position4,
+    5: position5,
+    6: position6,
+    7: position7,
+  };
 
   const handleRevealed = (id: number) => {
     setRevealedCount((prev) => prev + 1);
@@ -56,6 +73,7 @@ export const ScratchAdventure = () => {
             >
               <ScratchCard
                 id={i + 1}
+                image={positionImages[i + 1]}
                 onRevealed={handleRevealed}
                 resetTrigger={resetTrigger}
               />

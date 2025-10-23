@@ -108,14 +108,22 @@ export const ScratchCard = ({ id, image, onRevealed, resetTrigger }: ScratchCard
     <div className="relative w-[120px] h-[120px] mx-auto">
       <div
         className={cn(
-          "absolute inset-0 rounded-full flex items-center justify-center text-4xl font-bold transition-all duration-300",
+          "absolute inset-0 rounded-full flex items-center justify-center overflow-hidden transition-all duration-300",
           isRevealed ? "scale-110" : ""
         )}
         style={{
-          background: `linear-gradient(135deg, hsl(var(--primary)), hsl(var(--primary) / 0.7))`,
+          background: image ? "transparent" : `linear-gradient(135deg, hsl(var(--primary)), hsl(var(--primary) / 0.7))`,
         }}
       >
-        {id}
+        {image ? (
+          <img 
+            src={image} 
+            alt={`Position ${id}`} 
+            className="w-full h-full object-cover"
+          />
+        ) : (
+          <span className="text-4xl font-bold">{id}</span>
+        )}
       </div>
       <canvas
         ref={canvasRef}
