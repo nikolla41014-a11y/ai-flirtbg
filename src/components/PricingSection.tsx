@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Card } from "@/components/ui/card";
 import { Sparkles, Plus } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { ScratchHeartButton } from "@/components/ScratchHeartButton";
 import andrea from "@/assets/andrea.jpg";
 import desita from "@/assets/desita.jpg";
 import simeon from "@/assets/simeon.jpg";
@@ -202,6 +203,9 @@ export const PricingSection = ({ onSelect }: PricingSectionProps) => {
             ))}
           </div>
         </div>
+
+        {/* Scratch Heart Button */}
+        <ScratchHeartButton />
 
         {/* AI Boyfriends */}
         <div>
