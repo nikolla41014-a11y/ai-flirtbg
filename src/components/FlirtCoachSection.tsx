@@ -2,7 +2,7 @@ import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { MessageCircle, Sparkles } from "lucide-react";
-import aiGirlfriend from "@/assets/ai-girlfriend.jpg";
+import flirtCoach from "@/assets/flirt-coach.jpg";
 
 interface FlirtCoachSectionProps {
   onStartChat: () => void;
@@ -27,7 +27,7 @@ export const FlirtCoachSection = ({ onStartChat }: FlirtCoachSectionProps) => {
           <Card className="group relative overflow-hidden max-w-md w-full bg-card/80 backdrop-blur-sm border-2 border-primary/20 hover:border-primary/40 transition-all duration-300 hover:shadow-glow">
             <div className="relative h-80 overflow-hidden">
               <img
-                src={aiGirlfriend}
+                src={flirtCoach}
                 alt="Flirt Coach"
                 className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
               />
