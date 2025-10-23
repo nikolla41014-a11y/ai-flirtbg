@@ -75,6 +75,16 @@ const translations: Record<Language, Record<string, string>> = {
     "custom.name": "Име на партньора",
     "custom.create": "Създай",
     "custom.cancel": "Отказ",
+    
+    // Flirt Coach
+    "flirtcoach.title": "Flirt Coach 🎯",
+    "flirtcoach.subtitle": "Подобри уменията си във флирта с помощта на AI треньор",
+    "flirtcoach.name": "Flirt Coach",
+    "flirtcoach.description": "Твоят личен AI треньор за флирт и комуникация",
+    "flirtcoach.feature1": "Персонални съвети за флирт",
+    "flirtcoach.feature2": "Анализ на разговори",
+    "flirtcoach.feature3": "Практически упражнения",
+    "flirtcoach.startChat": "Започни тренировка",
   },
   en: {
     // Currency
@@ -142,6 +152,16 @@ const translations: Record<Language, Record<string, string>> = {
     "custom.name": "Partner Name",
     "custom.create": "Create",
     "custom.cancel": "Cancel",
+    
+    // Flirt Coach
+    "flirtcoach.title": "Flirt Coach 🎯",
+    "flirtcoach.subtitle": "Improve your flirting skills with AI coach",
+    "flirtcoach.name": "Flirt Coach",
+    "flirtcoach.description": "Your personal AI coach for flirting and communication",
+    "flirtcoach.feature1": "Personalized flirting tips",
+    "flirtcoach.feature2": "Conversation analysis",
+    "flirtcoach.feature3": "Practice exercises",
+    "flirtcoach.startChat": "Start Training",
   },
   es: {
     // Currency
@@ -209,6 +229,16 @@ const translations: Record<Language, Record<string, string>> = {
     "custom.name": "Nombre de Pareja",
     "custom.create": "Crear",
     "custom.cancel": "Cancelar",
+    
+    // Flirt Coach
+    "flirtcoach.title": "Flirt Coach 🎯",
+    "flirtcoach.subtitle": "Mejora tus habilidades de coqueteo con un coach IA",
+    "flirtcoach.name": "Flirt Coach",
+    "flirtcoach.description": "Tu coach personal de IA para coquetear y comunicarte",
+    "flirtcoach.feature1": "Consejos personalizados de coqueteo",
+    "flirtcoach.feature2": "Análisis de conversaciones",
+    "flirtcoach.feature3": "Ejercicios prácticos",
+    "flirtcoach.startChat": "Comenzar Entrenamiento",
   },
   tr: {
     // Currency
@@ -276,6 +306,16 @@ const translations: Record<Language, Record<string, string>> = {
     "custom.name": "Partner İsmi",
     "custom.create": "Oluştur",
     "custom.cancel": "İptal",
+    
+    // Flirt Coach
+    "flirtcoach.title": "Flirt Coach 🎯",
+    "flirtcoach.subtitle": "Yapay zeka koçu ile flört becerilerinizi geliştirin",
+    "flirtcoach.name": "Flirt Coach",
+    "flirtcoach.description": "Flört ve iletişim için kişisel yapay zeka koçunuz",
+    "flirtcoach.feature1": "Kişiselleştirilmiş flört ipuçları",
+    "flirtcoach.feature2": "Konuşma analizi",
+    "flirtcoach.feature3": "Pratik alıştırmalar",
+    "flirtcoach.startChat": "Eğitime Başla",
   },
 };
 

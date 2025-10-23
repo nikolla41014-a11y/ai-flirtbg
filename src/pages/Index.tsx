@@ -8,6 +8,7 @@ import { SubscriptionSelector } from "@/components/SubscriptionSelector";
 import { HeroSection } from "@/components/HeroSection";
 import { Footer } from "@/components/Footer";
 import { ScratchHeartButton } from "@/components/ScratchHeartButton";
+import { FlirtCoachSection } from "@/components/FlirtCoachSection";
 import { Button } from "@/components/ui/button";
 import { useAuth } from "@/contexts/AuthContext";
 import { LogOut, Sparkles } from "lucide-react";
@@ -64,6 +65,20 @@ const Index = () => {
 
   const handleBack = () => {
     setSelectedPartner(null);
+  };
+
+  const handleStartFlirtCoach = () => {
+    // Check if user is logged in
+    if (!user) {
+      navigate("/auth");
+      return;
+    }
+    // Start Flirt Coach chat
+    setSelectedPartner({
+      name: "Flirt Coach",
+      type: "girlfriend",
+      description: "Твоят личен AI треньор за флирт",
+    });
   };
 
   if (loading) {
@@ -130,6 +145,7 @@ const Index = () => {
       <div className="flex-1">
         <HeroSection />
         <ScratchHeartButton />
+        <FlirtCoachSection onStartChat={handleStartFlirtCoach} />
         {DEV_MODE || subscriptionStatus?.subscribed ? (
           <PartnerSelector onSelect={handleSelectPartner} />
         ) : (
