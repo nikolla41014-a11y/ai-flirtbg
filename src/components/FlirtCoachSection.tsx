@@ -15,7 +15,7 @@ export const FlirtCoachSection = ({ onStartChat }: FlirtCoachSectionProps) => {
     <div className="w-full py-16 px-4 bg-gradient-to-b from-accent/5 to-transparent">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-12 animate-fade-in">
-          <h2 className="text-4xl md:text-5xl font-bold gradient-romantic bg-clip-text text-transparent mb-4">
+          <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
             {t("flirtcoach.title")}
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
