@@ -70,6 +70,8 @@ import position64 from "@/assets/positions/position-64.jpg";
 import position65 from "@/assets/positions/position-65.jpg";
 import position66 from "@/assets/positions/position-66.jpg";
 import position67 from "@/assets/positions/position-67.jpg";
+import position68 from "@/assets/positions/position-68.jpg";
+import position69 from "@/assets/positions/position-69.jpg";
 
 export const ScratchAdventure = () => {
   const [resetTrigger, setResetTrigger] = useState(0);
@@ -143,6 +145,8 @@ export const ScratchAdventure = () => {
     65: position65,
     66: position66,
     67: position67,
+    68: position68,
+    69: position69,
   };
 
   const handleRevealed = (id: number) => {
