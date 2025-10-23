@@ -18,12 +18,9 @@ export const ScratchHeartButton = () => {
           onClick={() => setIsOpen(true)}
           className="group relative flex flex-col items-center gap-4 transition-all duration-300 hover:scale-105"
         >
-          <div className="relative">
+          <div className="relative rounded-full p-2 shadow-glow">
             <Heart
-              className="w-32 h-32 md:w-40 md:h-40 fill-pink-500 text-pink-500 animate-pulse"
-              style={{
-                filter: "drop-shadow(0 0 20px rgba(236, 72, 153, 0.6))",
-              }}
+              className="w-32 h-32 md:w-40 md:h-40 text-primary animate-pulse"
             />
             <div className="absolute inset-0 flex items-center justify-center">
               <span className="text-white font-bold text-xl md:text-2xl text-center px-4 drop-shadow-lg">
