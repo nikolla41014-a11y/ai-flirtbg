@@ -23,7 +23,7 @@ export const ScratchAdventure = () => {
     <div className="w-full py-16 px-4 bg-gradient-to-b from-background to-muted/20 animate-fade-in">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-12">
-          <h2 className="text-4xl md:text-5xl font-bold mb-4 gradient-romantic bg-clip-text text-transparent">
+          <h2 className="text-4xl md:text-5xl font-bold mb-4">
             Scratch Adventure
           </h2>
           <p className="text-lg text-muted-foreground mb-6">

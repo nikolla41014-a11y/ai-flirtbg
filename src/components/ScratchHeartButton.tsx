@@ -40,7 +40,7 @@ export const ScratchHeartButton = () => {
       <Dialog open={isOpen} onOpenChange={setIsOpen}>
         <DialogContent className="max-w-7xl max-h-[90vh] overflow-y-auto bg-gradient-to-b from-pink-50 to-pink-100 dark:from-pink-950 dark:to-pink-900">
           <DialogHeader>
-            <DialogTitle className="text-center text-3xl gradient-romantic bg-clip-text text-transparent">
+            <DialogTitle className="text-center text-3xl font-bold">
               69 Positions Scratch Adventure
             </DialogTitle>
           </DialogHeader>
