@@ -130,6 +130,9 @@ export const PricingSection = ({ onSelect }: PricingSectionProps) => {
           </p>
         </div>
 
+        {/* Scratch Heart Button */}
+        <ScratchHeartButton />
+
         {/* AI Girlfriends */}
         <div className="mb-16">
           <h3 className="text-3xl font-bold text-primary text-center mb-8">
@@ -204,8 +207,6 @@ export const PricingSection = ({ onSelect }: PricingSectionProps) => {
           </div>
         </div>
 
-        {/* Scratch Heart Button */}
-        <ScratchHeartButton />
 
         {/* AI Boyfriends */}
         <div>
