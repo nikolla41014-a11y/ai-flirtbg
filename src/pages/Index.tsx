@@ -10,7 +10,7 @@ import { Footer } from "@/components/Footer";
 import { ScratchHeartButton } from "@/components/ScratchHeartButton";
 import { Button } from "@/components/ui/button";
 import { useAuth } from "@/contexts/AuthContext";
-import { LogOut } from "lucide-react";
+import { LogOut, Sparkles } from "lucide-react";
 import aiFlirtLogo from "@/assets/ai-flirt-logo.png";
 
 // DEV MODE: Set to true to bypass subscription checks for testing
@@ -104,6 +104,17 @@ const Index = () => {
             </div>
           )}
           <LanguageSelector />
+          {user && (
+            <Button 
+              variant="ghost" 
+              size="sm" 
+              onClick={() => navigate("/image-generator")}
+              className="text-gray-900 hover:text-primary hover:bg-primary/10"
+            >
+              <Sparkles className="w-4 h-4 mr-2" />
+              AI Art
+            </Button>
+          )}
           {user ? (
             <Button variant="outline" size="sm" onClick={signOut} className="text-gray-900 border-gray-900 hover:bg-gray-100">
               <LogOut className="w-4 h-4 mr-2" />
