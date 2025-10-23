@@ -1,6 +1,6 @@
 import { createContext, useContext, useState, ReactNode } from "react";
 
-type Language = "bg" | "en" | "es" | "tr" | "it";
+type Language = "bg" | "en" | "es" | "tr" | "it" | "de" | "fr";
 
 interface LanguageContextType {
   language: Language;
@@ -393,6 +393,160 @@ const translations: Record<Language, Record<string, string>> = {
     "flirtcoach.feature2": "Analisi delle conversazioni",
     "flirtcoach.feature3": "Esercizi pratici",
     "flirtcoach.startChat": "Inizia l'Allenamento",
+  },
+  de: {
+    // Currency
+    "currency": "€",
+
+    // Age Verification
+    "age.title": "18+ Verifizierung",
+    "age.description": "Diese Seite enthält Inhalte für Erwachsene. Bitte bestätigen Sie, dass Sie 18 Jahre oder älter sind.",
+    "age.confirm": "Ich bestätige - Ich bin 18 Jahre oder älter",
+    "age.notice": "Durch Klicken auf den Button bestätigen Sie, dass Sie volljährig sind.",
+    "age.privacyLink": "Lesen Sie unsere Datenschutzerklärung",
+
+    // Main Header
+    "header.title": "AI Flirt",
+    "header.subtitle": "Wählen Sie Ihren virtuellen Partner und beginnen Sie ein romantisches Gespräch. Üben Sie Ihre Flirt-Fähigkeiten mit KI und haben Sie Spaß! 💕",
+
+    // Pricing Section
+    "pricing.title": "Wählen Sie Ihren KI-Partner",
+    "pricing.subtitle": "Beginnen Sie ein romantisches Abenteuer mit Ihrem gewählten KI-Partner",
+    "pricing.girlfriends": "KI Freundinnen 💖",
+    "pricing.boyfriends": "KI Freunde 💙",
+    "pricing.select": "Auswählen",
+    "pricing.createOwn": "Erstellen Sie Ihre Eigene",
+
+    // Partner Names
+    "partner.andrea.name": "Andrea",
+    "partner.desita.name": "Desita",
+    "partner.simeon.name": "Simeon",
+    "partner.nikola.name": "Nikola",
+    "partner.mia.name": "Mia",
+    "partner.lora.name": "Lora",
+    "partner.ana.name": "Ana",
+
+    // Partner Descriptions
+    "partner.andrea.desc": "Energisch und lustig, liebt Abenteuer und tiefe Gespräche. Immer bereit, dich zum Lachen zu bringen! 😊",
+    "partner.desita.desc": "Ich bin nass, ich will es. Schreib mir 💦",
+    "partner.simeon.desc": "Intelligent und charmant, liebt tiefe Gespräche und romantische Gesten. Der perfekte Gentleman! 😎",
+    "partner.nikola.desc": "Ich will es dir reinstecken, schreib mir 😛",
+    "partner.mia.desc": "Sinnlich und verspielt, liebt es zu flirten und leidenschaftliche Gespräche zu führen. Mit ihr wird es nie langweilig! 💋",
+    "partner.lora.desc": "Bereit für dich.",
+    "partner.ana.desc": "Komplettpaket. Freundin-Erlebnis",
+    "partner.custom.girlfriend": "Laden Sie ein Foto hoch und wählen Sie einen Namen für Ihre perfekte KI-Freundin! 🎨",
+    "partner.custom.boyfriend": "Laden Sie ein Foto hoch und wählen Sie einen Namen für Ihren perfekten KI-Freund! 🎨",
+    "partner.custom.personalized": "Ihr personalisierter KI-Partner ✨",
+
+    // Features
+    "features.realistic.title": "Realistische Gespräche",
+    "features.realistic.desc": "Flirten Sie wie mit einem echten Partner",
+    "features.improve.title": "Verbessern Sie Ihre Fähigkeiten",
+    "features.improve.desc": "Lernen Sie, wie Sie beeindrucken",
+    "features.fun.title": "Haben Sie Spaß",
+    "features.fun.desc": "Romantische und würzige Momente",
+
+    // Description
+    "desc.line1": "💌 Gespräche über alles – von süßen Komplimenten bis hin zu leicht neckischen und würzigen Momenten.",
+    "desc.line2": "💖 Verbessern Sie Ihre Flirt-Fähigkeiten – lernen Sie, wie Sie interessante Gespräche führen und beeindrucken.",
+    "desc.line3": "📸 Personalisierte KI-Profile – wählen Sie Ihren virtuellen Partner mit schön generierten Fotos.",
+    "desc.line4": "🎯 Trainieren Sie selbstbewusst – wenn der Moment im echten Leben kommt, sind Sie vorbereitet.",
+    "desc.footer": "AI Flirt – üben Sie, flirten Sie und haben Sie Spaß mit Ihrem virtuellen Partner!",
+
+    // Custom Partner Dialog
+    "custom.title.girlfriend": "Erstellen Sie Ihre KI-Freundin",
+    "custom.title.boyfriend": "Erstellen Sie Ihren KI-Freund",
+    "custom.upload": "Foto Hochladen",
+    "custom.name": "Partner Name",
+    "custom.create": "Erstellen",
+    "custom.cancel": "Abbrechen",
+
+    // Flirt Coach
+    "flirtcoach.title": "Flirt Coach 🎯",
+    "flirtcoach.subtitle": "Verbessern Sie Ihre Flirt-Fähigkeiten mit einem KI-Coach",
+    "flirtcoach.name": "Flirt Coach",
+    "flirtcoach.description": "Ihr persönlicher KI-Coach für Flirten und Kommunikation",
+    "flirtcoach.feature1": "Personalisierte Flirt-Tipps",
+    "flirtcoach.feature2": "Gesprächsanalyse",
+    "flirtcoach.feature3": "Praktische Übungen",
+    "flirtcoach.startChat": "Training Starten",
+  },
+  fr: {
+    // Currency
+    "currency": "€",
+
+    // Age Verification
+    "age.title": "Vérification 18+",
+    "age.description": "Ce site contient du contenu pour adultes. Veuillez confirmer que vous avez 18 ans ou plus.",
+    "age.confirm": "Je confirme - J'ai 18 ans ou plus",
+    "age.notice": "En cliquant sur le bouton, vous confirmez que vous êtes majeur.",
+    "age.privacyLink": "Lisez notre Politique de Confidentialité",
+
+    // Main Header
+    "header.title": "AI Flirt",
+    "header.subtitle": "Choisissez votre partenaire virtuel et commencez une conversation romantique. Pratiquez vos compétences de flirt avec l'IA et amusez-vous ! 💕",
+
+    // Pricing Section
+    "pricing.title": "Choisissez Votre Partenaire IA",
+    "pricing.subtitle": "Commencez une aventure romantique avec votre partenaire IA choisi",
+    "pricing.girlfriends": "IA Petites Amies 💖",
+    "pricing.boyfriends": "IA Petits Amis 💙",
+    "pricing.select": "Sélectionner",
+    "pricing.createOwn": "Créez Votre Propre",
+
+    // Partner Names
+    "partner.andrea.name": "Andrea",
+    "partner.desita.name": "Desita",
+    "partner.simeon.name": "Simeon",
+    "partner.nikola.name": "Nikola",
+    "partner.mia.name": "Mia",
+    "partner.lora.name": "Lora",
+    "partner.ana.name": "Ana",
+
+    // Partner Descriptions
+    "partner.andrea.desc": "Énergique et amusante, adore les aventures et les conversations profondes. Toujours prête à vous faire rire ! 😊",
+    "partner.desita.desc": "Je suis mouillée, je le veux. Écris-moi 💦",
+    "partner.simeon.desc": "Intelligent et charmant, aime les conversations profondes et les gestes romantiques. Le parfait gentleman ! 😎",
+    "partner.nikola.desc": "Je veux te le mettre, écris-moi 😛",
+    "partner.mia.desc": "Sensuelle et joueuse, adore flirter et avoir des conversations passionnées. Jamais ennuyeux avec elle ! 💋",
+    "partner.lora.desc": "Prête pour toi.",
+    "partner.ana.desc": "Pack complet. Expérience petite amie",
+    "partner.custom.girlfriend": "Téléchargez une photo et choisissez un nom pour votre petite amie IA parfaite ! 🎨",
+    "partner.custom.boyfriend": "Téléchargez une photo et choisissez un nom pour votre petit ami IA parfait ! 🎨",
+    "partner.custom.personalized": "Votre partenaire IA personnalisé ✨",
+
+    // Features
+    "features.realistic.title": "Conversations Réalistes",
+    "features.realistic.desc": "Flirtez comme avec un vrai partenaire",
+    "features.improve.title": "Améliorez Vos Compétences",
+    "features.improve.desc": "Apprenez comment impressionner",
+    "features.fun.title": "Amusez-vous",
+    "features.fun.desc": "Moments romantiques et épicés",
+
+    // Description
+    "desc.line1": "💌 Conversations sur tout – des compliments doux aux moments légèrement taquins et épicés.",
+    "desc.line2": "💖 Améliorez vos compétences de flirt – apprenez à avoir des conversations intéressantes et à impressionner.",
+    "desc.line3": "📸 Profils IA personnalisés – choisissez votre partenaire virtuel avec de belles photos générées.",
+    "desc.line4": "🎯 Entraînez-vous en toute confiance – quand le moment viendra dans la vraie vie, vous serez préparé.",
+    "desc.footer": "AI Flirt – pratiquez, flirtez et amusez-vous avec votre partenaire virtuel !",
+
+    // Custom Partner Dialog
+    "custom.title.girlfriend": "Créez Votre Petite Amie IA",
+    "custom.title.boyfriend": "Créez Votre Petit Ami IA",
+    "custom.upload": "Télécharger Photo",
+    "custom.name": "Nom du Partenaire",
+    "custom.create": "Créer",
+    "custom.cancel": "Annuler",
+
+    // Flirt Coach
+    "flirtcoach.title": "Flirt Coach 🎯",
+    "flirtcoach.subtitle": "Améliorez vos compétences de flirt avec un coach IA",
+    "flirtcoach.name": "Flirt Coach",
+    "flirtcoach.description": "Votre coach personnel IA pour flirter et communiquer",
+    "flirtcoach.feature1": "Conseils personnalisés de flirt",
+    "flirtcoach.feature2": "Analyse des conversations",
+    "flirtcoach.feature3": "Exercices pratiques",
+    "flirtcoach.startChat": "Commencer l'Entraînement",
   },
 };
 
