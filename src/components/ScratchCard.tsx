@@ -10,7 +10,8 @@ interface ScratchCardProps {
 }
 
 export const ScratchCard = ({ id, image, onRevealed, resetTrigger }: ScratchCardProps) => {
-  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const smallCanvasRef = useRef<HTMLCanvasElement>(null);
+  const largeCanvasRef = useRef<HTMLCanvasElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const [isRevealed, setIsRevealed] = useState(false);
   const [isScratching, setIsScratching] = useState(false);
@@ -20,8 +21,8 @@ export const ScratchCard = ({ id, image, onRevealed, resetTrigger }: ScratchCard
   const scratchedPixelsRef = useRef(0);
   const totalPixelsRef = useRef(0);
 
-  const initCanvas = (size = 120) => {
-    const canvas = canvasRef.current;
+  const initCanvas = (target: HTMLCanvasElement | null, size = 120) => {
+    const canvas = target;
     if (!canvas) return;
 
     const ctx = canvas.getContext("2d", { willReadFrequently: true });
@@ -57,7 +58,7 @@ export const ScratchCard = ({ id, image, onRevealed, resetTrigger }: ScratchCard
   };
 
   useEffect(() => {
-    initCanvas(120);
+    initCanvas(smallCanvasRef.current, 120);
     setIsZoomed(false);
     setCanScratch(false);
     setIsRevealed(false);
@@ -67,7 +68,7 @@ export const ScratchCard = ({ id, image, onRevealed, resetTrigger }: ScratchCard
     if (isZoomed) {
       // When zooming, reinit canvas at large size
       setTimeout(() => {
-        initCanvas(420);
+        initCanvas(largeCanvasRef.current, 420);
       }, 50);
     }
   }, [isZoomed]);
@@ -94,13 +95,13 @@ export const ScratchCard = ({ id, image, onRevealed, resetTrigger }: ScratchCard
       setCanScratch(false);
       // Reinitialize canvas at normal size after transition
       setTimeout(() => {
-        initCanvas(120);
+        initCanvas(smallCanvasRef.current, 120);
       }, 300);
     }
   };
 
   const scratch = (x: number, y: number) => {
-    const canvas = canvasRef.current;
+    const canvas = largeCanvasRef.current;
     if (!canvas || isRevealed || !canScratch) return;
 
     const ctx = canvas.getContext("2d", { willReadFrequently: true });
@@ -179,8 +180,8 @@ export const ScratchCard = ({ id, image, onRevealed, resetTrigger }: ScratchCard
           <span className="text-4xl font-bold">{id}</span>
         )}
       </div>
-      <canvas
-        ref={canvasRef}
+  <canvas
+        ref={smallCanvasRef}
         className={cn(
           "absolute inset-0 rounded-full pointer-events-none transition-opacity duration-300",
           isRevealed ? "opacity-0" : "opacity-100"
@@ -222,7 +223,7 @@ export const ScratchCard = ({ id, image, onRevealed, resetTrigger }: ScratchCard
           )}
         </div>
         <canvas
-          ref={canvasRef}
+          ref={largeCanvasRef}
           className={cn(
             "absolute inset-0 rounded-full transition-opacity duration-300",
             isRevealed ? "opacity-0 pointer-events-none" : "opacity-100",
