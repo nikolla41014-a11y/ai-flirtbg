@@ -57,10 +57,20 @@ export const ScratchCard = ({ id, image, onRevealed, resetTrigger }: ScratchCard
   };
 
   useEffect(() => {
-    initCanvas();
+    initCanvas(120);
     setIsZoomed(false);
     setCanScratch(false);
+    setIsRevealed(false);
   }, [resetTrigger]);
+
+  useEffect(() => {
+    if (isZoomed) {
+      // When zooming, reinit canvas at large size
+      setTimeout(() => {
+        initCanvas(420);
+      }, 50);
+    }
+  }, [isZoomed]);
 
   const handleCardClick = (e: React.MouseEvent) => {
     if (isRevealed || isZoomed) return;
@@ -71,25 +81,22 @@ export const ScratchCard = ({ id, image, onRevealed, resetTrigger }: ScratchCard
       setCardRect(rect);
       setIsZoomed(true);
       
-      // Reinitialize canvas at larger size
-      setTimeout(() => {
-        initCanvas(420);
-      }, 50);
-      
-      // Enable scratching after animation completes (600ms)
+      // Enable scratching after animation completes
       setTimeout(() => {
         setCanScratch(true);
-      }, 600);
+      }, 650);
     }
   };
 
   const handleBackdropClick = () => {
-    setIsZoomed(false);
-    setCanScratch(false);
-    // Reinitialize canvas at normal size
-    setTimeout(() => {
-      initCanvas(120);
-    }, 300);
+    if (!isRevealed) {
+      setIsZoomed(false);
+      setCanScratch(false);
+      // Reinitialize canvas at normal size after transition
+      setTimeout(() => {
+        initCanvas(120);
+      }, 300);
+    }
   };
 
   const scratch = (x: number, y: number) => {
@@ -123,6 +130,11 @@ export const ScratchCard = ({ id, image, onRevealed, resetTrigger }: ScratchCard
     if (scratchedPercentage >= 70 && !isRevealed) {
       setIsRevealed(true);
       onRevealed?.(id);
+      // Close zoom view after revealing
+      setTimeout(() => {
+        setIsZoomed(false);
+        setCanScratch(false);
+      }, 1500);
     }
   };
 
@@ -214,8 +226,10 @@ export const ScratchCard = ({ id, image, onRevealed, resetTrigger }: ScratchCard
           className={cn(
             "absolute inset-0 rounded-full transition-opacity duration-300",
             isRevealed ? "opacity-0 pointer-events-none" : "opacity-100",
-            canScratch ? "cursor-pointer" : "cursor-not-allowed"
+            canScratch ? "cursor-pointer hover:scale-[1.02]" : "cursor-not-allowed"
           )}
+          width={420}
+          height={420}
           onMouseDown={handleMouseDown}
           onMouseUp={handleMouseUp}
           onMouseMove={handleMouseMove}
@@ -223,10 +237,6 @@ export const ScratchCard = ({ id, image, onRevealed, resetTrigger }: ScratchCard
           onTouchStart={handleTouchStart}
           onTouchEnd={handleTouchEnd}
           onTouchMove={handleTouchMove}
-          style={{
-            width: '420px',
-            height: '420px',
-          }}
         />
       </div>
     </div>,
