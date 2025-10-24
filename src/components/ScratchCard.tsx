@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { cn } from "@/lib/utils";
+import { createPortal } from "react-dom";
 
 interface ScratchCardProps {
   id: number;
@@ -10,19 +11,22 @@ interface ScratchCardProps {
 
 export const ScratchCard = ({ id, image, onRevealed, resetTrigger }: ScratchCardProps) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
   const [isRevealed, setIsRevealed] = useState(false);
   const [isScratching, setIsScratching] = useState(false);
+  const [isZoomed, setIsZoomed] = useState(false);
+  const [canScratch, setCanScratch] = useState(false);
+  const [cardRect, setCardRect] = useState<DOMRect | null>(null);
   const scratchedPixelsRef = useRef(0);
   const totalPixelsRef = useRef(0);
 
-  const initCanvas = () => {
+  const initCanvas = (size = 120) => {
     const canvas = canvasRef.current;
     if (!canvas) return;
 
     const ctx = canvas.getContext("2d", { willReadFrequently: true });
     if (!ctx) return;
 
-    const size = 120;
     canvas.width = size;
     canvas.height = size;
 
@@ -39,7 +43,8 @@ export const ScratchCard = ({ id, image, onRevealed, resetTrigger }: ScratchCard
 
     // Add text
     ctx.fillStyle = "#666";
-    ctx.font = "14px sans-serif";
+    const fontSize = size === 420 ? 48 : 14;
+    ctx.font = `${fontSize}px sans-serif`;
     ctx.textAlign = "center";
     ctx.textBaseline = "middle";
     ctx.fillText("Scratchy!", size / 2, size / 2);
@@ -53,11 +58,43 @@ export const ScratchCard = ({ id, image, onRevealed, resetTrigger }: ScratchCard
 
   useEffect(() => {
     initCanvas();
+    setIsZoomed(false);
+    setCanScratch(false);
   }, [resetTrigger]);
+
+  const handleCardClick = (e: React.MouseEvent) => {
+    if (isRevealed || isZoomed) return;
+    
+    e.stopPropagation();
+    const rect = containerRef.current?.getBoundingClientRect();
+    if (rect) {
+      setCardRect(rect);
+      setIsZoomed(true);
+      
+      // Reinitialize canvas at larger size
+      setTimeout(() => {
+        initCanvas(420);
+      }, 50);
+      
+      // Enable scratching after animation completes (600ms)
+      setTimeout(() => {
+        setCanScratch(true);
+      }, 600);
+    }
+  };
+
+  const handleBackdropClick = () => {
+    setIsZoomed(false);
+    setCanScratch(false);
+    // Reinitialize canvas at normal size
+    setTimeout(() => {
+      initCanvas(120);
+    }, 300);
+  };
 
   const scratch = (x: number, y: number) => {
     const canvas = canvasRef.current;
-    if (!canvas || isRevealed) return;
+    if (!canvas || isRevealed || !canScratch) return;
 
     const ctx = canvas.getContext("2d", { willReadFrequently: true });
     if (!ctx) return;
@@ -70,7 +107,8 @@ export const ScratchCard = ({ id, image, onRevealed, resetTrigger }: ScratchCard
 
     ctx.globalCompositeOperation = "destination-out";
     ctx.beginPath();
-    ctx.arc(canvasX, canvasY, 15, 0, Math.PI * 2);
+    const scratchRadius = canvas.width === 420 ? 40 : 15;
+    ctx.arc(canvasX, canvasY, scratchRadius, 0, Math.PI * 2);
     ctx.fill();
 
     // Check scratch percentage
@@ -104,8 +142,12 @@ export const ScratchCard = ({ id, image, onRevealed, resetTrigger }: ScratchCard
     }
   };
 
-  return (
-    <div className="relative w-[120px] h-[120px] mx-auto">
+  const normalCard = (
+    <div 
+      ref={containerRef}
+      className="relative w-[120px] h-[120px] mx-auto cursor-pointer"
+      onClick={handleCardClick}
+    >
       <div
         className={cn(
           "absolute inset-0 rounded-full flex items-center justify-center overflow-hidden transition-all duration-300",
@@ -128,17 +170,73 @@ export const ScratchCard = ({ id, image, onRevealed, resetTrigger }: ScratchCard
       <canvas
         ref={canvasRef}
         className={cn(
-          "absolute inset-0 rounded-full cursor-pointer transition-opacity duration-300 hover:shadow-lg active:scale-95",
-          isRevealed ? "opacity-0 pointer-events-none" : "opacity-100"
+          "absolute inset-0 rounded-full pointer-events-none transition-opacity duration-300",
+          isRevealed ? "opacity-0" : "opacity-100"
         )}
-        onMouseDown={handleMouseDown}
-        onMouseUp={handleMouseUp}
-        onMouseMove={handleMouseMove}
-        onMouseLeave={handleMouseUp}
-        onTouchStart={handleTouchStart}
-        onTouchEnd={handleTouchEnd}
-        onTouchMove={handleTouchMove}
       />
     </div>
+  );
+
+  const zoomedCard = isZoomed && cardRect && createPortal(
+    <div 
+      className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm animate-fade-in"
+      onClick={handleBackdropClick}
+    >
+      <div
+        className="relative animate-zoom-spring"
+        style={{
+          width: '420px',
+          height: '420px',
+        }}
+        onClick={(e) => e.stopPropagation()}
+      >
+        <div
+          className={cn(
+            "absolute inset-0 rounded-full flex items-center justify-center overflow-hidden transition-all duration-300",
+            isRevealed ? "scale-110" : ""
+          )}
+          style={{
+            background: image ? "transparent" : `linear-gradient(135deg, hsl(var(--primary)), hsl(var(--primary) / 0.7))`,
+          }}
+        >
+          {image ? (
+            <img 
+              src={image} 
+              alt={`Position ${id}`} 
+              className="w-full h-full object-cover"
+            />
+          ) : (
+            <span className="text-[140px] font-bold">{id}</span>
+          )}
+        </div>
+        <canvas
+          ref={canvasRef}
+          className={cn(
+            "absolute inset-0 rounded-full transition-opacity duration-300",
+            isRevealed ? "opacity-0 pointer-events-none" : "opacity-100",
+            canScratch ? "cursor-pointer" : "cursor-not-allowed"
+          )}
+          onMouseDown={handleMouseDown}
+          onMouseUp={handleMouseUp}
+          onMouseMove={handleMouseMove}
+          onMouseLeave={handleMouseUp}
+          onTouchStart={handleTouchStart}
+          onTouchEnd={handleTouchEnd}
+          onTouchMove={handleTouchMove}
+          style={{
+            width: '420px',
+            height: '420px',
+          }}
+        />
+      </div>
+    </div>,
+    document.body
+  );
+
+  return (
+    <>
+      {normalCard}
+      {zoomedCard}
+    </>
   );
 };
