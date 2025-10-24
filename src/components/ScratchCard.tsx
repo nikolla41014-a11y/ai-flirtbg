@@ -90,14 +90,13 @@ export const ScratchCard = ({ id, image, onRevealed, resetTrigger }: ScratchCard
   };
 
   const handleBackdropClick = () => {
-    if (!isRevealed) {
-      setIsZoomed(false);
-      setCanScratch(false);
-      // Reinitialize canvas at normal size after transition
-      setTimeout(() => {
-        initCanvas(smallCanvasRef.current, 120);
-      }, 300);
-    }
+    setIsZoomed(false);
+    setCanScratch(false);
+    setIsScratching(false);
+    // Reinitialize canvas at normal size after transition
+    setTimeout(() => {
+      initCanvas(smallCanvasRef.current, 120);
+    }, 300);
   };
 
   const scratch = (x: number, y: number) => {
@@ -201,6 +200,7 @@ export const ScratchCard = ({ id, image, onRevealed, resetTrigger }: ScratchCard
           width: '420px',
           height: '420px',
         }}
+        onAnimationEnd={() => setCanScratch(true)}
         onClick={(e) => e.stopPropagation()}
       >
         <div
