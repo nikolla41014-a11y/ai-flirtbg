@@ -45,16 +45,20 @@ export const ScratchCard = ({ id, image, onRevealed, resetTrigger }: ScratchCard
     // Add text
     ctx.fillStyle = "#666";
     const fontSize = size === 420 ? 48 : 14;
-    ctx.font = `${fontSize}px sans-serif`;
+    ctx.font = `bold ${fontSize}px sans-serif`;
     ctx.textAlign = "center";
     ctx.textBaseline = "middle";
     ctx.fillText("Scratchy!", size / 2, size / 2);
 
-    // Calculate total pixels
+    // Calculate total pixels for the circle
     const imageData = ctx.getImageData(0, 0, size, size);
-    totalPixelsRef.current = imageData.data.filter((_, i) => i % 4 === 3 && imageData.data[i] > 0).length;
+    totalPixelsRef.current = 0;
+    for (let i = 3; i < imageData.data.length; i += 4) {
+      if (imageData.data[i] > 0) {
+        totalPixelsRef.current++;
+      }
+    }
     scratchedPixelsRef.current = 0;
-    setIsRevealed(false);
   };
 
   useEffect(() => {
@@ -62,14 +66,20 @@ export const ScratchCard = ({ id, image, onRevealed, resetTrigger }: ScratchCard
     setIsZoomed(false);
     setCanScratch(false);
     setIsRevealed(false);
+    setIsScratching(false);
   }, [resetTrigger]);
 
   useEffect(() => {
-    if (isZoomed) {
-      // When zooming, reinit canvas at large size
-      setTimeout(() => {
+    if (isZoomed && largeCanvasRef.current) {
+      // Initialize large canvas when zoomed
+      const timer = setTimeout(() => {
         initCanvas(largeCanvasRef.current, 420);
-      }, 50);
+        // Enable scratching after canvas is ready
+        setTimeout(() => {
+          setCanScratch(true);
+        }, 100);
+      }, 100);
+      return () => clearTimeout(timer);
     }
   }, [isZoomed]);
 
@@ -81,11 +91,7 @@ export const ScratchCard = ({ id, image, onRevealed, resetTrigger }: ScratchCard
     if (rect) {
       setCardRect(rect);
       setIsZoomed(true);
-      
-      // Enable scratching after animation completes
-      setTimeout(() => {
-        setCanScratch(true);
-      }, 650);
+      setCanScratch(false);
     }
   };
 
@@ -114,7 +120,7 @@ export const ScratchCard = ({ id, image, onRevealed, resetTrigger }: ScratchCard
 
     ctx.globalCompositeOperation = "destination-out";
     ctx.beginPath();
-    const scratchRadius = canvas.width === 420 ? 40 : 15;
+    const scratchRadius = 40;
     ctx.arc(canvasX, canvasY, scratchRadius, 0, Math.PI * 2);
     ctx.fill();
 
@@ -122,18 +128,20 @@ export const ScratchCard = ({ id, image, onRevealed, resetTrigger }: ScratchCard
     const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
     let transparentPixels = 0;
     for (let i = 3; i < imageData.data.length; i += 4) {
-      if (imageData.data[i] === 0) transparentPixels++;
+      if (imageData.data[i] === 0) {
+        transparentPixels++;
+      }
     }
 
     const scratchedPercentage = (transparentPixels / totalPixelsRef.current) * 100;
 
-    if (scratchedPercentage >= 70 && !isRevealed) {
+    if (scratchedPercentage >= 65 && !isRevealed) {
       setIsRevealed(true);
       onRevealed?.(id);
+      setCanScratch(false);
       // Close zoom view after revealing
       setTimeout(() => {
         setIsZoomed(false);
-        setCanScratch(false);
       }, 1500);
     }
   };
@@ -195,12 +203,11 @@ export const ScratchCard = ({ id, image, onRevealed, resetTrigger }: ScratchCard
       onClick={handleBackdropClick}
     >
       <div
-        className="relative animate-zoom-spring"
+        className="relative"
         style={{
           width: '420px',
           height: '420px',
         }}
-        onAnimationEnd={() => setCanScratch(true)}
         onClick={(e) => e.stopPropagation()}
       >
         <div
