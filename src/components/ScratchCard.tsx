@@ -102,13 +102,12 @@ export const ScratchCard = ({ id, image, onRevealed, resetTrigger }: ScratchCard
           <canvas
             ref={largeCanvasRef}
             className={cn(
-              "absolute inset-0 rounded-full touch-none select-none",
+              "absolute inset-0 rounded-full",
               revealed ? "opacity-0 pointer-events-none transition-opacity duration-300" : "cursor-pointer"
             )}
             onPointerDown={onPointerDown}
             onPointerMove={onPointerMove}
             onPointerUp={onPointerUp}
-            onPointerCancel={onPointerUp}
           />
         </div>
       </div>,
