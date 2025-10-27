@@ -5,9 +5,10 @@ import { useScratchCanvas } from "@/hooks/useScratchCanvas";
 interface ScratchCardProps {
   id: number;
   image?: string;
+  resetKey?: number;
 }
 
-export const ScratchCard = ({ id, image }: ScratchCardProps) => {
+export const ScratchCard = ({ id, image, resetKey = 0 }: ScratchCardProps) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   const { revealed, onPointerDown, onPointerMove, onPointerUp } = useScratchCanvas({
@@ -16,7 +17,7 @@ export const ScratchCard = ({ id, image }: ScratchCardProps) => {
     height: 120,
     radius: 20,
     threshold: 0.65,
-    resetKey: id,
+    resetKey: `${id}-${resetKey}`,
     scratchNumber: id,
   });
 

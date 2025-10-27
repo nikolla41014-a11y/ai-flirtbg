@@ -1,3 +1,6 @@
+import { useState } from "react";
+import { Button } from "./ui/button";
+import { RotateCcw } from "lucide-react";
 import { ScratchCard } from "./ScratchCard";
 import position1 from "@/assets/positions/position-1.jpg";
 import position2 from "@/assets/positions/position-2.jpg";
@@ -70,6 +73,7 @@ import position68 from "@/assets/positions/position-68.jpg";
 import position69 from "@/assets/positions/position-69.jpg";
 
 export const ScratchAdventure = () => {
+  const [resetKey, setResetKey] = useState(0);
   const positions = Array.from({ length: 69 }, (_, i) => i + 1);
 
   const positionImages: Record<number, string> = {
@@ -154,6 +158,14 @@ export const ScratchAdventure = () => {
           <p className="text-lg text-muted-foreground mb-6">
             Надраскай картите и открий скритите пози!
           </p>
+          <Button
+            onClick={() => setResetKey(prev => prev + 1)}
+            className="gap-2"
+            variant="outline"
+          >
+            <RotateCcw className="w-4 h-4" />
+            Нулирай всички
+          </Button>
         </div>
 
         <div className="grid grid-cols-3 sm:grid-cols-5 md:grid-cols-7 lg:grid-cols-9 gap-4 md:gap-6">
@@ -168,6 +180,7 @@ export const ScratchAdventure = () => {
               <ScratchCard
                 id={positionId}
                 image={positionImages[positionId]}
+                resetKey={resetKey}
               />
             </div>
           ))}
