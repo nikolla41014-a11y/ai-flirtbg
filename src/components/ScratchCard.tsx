@@ -2,7 +2,6 @@ import { useRef, useState, useEffect } from "react";
 import { cn } from "@/lib/utils";
 import { createPortal } from "react-dom";
 import { useScratchCanvas } from "@/hooks/useScratchCanvas";
-import scratchCover from "@/assets/scratch-card-cover.png";
 
 interface ScratchCardProps {
   id: number;
@@ -20,7 +19,7 @@ export const ScratchCard = ({ id, image }: ScratchCardProps) => {
     radius: 40,
     threshold: 0.65,
     resetKey: `${id}-${isOpen}`,
-    coverImage: scratchCover,
+    scratchNumber: id,
   });
 
   useEffect(() => {
@@ -35,12 +34,8 @@ export const ScratchCard = ({ id, image }: ScratchCardProps) => {
       className="relative w-[120px] h-[120px] mx-auto cursor-pointer"
       onClick={() => setIsOpen(true)}
     >
-      <div className="absolute inset-0 rounded-lg overflow-hidden">
-        <img 
-          src={scratchCover} 
-          alt="Scratch to reveal" 
-          className="w-full h-full object-cover"
-        />
+      <div className="absolute inset-0 rounded-full overflow-hidden bg-gradient-to-br from-gray-300 to-gray-400 flex items-center justify-center shadow-lg">
+        <span className="text-4xl font-bold text-gray-600">{id}</span>
       </div>
     </div>
   );
@@ -57,7 +52,7 @@ export const ScratchCard = ({ id, image }: ScratchCardProps) => {
           style={{ width: "420px", height: "420px" }}
           onClick={(e) => e.stopPropagation()}
         >
-          <div className="absolute inset-0 rounded-lg overflow-hidden flex items-center justify-center bg-gradient-to-br from-pink-100 to-purple-100 dark:from-pink-900 dark:to-purple-900">
+          <div className="absolute inset-0 rounded-full overflow-hidden flex items-center justify-center bg-gradient-to-br from-pink-100 to-purple-100 dark:from-pink-900 dark:to-purple-900">
             {image && (
               <img src={image} alt={`Position ${id}`} className="w-full h-full object-cover" />
             )}
@@ -66,7 +61,7 @@ export const ScratchCard = ({ id, image }: ScratchCardProps) => {
           <canvas
             ref={largeCanvasRef}
             className={cn(
-              "absolute inset-0 rounded-lg",
+              "absolute inset-0 rounded-full",
               revealed ? "opacity-0 pointer-events-none transition-opacity duration-300" : "cursor-pointer"
             )}
             onPointerDown={onPointerDown}

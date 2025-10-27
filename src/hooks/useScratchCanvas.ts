@@ -4,11 +4,12 @@ interface UseScratchCanvasOptions {
   canvasRef: React.RefObject<HTMLCanvasElement>;
   width: number;
   height: number;
-  radius?: number; // brush radius in px
-  threshold?: number; // 0..1 percent of cleared area to trigger reveal
+  radius?: number;
+  threshold?: number;
   onReveal?: () => void;
   resetKey?: any;
   coverImage?: string;
+  scratchNumber?: number;
 }
 
 export const useScratchCanvas = ({
@@ -20,6 +21,7 @@ export const useScratchCanvas = ({
   onReveal,
   resetKey,
   coverImage,
+  scratchNumber,
 }: UseScratchCanvasOptions) => {
   const [revealed, setRevealed] = useState(false);
   const isDownRef = useRef(false);
@@ -41,7 +43,6 @@ export const useScratchCanvas = ({
     if (!ctx) return;
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 
-    // Draw opaque cover
     if (coverImage) {
       const img = new Image();
       img.onload = () => {
@@ -49,23 +50,30 @@ export const useScratchCanvas = ({
       };
       img.src = coverImage;
     } else {
-      const gradient = ctx.createLinearGradient(0, 0, width, height);
-      gradient.addColorStop(0, "#cfcfcf");
-      gradient.addColorStop(1, "#a6a6a6");
+      const gradient = ctx.createRadialGradient(width / 2, height / 2, 0, width / 2, height / 2, width / 2);
+      gradient.addColorStop(0, "#b8b8b8");
+      gradient.addColorStop(1, "#8a8a8a");
       ctx.fillStyle = gradient;
       ctx.fillRect(0, 0, width, height);
 
-      // Optional label
-      ctx.fillStyle = "#5a5a5a";
-      ctx.font = `bold ${Math.max(16, Math.floor(width / 10))}px sans-serif`;
-      ctx.textAlign = "center";
-      ctx.textBaseline = "middle";
-      ctx.fillText("Scratch", width / 2, height / 2);
+      if (scratchNumber !== undefined) {
+        ctx.fillStyle = "#5a5a5a";
+        ctx.font = `bold ${Math.max(40, Math.floor(width / 6))}px sans-serif`;
+        ctx.textAlign = "center";
+        ctx.textBaseline = "middle";
+        ctx.fillText(scratchNumber.toString(), width / 2, height / 2);
+      } else {
+        ctx.fillStyle = "#5a5a5a";
+        ctx.font = `bold ${Math.max(16, Math.floor(width / 10))}px sans-serif`;
+        ctx.textAlign = "center";
+        ctx.textBaseline = "middle";
+        ctx.fillText("Scratch", width / 2, height / 2);
+      }
     }
 
     setRevealed(false);
     isDownRef.current = false;
-  }, [canvasRef, width, height, resetKey, coverImage]);
+  }, [canvasRef, width, height, resetKey, coverImage, scratchNumber]);
 
   const scratchAt = (clientX: number, clientY: number) => {
     const canvas = canvasRef.current;
