@@ -6,9 +6,9 @@ const FALLBACK_URL = 'https://dnxtzcibhlxrhyndzlqe.supabase.co';
 const FALLBACK_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRueHR6Y2liaGx4cmh5bmR6bHFlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjEwNjg4MTMsImV4cCI6MjA3NjY0NDgxM30.8LA2TTk2aAhu-2lYg6UOdU3MFquplPGko4W3Txdoh1U';
 
 const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL || FALLBACK_URL;
-const SUPABASE_PUBLISHABLE_KEY = import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY || FALLBACK_ANON_KEY;
+const SUPABASE_PUBLISHABLE_KEY = import.meta.env.VITE_SUPABASE_ANON_KEY || import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY || FALLBACK_ANON_KEY;
 
-if (!import.meta.env.VITE_SUPABASE_URL || !import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY) {
+if (!import.meta.env.VITE_SUPABASE_URL || (!import.meta.env.VITE_SUPABASE_ANON_KEY && !import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY)) {
   console.warn('[supabase] Using fallback URL or key. Check your environment variables.');
 }
 
