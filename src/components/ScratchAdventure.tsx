@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "./ui/button";
 import { RotateCcw } from "lucide-react";
 import { ScratchCard } from "./ScratchCard";
@@ -75,6 +75,23 @@ import position69 from "@/assets/positions/position-69.jpg";
 export const ScratchAdventure = () => {
   const [resetKey, setResetKey] = useState(0);
   const positions = Array.from({ length: 69 }, (_, i) => i + 1);
+
+  const allPositionImages: string[] = [
+    position1, position2, position3, position4, position5, position6, position7, position8, position9, position10,
+    position11, position12, position13, position14, position15, position16, position17, position18, position19, position20,
+    position21, position22, position23, position24, position25, position26, position27, position28, position29, position30,
+    position31, position32, position33, position34, position35, position36, position37, position38, position39, position40,
+    position41, position42, position43, position44, position45, position46, position47, position48, position49, position50,
+    position51, position52, position53, position54, position55, position56, position57, position58, position59, position60,
+    position61, position62, position63, position64, position65, position66, position67, position68, position69,
+  ];
+
+  const [shuffledImages, setShuffledImages] = useState<string[]>([]);
+
+  useEffect(() => {
+    const shuffled = [...allPositionImages].sort(() => Math.random() - 0.5);
+    setShuffledImages(shuffled);
+  }, [resetKey]);
 
   const positionImages: Record<number, string> = {
     1: position1,
@@ -179,7 +196,7 @@ export const ScratchAdventure = () => {
             >
               <ScratchCard
                 id={positionId}
-                image={positionImages[positionId]}
+                image={shuffledImages[i]}
                 resetKey={resetKey}
               />
             </div>
