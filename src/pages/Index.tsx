@@ -7,7 +7,6 @@ import { LanguageSelector } from "@/components/LanguageSelector";
 import { SubscriptionSelector } from "@/components/SubscriptionSelector";
 import { HeroSection } from "@/components/HeroSection";
 import { Footer } from "@/components/Footer";
-import { ScratchHeartButton } from "@/components/ScratchHeartButton";
 import { FlirtCoachSection } from "@/components/FlirtCoachSection";
 import { Button } from "@/components/ui/button";
 import { useAuth } from "@/contexts/AuthContext";
@@ -144,7 +143,6 @@ const Index = () => {
       </div>
       <div className="flex-1">
         <HeroSection />
-        <ScratchHeartButton />
         <FlirtCoachSection onStartChat={handleStartFlirtCoach} />
         {DEV_MODE || subscriptionStatus?.subscribed ? (
           <PartnerSelector onSelect={handleSelectPartner} />
