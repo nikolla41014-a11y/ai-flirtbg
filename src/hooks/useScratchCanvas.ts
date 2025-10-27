@@ -8,6 +8,7 @@ interface UseScratchCanvasOptions {
   threshold?: number; // 0..1 percent of cleared area to trigger reveal
   onReveal?: () => void;
   resetKey?: any;
+  coverImage?: string;
 }
 
 export const useScratchCanvas = ({
@@ -18,6 +19,7 @@ export const useScratchCanvas = ({
   threshold = 0.6,
   onReveal,
   resetKey,
+  coverImage,
 }: UseScratchCanvasOptions) => {
   const [revealed, setRevealed] = useState(false);
   const isDownRef = useRef(false);
@@ -40,22 +42,30 @@ export const useScratchCanvas = ({
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 
     // Draw opaque cover
-    const gradient = ctx.createLinearGradient(0, 0, width, height);
-    gradient.addColorStop(0, "#cfcfcf");
-    gradient.addColorStop(1, "#a6a6a6");
-    ctx.fillStyle = gradient;
-    ctx.fillRect(0, 0, width, height);
+    if (coverImage) {
+      const img = new Image();
+      img.onload = () => {
+        ctx.drawImage(img, 0, 0, width, height);
+      };
+      img.src = coverImage;
+    } else {
+      const gradient = ctx.createLinearGradient(0, 0, width, height);
+      gradient.addColorStop(0, "#cfcfcf");
+      gradient.addColorStop(1, "#a6a6a6");
+      ctx.fillStyle = gradient;
+      ctx.fillRect(0, 0, width, height);
 
-    // Optional label
-    ctx.fillStyle = "#5a5a5a";
-    ctx.font = `bold ${Math.max(16, Math.floor(width / 10))}px sans-serif`;
-    ctx.textAlign = "center";
-    ctx.textBaseline = "middle";
-    ctx.fillText("Scratch", width / 2, height / 2);
+      // Optional label
+      ctx.fillStyle = "#5a5a5a";
+      ctx.font = `bold ${Math.max(16, Math.floor(width / 10))}px sans-serif`;
+      ctx.textAlign = "center";
+      ctx.textBaseline = "middle";
+      ctx.fillText("Scratch", width / 2, height / 2);
+    }
 
     setRevealed(false);
     isDownRef.current = false;
-  }, [canvasRef, width, height, resetKey]);
+  }, [canvasRef, width, height, resetKey, coverImage]);
 
   const scratchAt = (clientX: number, clientY: number) => {
     const canvas = canvasRef.current;
