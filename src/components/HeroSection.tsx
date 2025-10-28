@@ -1,7 +1,4 @@
-import { Button } from "@/components/ui/button";
-import { Heart, Sparkles } from "lucide-react";
-import { useNavigate } from "react-router-dom";
-import { useAuth } from "@/contexts/AuthContext";
+import { Heart } from "lucide-react";
 
 interface BannerProps {
   color: string;
@@ -45,9 +42,6 @@ const Banner = ({ color, title, description, emoji, delay }: BannerProps) => {
 };
 
 export const HeroSection = () => {
-  const navigate = useNavigate();
-  const { user } = useAuth();
-
   const banners = [
     {
       color: '#ff4d4d',
@@ -78,15 +72,6 @@ export const HeroSection = () => {
         <Banner key={index} {...banner} />
       ))}
 
-      <div className="text-center pt-4 pb-2">
-        <Button
-          onClick={() => user ? navigate("/image-generator") : navigate("/auth")}
-          className="bg-gradient-to-r from-pink-500 to-rose-600 hover:from-pink-600 hover:to-rose-700 text-white font-semibold px-8 py-6 text-lg rounded-xl shadow-lg hover:shadow-xl transition-all"
-        >
-          <Sparkles className="w-5 h-5 mr-2" />
-          Генерирай AI Art
-        </Button>
-      </div>
     </div>
   );
 };

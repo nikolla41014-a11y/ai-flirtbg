@@ -11,7 +11,7 @@ import { ScratchHeartButton } from "@/components/ScratchHeartButton";
 import { FlirtCoachSection } from "@/components/FlirtCoachSection";
 import { Button } from "@/components/ui/button";
 import { useAuth } from "@/contexts/AuthContext";
-import { LogOut, Sparkles } from "lucide-react";
+import { LogOut } from "lucide-react";
 import aiFlirtLogo from "@/assets/ai-flirt-logo.png";
 
 // DEV MODE: Set to true to bypass subscription checks for testing
@@ -119,17 +119,6 @@ const Index = () => {
             </div>
           )}
           <LanguageSelector />
-          {user && (
-            <Button 
-              variant="ghost" 
-              size="sm" 
-              onClick={() => navigate("/image-generator")}
-              className="text-gray-900 hover:text-primary hover:bg-primary/10"
-            >
-              <Sparkles className="w-4 h-4 mr-2" />
-              AI Art
-            </Button>
-          )}
           {user ? (
             <Button variant="outline" size="sm" onClick={signOut} className="text-gray-900 border-gray-900 hover:bg-gray-100">
               <LogOut className="w-4 h-4 mr-2" />
@@ -152,22 +141,6 @@ const Index = () => {
           <SubscriptionSelector onStartFreeTrial={handleStartFreeTrial} />
         )}
 
-        <div className="py-12 px-4 bg-gradient-to-br from-purple-50 via-pink-50 to-rose-50 text-center">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4 bg-gradient-to-r from-pink-600 via-rose-600 to-purple-600 bg-clip-text text-transparent">
-            Създай своето AI изкуство
-          </h2>
-          <p className="text-lg text-gray-600 mb-6 max-w-2xl mx-auto">
-            Генерирай красиви романтични изображения с AI. Избери стил, опиши сцената и създай уникално изкуство!
-          </p>
-          <Button
-            onClick={() => user ? navigate("/image-generator") : navigate("/auth")}
-            size="lg"
-            className="bg-gradient-to-r from-purple-500 via-pink-500 to-rose-500 hover:from-purple-600 hover:via-pink-600 hover:to-rose-600 text-white font-bold px-10 py-7 text-xl rounded-2xl shadow-2xl hover:shadow-3xl transition-all transform hover:scale-105"
-          >
-            <Sparkles className="w-6 h-6 mr-3 animate-pulse" />
-            Отвори AI Art Generator
-          </Button>
-        </div>
       </div>
       <Footer />
     </div>
