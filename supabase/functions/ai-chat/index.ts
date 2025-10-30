@@ -104,28 +104,34 @@ serve(async (req) => {
 
 Сега следва твоята специфична роля и личност:`;
 
-    // Use OpenAI API
-    const OPENAI_API_KEY = Deno.env.get("OPENAI_API_KEY");
-    if (!OPENAI_API_KEY) {
-      throw new Error("OpenAI API Key not configured");
-    }
+    // Use Google Gemini API
+    const GEMINI_API_KEY = "AIzaSyCiwR7eXqwAveqbhiRadFVdtrjoQajQQzk";
 
-    const response = await fetch("https://api.openai.com/v1/chat/completions", {
-      method: "POST",
-      headers: {
-        "Authorization": `Bearer ${OPENAI_API_KEY}`,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        model: "gpt-4o-mini",
-        messages: [
-          { role: "system", content: `${systemOverride}\n\n${personality}` },
-          ...messages,
-        ],
-        max_tokens: 500,
-        temperature: 0.9,
-      }),
-    });
+    // Format messages for Gemini
+    const formattedMessages = messages.map((msg: any) => ({
+      role: msg.role === "user" ? "user" : "model",
+      parts: [{ text: msg.content }]
+    }));
+
+    const response = await fetch(
+      `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${GEMINI_API_KEY}`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          system_instruction: {
+            parts: [{ text: `${systemOverride}\n\n${personality}` }]
+          },
+          contents: formattedMessages,
+          generationConfig: {
+            temperature: 1.0,
+            maxOutputTokens: 500,
+          },
+        }),
+      }
+    );
 
     if (!response.ok) {
       const errorText = await response.text();
@@ -151,7 +157,8 @@ serve(async (req) => {
     const data = await response.json();
     console.log("AI response:", data);
 
-    const messageContent = data.content?.[0]?.text || data.choices?.[0]?.message?.content || "";
+    // Extract message from Gemini response format
+    const messageContent = data.candidates?.[0]?.content?.parts?.[0]?.text || "";
 
     return new Response(
       JSON.stringify({ message: messageContent }),
