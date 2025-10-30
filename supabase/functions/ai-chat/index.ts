@@ -66,7 +66,7 @@ Deno.serve(async (req) => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          system_instruction: {
+          systemInstruction: {
             parts: [{ text: `${systemOverride}\n\n${personality}` }]
           },
           contents: formattedMessages,
