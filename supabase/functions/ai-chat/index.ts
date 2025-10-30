@@ -12,10 +12,11 @@ serve(async (req) => {
 
   try {
     const { messages, partnerType, partnerName } = await req.json();
-    const LOVABLE_API_KEY = Deno.env.get("LOVABLE_API_KEY");
-    
-    if (!LOVABLE_API_KEY) {
-      throw new Error("LOVABLE_API_KEY is not configured");
+    const SUPABASE_URL = Deno.env.get("SUPABASE_URL");
+    const SUPABASE_ANON_KEY = Deno.env.get("SUPABASE_ANON_KEY");
+
+    if (!SUPABASE_URL || !SUPABASE_ANON_KEY) {
+      throw new Error("Supabase configuration is missing");
     }
 
     // Create personality based on partner name
@@ -103,20 +104,26 @@ serve(async (req) => {
 
 Сега следва твоята специфична роля и личност:`;
 
-    const response = await fetch("https://ai.gateway.lovable.dev/v1/chat/completions", {
+    // Use OpenAI API
+    const OPENAI_API_KEY = Deno.env.get("OPENAI_API_KEY");
+    if (!OPENAI_API_KEY) {
+      throw new Error("OpenAI API Key not configured");
+    }
+
+    const response = await fetch("https://api.openai.com/v1/chat/completions", {
       method: "POST",
       headers: {
-        Authorization: `Bearer ${LOVABLE_API_KEY}`,
+        "Authorization": `Bearer ${OPENAI_API_KEY}`,
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        model: "google/gemini-2.5-flash",
+        model: "gpt-4o-mini",
         messages: [
-          { role: "system", content: systemOverride },
-          { role: "system", content: personality },
+          { role: "system", content: `${systemOverride}\n\n${personality}` },
           ...messages,
         ],
-        stream: false,
+        max_tokens: 500,
+        temperature: 0.9,
       }),
     });
 
@@ -144,8 +151,10 @@ serve(async (req) => {
     const data = await response.json();
     console.log("AI response:", data);
 
+    const messageContent = data.content?.[0]?.text || data.choices?.[0]?.message?.content || "";
+
     return new Response(
-      JSON.stringify({ message: data.choices[0].message.content }),
+      JSON.stringify({ message: messageContent }),
       { headers: { ...corsHeaders, "Content-Type": "application/json" } }
     );
   } catch (error) {
