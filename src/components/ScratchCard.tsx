@@ -1,45 +1,21 @@
-import { useRef } from "react";
-import { cn } from "@/lib/utils";
-import { useScratchCanvas } from "@/hooks/useScratchCanvas";
-
 interface ScratchCardProps {
   id: number;
   image?: string;
-  resetKey?: number;
+  onClick: () => void;
 }
 
-export const ScratchCard = ({ id, image, resetKey = 0 }: ScratchCardProps) => {
-  const canvasRef = useRef<HTMLCanvasElement>(null);
-
-  const { revealed, onPointerDown, onPointerMove, onPointerUp } = useScratchCanvas({
-    canvasRef,
-    width: 120,
-    height: 120,
-    radius: 20,
-    threshold: 0.65,
-    resetKey: `${id}-${resetKey}`,
-    scratchNumber: id,
-  });
-
+export const ScratchCard = ({ id, onClick }: ScratchCardProps) => {
   return (
-    <div className="relative w-[120px] h-[120px] mx-auto">
-      <div className="absolute inset-0 rounded-full overflow-hidden flex items-center justify-center bg-gradient-to-br from-pink-100 to-purple-100 dark:from-pink-900 dark:to-purple-900 shadow-lg">
-        {image && (
-          <img src={image} alt={`Position ${id}`} className="w-full h-full object-cover" />
-        )}
+    <button
+      onClick={onClick}
+      className="relative w-[120px] h-[120px] mx-auto rounded-full overflow-hidden shadow-lg hover:scale-105 transition-transform cursor-pointer group"
+    >
+      <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-gray-300 to-gray-400 dark:from-gray-600 dark:to-gray-700">
+        <span className="text-5xl font-bold text-gray-600 dark:text-gray-300 group-hover:scale-110 transition-transform">
+          {id}
+        </span>
       </div>
-
-      <canvas
-        ref={canvasRef}
-        className={cn(
-          "absolute inset-0 rounded-full",
-          revealed ? "opacity-0 pointer-events-none transition-opacity duration-300" : "cursor-pointer"
-        )}
-        onPointerDown={onPointerDown}
-        onPointerMove={onPointerMove}
-        onPointerUp={onPointerUp}
-      />
-    </div>
+    </button>
   );
 };
 

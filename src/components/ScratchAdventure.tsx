@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Button } from "./ui/button";
 import { RotateCcw } from "lucide-react";
 import { ScratchCard } from "./ScratchCard";
+import { ScratchCardModal } from "./ScratchCardModal";
 import position1 from "@/assets/positions/position-1.jpg";
 import position2 from "@/assets/positions/position-2.jpg";
 import position3 from "@/assets/positions/position-3.jpg";
@@ -74,6 +75,7 @@ import position69 from "@/assets/positions/position-69.jpg";
 
 export const ScratchAdventure = () => {
   const [resetKey, setResetKey] = useState(0);
+  const [selectedCard, setSelectedCard] = useState<{ id: number; image: string } | null>(null);
   const positions = Array.from({ length: 69 }, (_, i) => i + 1);
 
   const allPositionImages: string[] = [
@@ -91,6 +93,7 @@ export const ScratchAdventure = () => {
   useEffect(() => {
     const shuffled = [...allPositionImages].sort(() => Math.random() - 0.5);
     setShuffledImages(shuffled);
+    setSelectedCard(null);
   }, [resetKey]);
 
   const positionImages: Record<number, string> = {
@@ -188,7 +191,7 @@ export const ScratchAdventure = () => {
         <div className="grid grid-cols-3 sm:grid-cols-5 md:grid-cols-7 lg:grid-cols-9 gap-4 md:gap-6">
           {positions.map((positionId, i) => (
             <div
-              key={positionId}
+              key={`${positionId}-${resetKey}`}
               className="animate-fade-in"
               style={{
                 animationDelay: `${i * 0.01}s`,
@@ -196,12 +199,20 @@ export const ScratchAdventure = () => {
             >
               <ScratchCard
                 id={positionId}
-                image={shuffledImages[i]}
-                resetKey={resetKey}
+                onClick={() => setSelectedCard({ id: positionId, image: shuffledImages[i] })}
               />
             </div>
           ))}
         </div>
+
+        {selectedCard && (
+          <ScratchCardModal
+            id={selectedCard.id}
+            image={selectedCard.image}
+            isOpen={!!selectedCard}
+            onClose={() => setSelectedCard(null)}
+          />
+        )}
       </div>
     </div>
   );
